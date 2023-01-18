@@ -1,0 +1,7 @@
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+<g transform="rotate(-90,25,25)">
+	<path d="M 20 10 L 20 40 L 5 40 Z" fill="#FFFFFF"/>
+	<path d="M 25 12 L 25 40" stroke-dasharray="4" stroke="#FFFFFF"/>
+	<path d="M 30 10 L 30 40 L 45 40 Z" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+</svg>

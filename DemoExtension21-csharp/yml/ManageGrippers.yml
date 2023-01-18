@@ -1,0 +1,658 @@
+ManageGrippers 
+{
+    width: 695
+
+    CheckBox {
+        id: gripperModifiedFlag
+        visible: false
+    }
+
+    CheckBox {
+        id: gripperWizardFlag
+        visible: false
+    }
+
+    Column {
+        width: parent.width
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr("cell_setup") + " > " + tr("manage_grippers")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		}
+
+        Image {     // Step image
+            x: 75
+            width: 527
+            height: 36
+            source: "images/Step4.png"
+            fillMode: Const.PreserveAspectFit
+            visible: gripperWizardFlag.checked
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 40
+            visible: gripperWizardFlag.checked
+
+            Label {
+                width: 165
+                text: tr("indexes")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("stations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("masterjob")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("grippers")
+                halign: Const.Center
+            }
+        } // Row
+
+        Rectangle {     // Gripper table
+            color: "white"
+            width: parent.width
+            height: 240
+
+            Table {
+                id: gripperTable
+                width: parent.width
+                height: parent.height
+
+                rowSpacing: 0
+                colSpacing: 0
+
+                verticalScroll: true
+                //horizontalScroll: true
+                rowSelectable: true
+                fontSize: 18
+                showBorder: true
+                showHeadings: true
+
+                columns: [
+                    {key: 'name', width: 230, label: tr("name"), halign: Const.Left},
+                    {key: 'empty', width: 100, label: tr("empty_tool_label"), halign: Const.Center},
+                    {key: 'loaded', width: 100, label: tr("loaded_tool_label"), halign: Const.Center},
+                    {key: 'control', width: 245, label: tr("gripper_control"), halign: Const.Left}
+                ]
+
+                rows: [
+                    //{ name: 'BoxGripper', empty: '0', loaded: '1', control: 'output# 1'}    
+                ]
+            }
+
+            Rectangle {
+                width: parent.width
+                height: parent.height
+                color: "#5fffffff"
+                visible: gripperModifiedFlag.checked
+            }
+
+            MouseArea {         // gripperTableMouseArea
+                id: gripperTableMouseArea
+                width: parent.width
+                height: parent.height
+                enabled: gripperModifiedFlag.checked
+            }
+        }
+
+        Item {
+            width: parent.width
+            height: 55
+
+            Row {           // Buttons
+                id: gripperTableButtons
+                width: parent.width
+                spacing: 20
+                
+                Button {
+                    id: gripperAddButton
+                    text: tr("new_gripper")
+                    width: (parent.width - parent.spacing * 2) / 3
+                    requiredMode: Const.Manual
+                    requiredAccess: Const.Managing
+                    enabled: !gripperModifiedFlag.checked
+                }
+
+                // Button {
+                //     id: gripperEditButton
+                //     text: tr("edit_gripper")
+                //     width: gripperAddButton.width
+                //     enabled: gripperTable.selectedRow >= 0
+                // }
+
+                Button {
+                    id: gripperDeleteButton
+                    text: tr("delete_gripper")
+                    width: gripperAddButton.width
+                    requiredMode: Const.Manual
+                    requiredAccess: Const.Managing
+                    enabled: gripperTable.selectedRow >= 0 && !gripperModifiedFlag.checked
+                }  
+            }
+
+            MouseArea {         // gripperButtonsMouseArea
+                id: gripperButtonsMouseArea
+                width: parent.width
+                height: parent.height
+                enabled: gripperModifiedFlag.checked
+            }
+        }
+
+        Text {  // Title
+			text: tr("gripper_definition")
+			fontSize: 30
+			valign: Const.Center
+			halign: Const.Left
+		}
+
+        Rectangle {     // product Definition Section
+            id: gripperUnselected
+            width: parent.width
+            height: 500
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+            Text {  // Unselected Notification
+                y: 50
+                width: parent.width
+                fontSize: 20
+                halign: Const.Center
+                text: tr("select_gripper")
+            }
+        }
+
+
+        Rectangle {     // Gripper Definition Section
+            id: gripperDefinitionSection
+            width: parent.width
+            height: gripperUnselected.height
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+            visible: !gripperUnselected.visible
+            
+            Column {
+                x: 15 
+
+                Row {           // Gripper Name
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        text: tr("name") + ":"
+                    }
+
+                    TextField {
+                        id: gripperName
+                        fontSize: 20
+                        allowedChars: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#!@$%&*()'+=:;<>/_[]-."
+                        width: 270
+                        visible: false
+
+                        Rectangle {
+                            width: parent.width
+                            height: 40
+                            y: 12
+                            color:"transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: gripperName.visible && gripperName.text == ""
+                        }
+                    }
+
+                    Label {
+                        text: gripperName.text
+                        fontSize: 20
+                        fontWeight: Const.Medium
+                        visible: !gripperName.visible
+                    }
+                }
+
+                Row {           // Empty Tool
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 120
+                        text: tr("empty_tool_label")
+                    }
+
+                    ComboBox
+                    {
+                        id: emptyToolCombo
+                        width: 200
+                        options: []
+                        requiredMode: Const.Manual
+                        requiredAccess: Const.Managing
+
+                        Rectangle
+                        {
+                            id: emptyToolBox
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "orange"
+                            borderWidth: 2
+                            visible: false
+                        }
+                    }
+
+                    Button {
+                        id: emptyToolLink
+                        text: ""
+                        iconSource: "images/GearIcon.svg"
+                        iconWidth: 32
+                        iconHeight: 32
+                        bgcolor: "transparent"
+                    }
+
+                    // Text
+                    // {
+                    //     id: emptyToolLink
+                    //     width: 85
+                    //     wrapMode: Const.Wrap
+                    //     text: "<a href=\"screen:toolSettings?toolnum=0\">" + tr("tool_setup") + "</a>"
+                    //     fontSize: 18
+
+                    //     MouseArea {
+                    //         id: emptyToolArea
+                    //         width: parent.width
+                    //         height: parent.height
+                    //     }
+                    // }
+                }
+
+                Row {           // Loaded Tool
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label
+                    {
+                        width: 120
+                        text: tr("loaded_tool_label")
+                    }
+
+                    ComboBox
+                    {
+                        id: loadedToolCombo
+                        width: 200
+                        options: []
+                        requiredMode: Const.Manual
+                        requiredAccess: Const.Managing
+
+                        Rectangle
+                        {
+                            id: loadedToolBox
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "orange"
+                            borderWidth: 2
+                            visible: false
+                        }
+                    }
+
+                    Button {
+                        id: loadedToolLink
+                        text: ""
+                        iconSource: "images/GearIcon.svg"
+                        iconWidth: 32
+                        iconHeight: 32
+                        bgcolor: "transparent"
+                    }
+
+                    // Text
+                    // {
+                    //     id: loadedToolLink
+                    //     width: 85
+                    //     wrapMode: Const.Wrap
+                    //     text: "<a href=\"screen:toolSettings?toolnum=0\">" + tr("tool_setup") + "</a>"
+                    //     fontSize: 18
+                        
+                    //     MouseArea {
+                    //         id: loadedToolArea
+                    //         width: parent.width
+                    //         height: parent.height
+                    //     }
+                    // }
+                }
+
+                Item  { width: 10; height: 1 }
+
+                Label {         // Tool activation
+                    text: "<u>" + tr("gripper_control") + "</u>"
+                    height: 30
+                }
+
+                Row {
+                    spacing: 20
+                    Column {    
+                    
+                        Row {   // Gripper Simple Control Radio
+                            RadioButton {
+                                id: gripperSimpleRadio
+                                text: tr("simple_control")
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+                        } // Row
+
+                        Row {   // Output
+                            spacing: 0
+                            align: Const.Center
+                            height: 40
+
+                            Item { width: 15; height: 15 }
+
+                            Label {
+                                text: tr("output_label")
+                                color: gripperSimpleRadio.checked ? "#09375F" : "#8009375f"
+                            }
+
+                            Item { width: 5; height: 15 }
+
+                            TextField {
+                                id: gripperOutputText
+                                width: 60
+                                height: 30
+                                text: "1"
+                                numericInput: true
+                                decimalPlaces: 0
+                                lowerBound: 1
+                                upperBound: 256
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: gripperOutputText.text == "" && gripperSimpleRadio.checked
+                                }
+                            }
+                        }
+
+                        Row {
+                             spacing: 0
+                             align: Const.Center
+                             height: 40
+
+                             Item { width: 40; height: 15 }
+                            
+                            CheckBox
+                            {
+                                id: gripperInvert
+                                text: tr("invert_gripper")
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+                             
+                        } // Row
+
+                        Row {   // Timer
+                            spacing: 0
+                            align: Const.Center
+                            height: 40
+
+                            Item { width: 15; height: 15 }
+
+                            CheckBox
+                            {
+                                id: gripperOnTimerUsed
+                                text: tr("activate_timer") + " T="
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+
+                            TextField
+                            {
+                                id: gripperOnTimerText
+                                width: 100
+                                height: 30
+                                numericInput: true
+                                decimalPlaces: 2
+                                lowerBound: 0.01
+                                upperBound: 655.35
+                                units: tr("unit_sec")
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: gripperOnTimerText.text == "" && gripperSimpleRadio.checked
+                                }
+                            }
+                        }
+
+                        Row {   // Timer
+                            spacing: 0
+                            align: Const.Center
+                            height: 40
+
+                            Item { width: 15; height: 15 }
+
+                            CheckBox
+                            {
+                                id: gripperOffTimerUsed
+                                text: tr("deactivate_timer") + " T="
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+
+                           TextField
+                            {
+                                id: gripperOffTimerText
+                                width: gripperOnTimerText.width
+                                height: gripperOnTimerText.height
+                                numericInput: gripperOnTimerText.numericInput
+                                decimalPlaces: gripperOnTimerText.decimalPlaces
+                                lowerBound: gripperOnTimerText.lowerBound
+                                upperBound: gripperOnTimerText.upperBound
+                                units: tr("unit_sec")
+                                enabled: gripperSimpleRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: gripperOffTimerText.text == "" && gripperSimpleRadio.checked
+                                }
+                            }
+                        }
+                    }
+
+                    Column {
+                    
+                        Row {   // Gripper Complex Control Radio
+                            RadioButton {
+                                id: gripperComplexRadio
+                                text: tr("complex_control")
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+                        } // Row
+
+                        Row {   // call job
+                            spacing: 10
+                            align: Const.Center
+                            height: 40
+                            
+                            Item { width: 15; height: 2 }
+
+                            Label {
+                                width: 70
+                                text: tr("activate_job")
+                                color: gripperComplexRadio.checked ? "#09375F" : "#8009375f"
+                            }
+
+                            TextField {
+                                id: gripperOnCallJobText
+                                width: 180
+                                height: 30
+                                placeholderText: " " + tr("enter_job_name")
+                                uppercaseInput: true
+                                allowedChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!&\'()_"
+                                enabled: gripperComplexRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: (gripperOnCallJobText.text == "") && gripperComplexRadio.checked
+                                }
+                            }
+
+                            Button {
+                                id: gripperOnCallJobSelect
+                                text: tr("job_list")
+                                width: 95
+                                enabled: gripperComplexRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+                        }
+
+                        Row {   // Call Job
+                            spacing: 10
+                            align: Const.Center
+                            height: 40
+
+                            Item { width: 15; height: 2 }
+
+                            Label {
+                                width: 70
+                                text: tr("deactivate_job")
+                                color: gripperComplexRadio.checked ? "#09375F" : "#8009375f"
+                            }
+
+                            TextField {
+                                id: gripperOffCallJobText
+                                width: gripperOnCallJobText.width
+                                height: gripperOnCallJobText.height
+                                placeholderText: gripperOnCallJobText.placeholderText
+                                uppercaseInput: gripperOnCallJobText.uppercaseInput
+                                allowedChars: gripperOnCallJobText.allowedChars
+                                enabled: gripperComplexRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: (gripperOffCallJobText.text == "") && gripperComplexRadio.checked
+                                }
+                            }
+
+                            Button {
+                                id: gripperOffCallJobSelect
+                                text: tr("job_list")
+                                width: gripperOnCallJobSelect.width
+                                enabled: gripperComplexRadio.checked
+                                requiredMode: Const.Manual
+                                requiredAccess: Const.Managing
+                            }
+                        }
+                    }
+                } // Row 
+            } // Column
+        }
+    } // Column
+
+    Column {
+        // spacing: 0
+        id: gripperButtonRow
+        y: 1065
+        align: Const.Right
+        width: parent.width
+
+        Row {
+            spacing: 20
+            
+            Button {            // Return setup
+                id: gripperReturn
+                width: (gripperButtonRow.width - parent.spacing * 2) / 3
+                text: tr("return_to_setup")
+                visible: !gripperModifiedFlag.checked && !gripperWizardFlag.checked
+            } 
+
+            Button {
+                id: gripperDiscard
+                width: gripperReturn.width
+                text: tr("cancel")
+                bgcolor: "#D0011B"  // red
+                visible: gripperModifiedFlag.checked
+            }
+
+            Button {
+                id: gripperSave
+                width: gripperReturn.width
+                text: tr("accept")
+                bgcolor: "#87D040"  // green
+                visible: gripperModifiedFlag.checked
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+            }
+
+            Button {
+                id: gripperPrevious
+                width: gripperReturn.width
+                text: tr("previous")
+                visible: !gripperModifiedFlag.checked && gripperWizardFlag.checked 
+            }
+
+            Button {
+                id: gripperNext
+                width: gripperReturn.width
+                text: tr("next")
+                visible: !gripperModifiedFlag.checked && gripperWizardFlag.checked
+            }
+
+        } // Row
+    } // Column
+
+}

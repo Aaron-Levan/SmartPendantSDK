@@ -1,0 +1,113 @@
+ManageBuilds
+{
+    width: 695
+
+	Column
+	{
+        width: parent.width
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr("manage_builds")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+        Rectangle {     // build table
+            color: "white"
+            width: parent.width
+            height: 650
+            
+            Table {
+                id: buildTable
+                width: parent.width
+                height: parent.height
+
+                rowSpacing: 0
+                colSpacing: 0
+
+                verticalScroll: true
+                //horizontalScroll: true
+                rowSelectable: true
+                fontSize: 18
+                showBorder: true
+                showHeadings: true
+
+                columns: [
+                    {key: 'name', width: 240, label: tr("name"), halign: Const.Left},
+                    {key: 'product', width: 160, label: tr("product"), halign: Const.Left},
+                    {key: 'station', width: 150, label: tr("station"), halign: Const.Left},
+                    {key: 'status', width: 150, label: tr("job_status"), halign: Const.Left}
+                ]
+
+                rows: []
+            }
+        }
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            
+            Button {
+                id: buildAddButton
+                text: tr("new")
+                width: (parent.width - parent.spacing * 2) / 3
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+			Button {
+                id: buildEditButton
+                text: tr("edit")
+                width: buildAddButton.width
+                enabled: buildTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+            Button {
+                id: buildGenerateButton
+                text: tr("generate_job")
+                width: buildAddButton.width
+                enabled: buildTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+        }
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            
+            Button {
+                id: buildDuplicateButton
+                text: tr("duplicate")
+                width: buildAddButton.width
+                enabled: buildTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+			Item {
+                width: buildAddButton.width
+                height: buildAddButton.height
+            }
+
+            Button {
+                id: buildDeleteButton
+                text: tr("delete")
+                width: buildAddButton.width
+                enabled: buildTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+        }
+    }
+
+}

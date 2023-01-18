@@ -1,0 +1,129 @@
+ManageJobs
+{
+    width: 695
+
+    ComboBox {
+        id: jobType
+        width: 150
+        x: parent.width - width
+        options: [tr("pick"), tr("place")]
+        visible: false
+    }
+
+    // Label {
+    //     x: jobType.x - width
+    //     y: jobType.y
+    //     height: jobType.height
+    //     text: tr("job_type") + ": "
+    // }
+
+	Column
+	{
+        width: parent.width
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: jobType.currentIndex==0 ? tr("manage_picks") : tr("manage_layers")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+
+        Rectangle {     // job table
+            color: "white"
+            width: parent.width
+            height: 650
+
+            Table {
+                id: jobTable
+                width: parent.width
+                height: parent.height
+
+                rowSpacing: 0
+                colSpacing: 0
+
+                verticalScroll: true
+                //horizontalScroll: true
+                rowSelectable: true
+                fontSize: 18
+                showBorder: true
+                showHeadings: true
+
+                columns: [
+                    {key: 'name', width: 240, label: tr("name"), halign: Const.Left},
+                    {key: 'product', width: 160, label: tr("product"), halign: Const.Left},
+                    {key: 'station', width: 150, label: tr("station"), halign: Const.Left},
+                    {key: 'status', width: 150, label: tr("job_status"), halign: Const.Left}
+                ]
+
+                rows: []
+            }
+        }
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            
+            Button {
+                id: jobAddButton
+                text: tr("new")
+                width: (parent.width - parent.spacing * 2) / 3
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+			Button {
+                id: jobEditButton
+                text: tr("edit")
+                width: jobAddButton.width
+                enabled: jobTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+            Button {
+                id: jobGenerateButton
+                text: tr("generate_job")
+                width: jobAddButton.width
+                enabled: jobTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+        }
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            
+            Button {
+                id: jobDuplicateButton
+                text: tr("duplicate")
+                width: jobAddButton.width
+                enabled: jobTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+
+			Item {
+                width: jobAddButton.width
+                height: jobAddButton.height
+            }
+
+            Button {
+                id: jobDeleteButton
+                text: tr("delete")
+                width: jobAddButton.width
+                enabled: jobTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+            }
+        }
+    }
+
+}

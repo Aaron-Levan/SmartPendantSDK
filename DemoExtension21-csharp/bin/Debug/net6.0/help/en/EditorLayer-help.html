@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Layer Editor</b></strong></h2>
+        <p>The layer editor allows you to define how boxes are arranged on a single layer of your pallet.&nbsp;</p>
+         
+        <p>This interactible canvas shows a rectangular area representing your selected pallet.&nbsp; Your box product is represented by rectangles with your assigned labels and a number inside.&nbsp; 
+           <b>The number on the box indicates its placement order for a layer.&nbsp;</b> When programming your robot to construct your layer, you will be teaching the location of box 1.&nbsp; PalletBuilder will
+           automatically determine the next box position with respect to box 1 of the designed layer and adjust the path accordingly.&nbsp;
+        </p>
+
+        <p>
+           PalletBuilder offers three modes (BUILD, SNAP and GROUP) which can be accessed with there respective buttons.&nbsp;
+           The <b>PREDEFINED LAYER</b> button enters a mode where PalletBuilder will suggest layers to the user.&nbsp;
+           Finally, the <b>SEQUENCE</b> button allows you to define the order in which the boxes of your layer will be placed.&nbsp;
+        </p>
+
+        <p>
+          The <b>PREDEFINED LAYER</b> button will bring up a preview screen where PalletBuilder will suggest standard layer types.&nbsp; PalletBuilder has four distinct layer types that can be selected using the dropdown menu.&nbsp; Each layer type has options to adjust the suggested layers.&nbsp;            
+        </p>
+
+        <p style="vertical-align: middle;"><img src="../../images/Block.png" width="150" height="150"/>
+          <i>Block</i>: All boxes are oriented the same way.
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Interlock.png" width="150" height="150"/>
+          <i>Interlock</i>: A row or column of boxes has a different orientation from the other boxes.</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Pinwheel.png" width="150" height="150"/>
+          <i>Pinwheel</i>: A symmetrical layer with sections of alternating box orientations.</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Diagonal.png" width="150" height="150"/>
+         <i>Diagonal</i>: Boxes with a common orientation are aligned diagonally.</br>
+        </p>
+        
+        
+        <p>
+          Accepting the layer will apply the suggested layer.&nbsp; Cancelling will restore your layer design prior to entering the predefined layer mode.&nbsp;
+        </p>
+
+        <p>
+          The <b>SEQUENCE</b> button allows you to overwrite the order in which the boxes are placed.&nbsp; When clicked, all the boxes will no longer have numbers in them.&nbsp;
+          Two options are available to sequence your layer.&nbsp; The <b>Automatic</b> mode requires you to choose a corner of the pallet and a direction with respect to that corner.&nbsp;
+          PalletBuilder will suggest a sequence for your layer based on your choices.&nbsp; Alternatively, when using the <b>manual mode</b>, you can click the boxes in the order you want them placed.&nbsp;
+        </p>
+        
+        <p>
+          The canvas display can be manipulated using the four buttons at the top right corner of the screen.&nbsp;
+          <ul>
+            <li>The <img src="../../images/Center.svg" width="20" height="20"/> button allows you to center your view about a point on the screen.&nbsp;</li>
+            <li>The <img src="../../images/FitPage.svg" width="20" height="20"/> button brings all boxes and the pallet into view (i.e. fit-to-screen).&nbsp;</li>
+            <li>The <img src="../../images/ZoomIn2.png" width="20" height="20"/> and <img src="../../images/ZoomOut2.png" width="20" height="20"/> buttons can be used to zoom in and zoom out respectively.&nbsp;</li>
+          </ul>
+        </p>
+
+        <p>
+          Lastly, PalletBuilder provides global transformations that can be applied to a layer.&nbsp;
+          <ul>
+            <li>The <img src="../../images/MirrorHoriz2.svg" width="20" height="20"/> and <img src="../../images/MirrorVert2.svg" width="20" height="20"/> buttons can be used to reflect a layer about its centroidal position horizontally or vertically respectively.&nbsp;</li>
+            <li>The <img src="../../images/CenterPallet.svg" width="20" height="20"/> button can be used to center the layer to the middle of the pallet.&nbsp;</li>
+          </ul>
+        </p>
+
+        <p>
+          <b>BUILD</b>: This is the default construction mode for a layer.&nbsp; When a box is pressed, four circular "+" buttons will appear on the selected box.&nbsp; Pressing away from the box will deselect it.&nbsp; Clicking on a "+" button will add a box in the selected direction.&nbsp; An additional button at the top can be pressed for quick rotations of boxes.&nbsp;
+        </p>
+        <p style="margin-left: 50;">
+            <img src="../../images/BuildMode.png" width="400" height="130"/>
+        </p>
+        
+        <p>
+          While a box is selected, the bottom section will show the position and orientation of the box with respect to the pallet's coordinate system.&nbsp; The arrow buttons can be used to perform stepwise translations or rotations of the selected box.&nbsp; Alternatively, the position of the box can be set by editing its X and Y fields.&nbsp;
+        </p>
+
+        <p><b>GROUP</b>: The group mode allows you to select multiple boxes to translate them or rotate them together as a unit.&nbsp; Press on a box to include or exclude it from the selection.&nbsp; You can also delete multiple boxes at once with this mode.&nbsp;
+              Pressing on the <b>SELECT ALL</b> button will automatically enable group mode with all boxes selected.&nbsp; Deleting all boxes will reset the layer editor.&nbsp;            
+        </p>
+
+        <p style="margin-left: 150;">
+          <img src="../../images/GroupMode.png" width="187" height="178"/>
+        </p>
+
+        <p><b>SNAP</b>: In the snap mode, users can move boxes together for quick translations. 
+          Touching on a box will display eight circular snap points.&nbsp; 
+          Users can then select a snap point on the source box to be associated with the snapping action.&nbsp; 
+          Next, users must select a destination box and a corresponding snap point.&nbsp; 
+          Once two distinct snap points are selected, the source box will be translated to the destination box so that 
+          the two selected snap points are joined.&nbsp;
+        </p>
+
+        <p style="margin-left: 10;">
+          <img src="../../images/SnapMode.png" width="500" height="150"/>
+        </p>
+
+        <p><b>Notes</b>:</p>
+        <ul> 
+          <li>Boxes in collision will turn red and boxes outside of the pallet will be yellow.&nbsp;</li>
+          <li>Discarding a sequence will restore the previous sequence.&nbsp;</li>
+        </ul>
+
+        </body>
+</html>

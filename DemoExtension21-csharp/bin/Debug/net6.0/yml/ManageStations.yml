@@ -1,0 +1,948 @@
+ManageStations {
+
+    width: 695
+
+    CheckBox {
+        id: stationModifiedFlag
+        visible: false
+    }
+
+    CheckBox {
+        id: stationWizardFlag
+        visible: false
+    }                      
+
+    Column {
+        // spacing: 0
+        // align: Const.Center
+        width: parent.width
+        
+        Item {		// Screen Title
+            //id: stationDefinitionTitle
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr("cell_setup") + " > " + tr('station_definition')
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		}
+
+        Image {     // Step image
+            x: 75
+            width: 527
+            height: 36
+            source: "images/Step2.png"
+            fillMode: Const.PreserveAspectFit
+            visible: stationWizardFlag.checked
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 40
+            visible: stationWizardFlag.checked
+
+            Label {
+                width: 165
+                text: tr("indexes")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("stations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("masterjob")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("grippers")
+                halign: Const.Center
+            }
+        } // Row
+
+        Rectangle {     // station Definition Section
+            id: stationDefinitionSection
+            width: parent.width
+            height: stationWizardFlag.checked ? 880 : 990
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+            Image {
+                id: stationTypeImage
+                x:450
+                y:20
+                width: 220
+                height: 220
+                source: "images/StationInfeed.png"
+                fillMode: Const.PreserveAspectFit
+            } 
+            
+            Column {
+                x: 15
+                y: 10
+                width: parent.width
+                spacing: 10
+
+                Row {           // station Name
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 110
+                        text: tr("name") + ":"
+                    }
+
+                    TextField {
+                        id: stationName
+                        width: 260
+                        fontSize: 20
+                        allowedChars: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#!@$%&*()'+=:;<>/_[]-."
+                        visible: false
+
+                        Rectangle {
+                            width: parent.width
+                            height: 40
+                            y: 12
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: stationName.visible && stationName.text == ""
+                            
+                        }
+                    }
+
+                    Label {
+                        text: stationName.text
+                        fontSize: 20
+                        fontWeight: Const.Medium
+                        visible: !stationName.visible
+                    }
+                }
+
+                Row {         // station type
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 110
+                        text: tr("type") + ":" 
+                    }
+
+                    ComboBox {
+                        id: stationType
+                        width: 300
+                        options: [tr("infeed"), tr("build"), tr("dispenserFix"), tr("dispenserSearch")]
+                        visible: false //stationName.visible
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (stationType.currentIndex < 0) //&& (stationTable.selectedRow >= 0)
+                        }
+                    }
+
+                    Label {
+                        text: stationType.currentIndex==0 ? tr("infeed") : stationType.currentIndex==1 ? tr("build"): stationType.currentIndex==2 ? tr("dispenserFix"): tr("dispenserSearch")
+                        visible: !stationType.visible
+                    }
+                } // Row
+
+                Row {       // Infeed Alignment
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+                    visible: stationType.currentIndex == 0
+
+                    Label {
+                        width: 110
+                        text: tr("alignment") + ":" 
+                    }
+
+                    ComboBox {
+                        id: stationAlignment
+                        width: 200
+                        options: [tr("right"), tr("left"), tr("center")]
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (stationAlignment.currentIndex < 0) //&& (stationTable.selectedRow >= 0)
+                        }
+                    }
+                } // Row
+
+                Row {       // Infeed Width
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+                    visible: stationType.currentIndex == 0
+
+                    Label {
+                        width: 110
+                        text: tr("width") + " (W):"
+                        color: "#1B8A3C" // green
+                    }
+
+                    TextField { 
+                        id: stationWidth
+                        width: 120
+                        height: 38
+                        numericInput: true
+                        decimalPlaces: 3
+                        lowerBound: 1.000
+                        upperBound: 9999.999
+                        units: tr("unit_mm")
+                        Rectangle {
+                            y: -2
+                            width: parent.width
+                            height: parent.height + 3
+                            color: "transparent"
+                            borderColor: stationWidth.text == "" ? "Orange" : "#90CE98" //"Green"
+                            borderWidth: 2
+                            visible: stationWidth.text == ""
+                        }
+                    }  
+                } // Row
+
+                Row {       // Dispenser Height
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+                    visible: stationType.currentIndex == 3
+
+                    Label {
+                        width: 110
+                        text: tr("height") + " (H):"
+                        color: "#0A67B2" // image blue
+                    }
+
+                    TextField { 
+                        id: stationHeight
+                        width: 120
+                        height: 38
+                        numericInput: true
+                        decimalPlaces: 3
+                        lowerBound: 1.000
+                        upperBound: 9999.999
+                        units: tr("unit_mm")
+                        Rectangle {
+                            y: -2
+                            width: parent.width
+                            height: parent.height + 3
+                            color: "transparent"
+                            borderColor: stationHeight.text == "" ? "Orange" : "#78A6CC" //"Blue"
+                            borderWidth: 2
+                            visible: stationHeight.text == ""
+                        }
+                    }  
+                } // Row
+
+                Row {       // User Frame Selection
+                    height: 40
+                    spacing: 0
+
+                    Label
+                    {
+                        y: 10
+                        width: 140
+                        text: tr("frame") + ": "
+                    }
+                    
+                    ComboBox {
+                        id: stationFrame
+                        y: 3
+                        width: 200
+                        options: []
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (stationFrame.currentIndex < 0)
+                        }
+                    }
+
+                    Button {
+                        id: stationFrameLink
+                        y: -5
+                        width: 40
+                        text: ""
+                        iconSource: "images/GearIcon.svg"
+                        iconWidth: 32
+                        iconHeight: 32
+                        bgcolor: "transparent"
+                    }
+
+                    HelpButton {
+                        id: stationFrameInfo
+                        //title: "Infeed User Frame"
+                        htmlSource: "help/en/Station-UF-Infeed.html"
+                        visible: false
+                    }
+                }
+                
+                Row {       // variables_assignment label
+                    height: 40
+                    Label {
+                        y: 15
+                        text: tr("variables_assignment") + ":"
+                        fontWeight: Const.Medium
+                        fontSize: 20 
+                    }
+                }
+
+                Row {       // variables_assignment
+                    x: 15
+                    spacing: 0
+
+                    Column {    // Labels
+                        y: 13
+                        spacing: 35
+                        
+                        Label {
+                            text: stationType.currentIndex == 1 ? tr("pattern_index") + " #" : tr("product_index") + " #"
+                        }
+
+                        Label {
+                            text: tr("layer_index") + " #"
+                            visible: stationType.currentIndex == 1
+                        }
+                        
+                    } // Column
+
+                    Column {    // Textfields
+                        y: 0
+                        spacing: 10
+                        
+                        TextField {
+                            id: stationProductVar
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 249
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: parent.text == ""
+                            }
+                        }
+
+                        TextField {
+                            id: stationLayerVar
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 249
+                            visible: stationType.currentIndex == 1
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: parent.text == ""
+                            }
+                        } 
+                    } // Column
+
+                    Item { width: 50; height: 40}
+
+                    Column {    // Labels
+                        y: 13
+                        spacing: 35
+                        
+                        Row {
+                            spacing: 0
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+
+                            CheckBox {
+                                id: stationShiftUsed
+                                y: -5
+                                visible: stationType.currentIndex == 3
+                            }
+
+                            Label {
+                                id: shiftVarLabel
+                                text: stationType.currentIndex == 1 ? tr("build_height") + " #" : tr("search_height") + " #"
+                            }
+                        }
+
+                        Label {
+                            text: tr("cycle_index") + " #"
+                            visible: stationType.currentIndex == 1
+                        }  
+                    } // Column
+
+                    Column {    // Textfields
+                        y: 0
+                        spacing: 10
+                        
+                        TextField {
+                            id: stationShiftVar
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 249
+                            enabled: stationType.currentIndex != 3 || stationShiftUsed.checked || text == ""
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: parent.text == "" && (stationType.currentIndex == 1 || stationShiftUsed.checked)
+                            }
+                        }
+
+                        TextField {
+                            id: stationCycleVar
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 249
+                            visible: stationType.currentIndex == 1
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: parent.text == ""
+                            }
+                        } 
+                    } // Column
+                }
+
+                Row {       // io_assignment label
+                    height: 40
+                    Label {
+                        y: 15
+                        text: tr("io_assignment") + ":"
+                        fontWeight: Const.Medium
+                        fontSize: 20 
+                    }
+                }
+
+                Row {       // Inputs and Outputs
+                    spacing: 0
+                    x: 15
+
+                    Column {    // Checkboxes
+                        y: 5 
+                        spacing: 20
+                        
+                        CheckBox {
+                            id: stationReadyCheck
+                            checked: true
+                        }
+                        
+                        CheckBox {
+                            id: stationResetCheck
+                            checked: true
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+                        }
+                    } // Column
+
+                    Column {    // Labels
+                        y: 13
+                        spacing: 35
+
+                        Label {
+                            text: tr("ready_input") + " #"
+                        }
+
+                        Label {
+                            text: tr("reset_input") + " #"
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+                        }
+                    }
+
+                    Item { width: 5; height: 5 }
+
+                    Column {    // TextFields
+                        y: 0
+                        spacing: 10
+
+                        TextField {
+                            id: stationReadyText
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            allowEmpty: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 256
+                            enabled: stationReadyCheck.checked || text == ""
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationReadyCheck.checked && parent.text == ""
+                            }
+                        }
+
+                        TextField {
+                            id: stationResetText
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 256
+                            enabled: stationResetCheck.checked || text == ""
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationResetCheck.checked && parent.text == ""
+                            }
+                        }
+                    }
+
+                    Item { width: 50; height: 5 }
+
+                    Column {    // Checkboxes
+                        y: 5 
+                        spacing: 20
+                        
+                        CheckBox {
+                            id: stationActiveCheck
+                            checked: true
+                        }
+                        
+                        CheckBox {
+                            id: stationDoneCheck
+                            checked: true
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+                        }
+                    } // Column
+
+                    Column {    // Labels
+                        y: 13
+                        spacing: 35
+
+                        Label {
+                            text: tr("active_output") + " #"
+                        }
+
+                        Label {
+                            text: stationType.currentIndex == 1 ? tr("done_output") + " #" : tr("empty_output") + " #"
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+                        }
+                    }
+
+                    Item { width: 5; height: 5 }
+
+                    Column {    // TextFields
+                        y: 0
+                        spacing: 10
+
+                        TextField {
+                            id: stationActiveText
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            allowEmpty: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 256
+                            enabled: stationActiveCheck.checked || text == ""
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationActiveCheck.checked && parent.text == ""
+                            }
+                        }
+
+                        TextField {
+                            id: stationDoneText
+                            width: 50
+                            height: 43
+                            text: ""
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 256
+                            enabled: stationDoneCheck.checked || text == ""
+                            visible: stationType.currentIndex == 1 || stationType.currentIndex == 3
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationDoneCheck.checked && parent.text == ""
+                            }
+                        }
+                    }
+                    
+                } // Row
+
+                Row {       // search_options label
+                    height: 40
+                    Label {
+                        y: 15
+                        text: tr("search_options") + ":"
+                        fontWeight: Const.Medium
+                        fontSize: 20 
+                        visible: stationType.currentIndex == 3
+                    }
+                }
+
+                Row {   // station Search Row
+                    id: stationSearchRow
+                    align: Const.Center
+                    spacing: 0
+                    x: 15
+                    visible: stationType.currentIndex == 3
+
+                    Label {
+                        text: tr("search_input") + " #"
+                    }
+
+                    TextField {
+                        id: stationSearchText
+                        width: 50
+                        height: 38
+                        text: ""
+                        numericInput: true
+                        decimalPlaces: 0
+                        lowerBound: 1
+                        upperBound: 256
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: parent.text == ""
+                        }
+                    }
+
+                    Item { height: 10; width: 30; }
+
+                    CheckBox {
+                        id: stationActiveToolSearch
+                        text: tr("active_tool_search")
+                        
+                        // requiredMode: Const.Manual
+                        // requiredServo: Const.On
+                        // requiredAccess: Const.Managing
+                    }
+                    
+                } // Row
+
+                Row {   // start_search_Z
+                    // spacing: 0
+                    x: 15
+                    align: Const.Center
+                    visible: stationType.currentIndex == 3
+
+                    Label {
+                        text: tr("start_search_Z")   
+                    }
+
+                    TextField { 
+                        id: stationStartSearchZ
+                        width: 120
+                        height: 38
+                        numericInput: true
+                        decimalPlaces: 3
+                        lowerBound: 0.000
+                        upperBound: 9999.999
+                        units: tr("unit_mm")
+                        // Rectangle {
+                        //     width: parent.width
+                        //     height: parent.height
+                        //     color: "transparent"
+                        //     borderColor: "Orange"
+                        //     borderWidth: 2
+                        //     visible: (stationStartSearchZ.text == "") && stationModifiedFlag.checked
+                        // }
+                    } 
+                } // Row
+
+                Row {       // station product low Row
+                    id: stationLowRow
+                    align: Const.Center
+                    spacing: 0
+                    x: 15
+                    visible: stationType.currentIndex == 3
+
+                    CheckBox {
+                        id: stationLowCheck
+                        checked: true
+                    }
+
+                    Label {
+                        text: tr("signal_low_output") + " #"
+                    }
+
+                    TextField {
+                        id: stationLowText
+                        width: 50
+                        height: 38
+                        text: ""
+                        numericInput: true
+                        decimalPlaces: 0
+                        lowerBound: 1
+                        upperBound: 256
+                        enabled: stationLowCheck.checked || text == ""
+
+                        // Rectangle {
+                        //     width: parent.width
+                        //     height: parent.height
+                        //     color: "transparent"
+                        //     borderColor: "Orange"
+                        //     borderWidth: 2
+                        //     visible: stationLowCheck.checked && parent.text == ""
+                        // }
+                    }   
+
+                    Item { height: 10; width: 10; }
+
+                    Label {
+                        text: tr("low_level_height")   
+                    }
+
+                    TextField { 
+                            id: stationLowZ
+                            width: 120
+                            height: 38
+                            numericInput: true
+                            decimalPlaces: 3
+                            lowerBound: 0.000
+                            upperBound: 9999.999
+                            units: tr("unit_mm")
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: (stationLowZ.text == "") && stationModifiedFlag.checked
+                            }
+                        } 
+                } // Row
+
+                Row {       // Call job label
+                    height: 40
+                    Label { 
+                        y: 15   
+                        text: tr("call_job") + ":"
+                        fontWeight: Const.Medium
+                        fontSize: 20 
+                    }
+                }
+
+                Row {   // call jobs
+                    id: stationCalls
+                    x: 15
+                    width: parent.width - 30
+                    spacing: 0
+
+                    Column {
+                        id: stationCallCheckboxes
+                        y: 8 
+                        spacing: 19
+
+                        CheckBox {
+                            id: stationCallJobBeforeCheck
+                        }
+
+                        CheckBox {
+                            id: stationCallJobAfterCheck
+                        }
+                    }
+
+                    Column {
+                        id: stationCallLabels
+                        y: 15
+                        spacing: 34
+                        Label {
+                            text: stationType.currentIndex == 1 ? tr("call_before_place") : tr("call_before_pick")
+                        }
+
+                        Label {
+                            text: stationType.currentIndex == 1 ? tr("call_after_place") : tr("call_after_pick") 
+                        }
+                    } // Column
+
+                    Item { width: 5; height: 40 }
+
+                    Button {    // Dummy button to know the width
+                        id: stationDummyButton
+                        text: tr("job_list")
+                        visible: false
+                    }
+
+                    Column {
+                        y: 0
+                        spacing: 5
+
+                        TextField {
+                            id: stationCallJobBefore
+                            width: stationCalls.width - stationCallCheckboxes.width - stationCallLabels.width - stationDummyButton.width - 30
+                            placeholderText: " " + tr("enter_job_name")
+                            uppercaseInput: true
+                            allowedChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!&\'()_"
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationCallJobBeforeCheck.checked && (stationCallJobBefore.text == "")
+                            }
+                        }
+
+                        TextField {
+                            id: stationCallJobAfter
+                            width: stationCallJobBefore.width
+                            placeholderText: " " + tr("enter_job_name")
+                            uppercaseInput: true
+                            allowedChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!&\'()_"
+
+                            Rectangle {
+                                width: parent.width
+                                height: parent.height
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: stationCallJobAfterCheck.checked && (stationCallJobAfter.text == "")
+                            }
+                        }
+                    }
+
+                    Item { width: 5; height:40 }
+
+                    Column {
+                        spacing: 5
+
+                        Button {
+                            id: stationCallJobBeforeButton
+                            text: tr("job_list")
+                            //width: 75
+                        }
+
+                        Button {
+                            id: stationCallJobAfterButton
+                            text: tr("job_list")
+                            //width: 75
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Column {
+        // spacing: 0
+        id: stationButtonRow
+        y: 1065
+        align: Const.Right
+        width: parent.width
+
+        Row {
+            spacing: 20
+            
+            Button {            // Return setup
+                id: stationReturnSetup
+                width: (stationButtonRow.width - parent.spacing * 2) / 3
+                text: tr("return_to_setup")
+                visible: !stationModifiedFlag.checked && !stationWizardFlag.checked
+            } 
+
+            Button {
+                id: stationDiscard
+                width: stationReturnSetup.width
+                text: tr("cancel")
+                bgcolor: "#D0011B"  // red
+                visible: stationModifiedFlag.checked && !stationWizardFlag.checked
+            }
+
+            Button {
+                id: stationSave
+                width: stationReturnSetup.width
+                text: tr("accept")
+                bgcolor: "#87D040"  // green
+                visible: stationModifiedFlag.checked && !stationWizardFlag.checked
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+            }
+
+            Button {
+                id: stationPrevious
+                width: stationReturnSetup.width
+                text: tr("previous")
+                visible: stationWizardFlag.checked
+            }
+
+            Button {
+                id: stationNext
+                width: stationReturnSetup.width
+                text: tr("next")
+                visible: stationWizardFlag.checked
+            }
+        } // Row
+    } // Column
+
+    
+}

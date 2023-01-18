@@ -1,0 +1,423 @@
+Wizard {
+    width: 695
+
+    ComboBox {      // Dummy control used as property
+        id: wizardStep
+        options: ["product", "pick", "place", "build"]
+        currentIndex: 0
+        visible: false
+    }
+
+    Column {
+        width: parent.width
+        spacing: 10
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr("build_pattern_creation")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		}
+
+        Image {     // Step image
+            //id: wizardStepImage
+            x: 75
+            width: 527
+            height: 36
+            source: wizardStep.currentIndex==0 ? "images/Step1.png" : wizardStep.currentIndex==1 ? "images/Step2.png" : wizardStep.currentIndex==2 ? "images/Step3.png" : "images/Step4.png" 
+            fillMode: Const.PreserveAspectFit
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 50
+            Label {
+                width: 165
+                text: tr("select_product")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("pick_operations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("place_layers")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("build_pattern")
+                halign: Const.Center
+            }
+        } // Row
+
+        Rectangle { // Pages
+            width: parent.width
+            height: 885
+            color: "transparent"
+            
+            Stack {
+                id: wizardStack
+                width: parent.width
+
+                Column {
+                    width: parent.width
+                    height: 300
+                    spacing: 30
+
+                    Label {
+                        width: parent.width
+                        text: wizardStep.currentIndex==0 ? tr("select_products") : wizardStep.currentIndex==1 ? tr("select_picks") : tr("select_places")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Row {   // Pallet
+                        x: 15
+
+                        Image {
+                            width: 150
+                            height: 150
+                            source: "images/Pallet.svg"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Column {
+                            
+                            Label {
+                                text: tr("pallet")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Row {  // pallet name
+                                visible: wizardStep.currentIndex > 0
+
+                                Label {
+                                    text: tr("name") + ":"  
+                                }
+
+                                Label {
+                                    id: wizardPalletName
+                                    text: "MyPallet"   
+                                }
+                            }
+
+                            CheckBox {  // Dummy control used as property
+                                id: wizardPalletNoHandling
+                                visible: false
+                            }
+
+                            Label {
+                                id: wizardPalletPick
+                                text: "PalletPick"
+                                visible: false 
+                            }
+
+                            Row {  // pallet pick
+                                visible: wizardStep.currentIndex > 1 && wizardPalletPick.text != ""
+
+                                Label {
+                                    text: tr("pick_operation") + ":"  
+                                }
+
+                                Label {
+                                    text: wizardPalletPick.text  
+                                }
+                            } 
+
+                            Row {       // multi-use combobox
+                                visible: (wizardStep.currentIndex == 0) || (wizardStep.currentIndex == 1 && !wizardPalletNoHandling.checked) || (wizardStep.currentIndex > 1 && wizardPalletPick.text != "")
+                                ComboBox {
+                                    id: wizardPalletList
+                                    width: 300
+                                    height: 50
+                                    options: ["Item1", "Item2", "Item3"]
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: (wizardPalletList.currentIndex < 0) 
+                                    }
+                                }
+
+                                Button {
+                                    id: wizardAddPallet
+                                    width: 190
+                                    text: wizardStep.currentIndex == 0 ? tr("add_pallet") : wizardStep.currentIndex == 1 ? tr("add_pallet_pick") : tr("add_pallet_place") 
+                                }   
+                            } // Row
+                        } // Column
+                    } // Row
+
+                    Row {   // Box
+                        x: 15
+                        
+                        Item {
+                            width: 150
+                            height: 150
+
+                            Image {
+                                x: 15
+                                y: 15
+                                width: 120
+                                height: 120
+                                source: "images/Box.svg"
+                                fillMode: Const.PreserveAspectFit
+                            }
+                        }
+
+                        Column {
+                            
+                            Label {
+                                text: tr("box");
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Row {  // box name
+                                visible: wizardStep.currentIndex > 0
+
+                                Label {
+                                    text: tr("name") + ":"  
+                                }
+
+                                Label {
+                                    id: wizardBoxName
+                                    text: "MyBox"   
+                                }
+                            }
+
+                            Row {  // box pick
+                                visible: wizardStep.currentIndex > 1
+
+                                Label {
+                                    text: tr("pick_operation") + ":"  
+                                }
+
+                                Label {
+                                    id: wizardBoxPick
+                                    text: "BoxPick"   
+                                }
+                            }
+
+                            Row {   // multi-use combobox
+                                ComboBox {
+                                    id: wizardBoxListA
+                                    width: 300
+                                    height: 50
+                                    options: ["Item1", "Item2", "Item3"]
+                                    //visible: wizardStep.currentIndex < 2
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: (wizardBoxListA.currentIndex < 0) 
+                                    }
+                                }
+
+                                Button {
+                                    id: wizardAddBoxA
+                                    width: 190
+                                    text: wizardStep.currentIndex == 0 ? tr("add_box") : wizardStep.currentIndex == 1 ? tr("add_box_pick") : tr("add_box_place")
+                                }   
+                            } // Row
+
+
+                            Row {   // multi-use combobox
+                                visible: wizardStep.currentIndex == 2
+                                ComboBox {
+                                    id: wizardBoxListB
+                                    width: 300
+                                    height: 50
+                                    options: []
+                                }
+
+                                Button {
+                                    id: wizardAddBoxB
+                                    width: 190
+                                    text: wizardStep.currentIndex == 0 ? tr("add_box") : wizardStep.currentIndex == 1 ? tr("add_box_pick") : tr("add_box_place")
+                                    enabled: wizardBoxListA.currentIndex >= 0
+                                }   
+                            } // Row
+
+
+                        } // Column  
+                    } // Row
+
+
+                    Text {
+                        id: wizardSeparatorName
+                        text: ""
+                        visible: false
+                    }// Dummy control used as property
+
+
+                    Row {   // Separator
+                        x: 15
+                        visible: wizardStep.currentIndex == 0 || wizardSeparatorName.text != ""
+                        
+                        Image {
+                            width: 150
+                            height: 150
+                            source: "images/Separator.svg"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Column {
+                            
+                            Label {
+                                text: wizardStep.currentIndex == 0 ? tr("separator") + " (" + tr("optional") + ")" : tr("separator")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Row {  // Separator name
+                                visible: wizardStep.currentIndex > 0
+
+                                Label {
+                                    text: tr("name") + ":"  
+                                }
+
+                                Label {
+                                    text: wizardSeparatorName.text  
+                                }
+                            }
+
+                            Row {  // Separator pick
+                                visible: wizardStep.currentIndex > 1
+
+                                Label {
+                                    text: tr("pick_operation") + ":"  
+                                }
+
+                                Label {
+                                    id: wizardSeparatorPick
+                                    text: "SeparatorPick"   
+                                }
+                            }
+
+                            Row {   // multi-use combobox
+                                ComboBox {
+                                    id: wizardSeparatorList
+                                    width: 300
+                                    height: 50
+                                    options: ["Item1", "Item2", "Item3"]
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: (wizardSeparatorList.currentIndex < 0) 
+                                    }
+                                }
+
+                                Button {
+                                    id: wizardAddSeparator
+                                    width: 190
+                                    text: wizardStep.currentIndex == 0 ? tr("add_separator") : wizardStep.currentIndex == 1 ? tr("add_separator_pick") : tr("add_separator_place")
+                                }   
+                            } // Row
+                        } // Column          
+                    } // Row
+                }
+
+                Column {
+                    width: parent.width
+                    height: 300
+
+                    Text {
+                        text: tr("pattern_created")
+                        width: parent.width
+                        fontSize: 30
+                        valign: Const.Bottom
+                    }  // Text
+
+                    Text {
+                        text: tr("pattern_created_desc")
+                        width: parent.width
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }  // Text
+
+                    Row {   // buttons
+                        // spacing: 0
+                        // align: Const.Center
+                        width: parent.width
+
+                        Button {
+                            id: wizardNewPattern
+                            width: ( parent.width - parent.spacing ) / 2
+                            text: tr("new_pattern")
+                        }
+
+                        Button {
+                            id: wizardAssign
+                            width: wizardNewPattern.width
+                            text: tr("assign_pattern")
+                        }
+
+                    } // Row
+                }
+            } // Stack
+        }
+    }
+
+    Row {     // Bottom buttons
+        y: 1065
+        width: parent.width
+        height: 50
+        spacing: 20
+
+        Item {
+            // id: dummyButtonSpace
+            width: (parent.width - 2 * parent.spacing) / 3
+            height: parent.height 
+        }
+
+        Button {
+            id: wizardPrevious
+            width: (parent.width - 2 * parent.spacing) / 3
+            text: tr("previous")
+            visible: wizardStep.currentIndex > 0 && wizardStack.currentIndex == 0
+        }
+
+        Item {
+            // id: dummyButtonSpace
+            width: wizardPrevious.width
+            height: parent.height 
+            visible: !wizardPrevious.visible
+        }
+
+        Button {
+            id: wizardNext
+            width: wizardPrevious.width
+            text: tr("next")
+            visible: wizardStack.currentIndex == 0
+        }
+
+        Button {
+            id: wizardClose
+            width: wizardPrevious.width
+            text: tr("close")
+            visible: wizardStack.currentIndex == 1
+        }
+    }
+}

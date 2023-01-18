@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Stations</b></strong></h2>
+    
+    <p>Stations form the foundation of a palletization cell.&nbsp; They are the zones of the palletization cell where products can be picked or placed.&nbsp; </p>
+    
+    <p> 
+        Every station has a user frame associated with it.&nbsp; User frames are taught using the Smart Pendant user frames menu which is accessible by pressing the gear icon next to the "User Frame" selection box.&nbsp;
+    </p>
+    
+    <p>
+    	When teaching points, the taught points will be with respect to the assigned user frame.&nbsp; For proper operation, it is important that the user frame be taught at the recommended location for each station type.&nbsp; For details on how to teach the user frame for a specific station type, press the information icon next to the "User Frame" dropdown list.&nbsp;
+    </p>
+    
+    <p>
+    In the variable assignment section, users must assign variables that the palletization jobs will reference to for that station.&nbsp; Following variable assignment, I/O can be selected to add further control to the station.&nbsp; These I/O can be used to signify to a controller when a station is ready, needs resetting, or a pallet stack is complete.&nbsp;
+    </p>
+    
+    <p>
+    	Optionally, users can also assign jobs that will be called when transitioning between stations.&nbsp; These jobs can be used to move the robot along a specific path between stations to avoid obstacles such as fencing, a column or other stations.&nbsp; They can also be used to activate I/O signals to the gripper or other devices.&nbsp;
+    </p>
+    
+    <p><b>Station Specific</b>:</p>
+    
+    <p>Build Station:</p>
+    <ul>
+    	<li>Pattern S-Var: String variable used to store the assigned Build Pattern job name.&nbsp;</li>
+    	<li>Build Height D-Var: Double integer variable used to track the current height of the build station (in microns) and shift the layer accordingly.&nbsp;</li>
+    	<li>
+    	Layer I-Var: Integer variable with the build current layer number (pallet and separators also count as layers).&nbsp; 
+    	</li>  
+    	<li>
+    	Cycle I-Var: Integer variable with the layer current cycle (box) number.&nbsp; 
+    	</li>
+    	<li>
+    	Ready Input#: Input signal confirming that the build station is ready.&nbsp; Often associated with a pallet present sensor.&nbsp;
+    	</li>
+    	<li>
+    	At Station Output#: Output signal indicating that the robot is currently at this station.&nbsp; 
+    	</li>
+    	<li>
+    	Reset Input#: Input signal causing the build station to reset the build height to 0 and the layer and cycle variables to 1.&nbsp; 
+    	</li>
+    	<li>
+    	Complete Output#: Output signal indicating that the current build is complete.&nbsp;
+    	</li>
+    </ul>
+    
+    <p>
+    <b>Note</b>: The Complete Output and Reset Input usually work together. When the build pattern is complete, the Complete Output turns on, once the pallet is removed and a new one is in position, the Reset Input is turned on. When the Complete signal turns off, the Reset Input can be turned off.  
+    </p>
+    
+    <p>Infeed Station:</p>
+    <ul>
+    	<li>
+    	Alignment: Indicates if the boxes on the infeed are aligned to the right, left or center of the conveyer.&nbsp; 
+    	</li>
+    	<li>
+    	Width: Width of the conveyer in mm. Used to calculate the position of the box relative to the user frame.&nbsp;
+    	</li>
+    	<li>
+    	Product S-Var: String variable used to store the product name assigned to the infeed.&nbsp;
+    	</li>
+    	<li>
+    	Ready Input#: Input signal confirming that the infeed station is ready.&nbsp; Often associated with a box present sensor at the end of the infeed.&nbsp;
+    	</li>
+    	<li>
+    	At Station Output#: Output signal indicating that the robot is currently at this station.&nbsp;
+    	</li>
+    </ul>
+    
+    <p>Dispenser Fixed Pick:</p>
+    <ul>
+    <li>Product S-Var: String variable used to store the product name assigned to the dispenser.&nbsp;</li> 
+
+<li>Ready Input#: Input signal confirming that the dispenser station is ready. Often associated with a sensor detecting the presence of product.&nbsp;</li> 
+
+<li>At Station Output#: Output signal indicating that the robot is currently at this station.&nbsp;</li>
+    </ul>
+    
+    <p>Dispenser Search Stack:</p>
+    <ul>
+    <li>Height: Height of the dispenser sides that need to be cleared when moving to or from the station.&nbsp;</li>
+
+<li>Product S-Var: String variable used to store the product name assigned to the dispenser.&nbsp;</li> 
+
+<li>Search Adjustment D-var: Double variable used to track the location of the last found product.&nbsp; If enabled, the next search operation will start from the last found location, instead of starting the search from the maximum stack height.&nbsp;</li> 
+
+<li>Ready Input#: Input signal confirming that the dispenser station is ready.&nbsp; Often associated with a sensor detecting the presence of product.&nbsp;</li> 
+
+<li>At Station Output#: Output signal indicating that the robot is currently at this station.&nbsp;</li>  
+
+<li>Reset Input#: Input signal causing the dispenser to reset empty stack output and the search adjustment height to 0.&nbsp;</li> 
+
+<li>Empty Stack Output#: Output signal indicating that the search has reached the taught pick position on the last search.&nbsp;</li> 
+
+<li>Search Input#: Input signal from the gripper detecting the presence of the product.&nbsp; There is an option to ‘Activate tool at beginning of search’, this allows to turn on vacuum at the beginning of the search when a vacuum confirmation sensor is used as the search input.&nbsp;
+</li> 
+
+<li>When the product is thin and the ‘Search Adjust’ variable is enabled, a distance can be added to ‘Start the next search Z mm above the last found part’.&nbsp;</li> 
+
+<li>Signal Low Stack Output: When enabled, the indicated output signal will turn on when the found product is below the indicated value in mm.&nbsp;
+</li>
+</ul>
+
+<p>
+<b>Note</b>: The Empty Stack Output and Reset Input usually work together.&nbsp; When the dispenser is empty, the Empty signal turns on, once the dispenser is reloaded, the Reset Input is turned on.&nbsp; When the Complete signal turns off, the Reset Input can be turned off.&nbsp;
+</p>   
+     
+    
+  </body>
+</html>

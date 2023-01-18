@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <!-- <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <meta http-equiv="content-type" content="text/html;> -->
+  </head>
+  <body>
+    <h2><strong><b>レイアウト(段)エディター</b></strong></h2>
+        <p>レイアウト(段)タブを使用すると、パレットの 1 つの段に箱を配置する方法を定義できます。</p>
+        
+        <p>このインタラクティブなキャンバスには、選択したパレットを表す長方形の領域が表示されます。&nbsp; 製品(箱)は、割り当てられたラベルと数字が入った長方形で表されます。&nbsp;
+           <b>製品(箱)の番号は、配置の順番を示しています。</b> レイアウト(段)を設定するためにロボットで教示するときは、製品(箱) 1 (最初の箱) の位置を教示します。&nbsp; パレットビルダーは
+           レイアウト(段)の製品(箱) 1 を基準にして、次の製品(箱)の位置を自動的に決定しそれに応じて経路を調整します。&nbsp;
+        </p>
+
+        <p>
+           パレットビルダーには 3 つのモード (ビルド、スナップ、グループ) があります。&nbsp;
+           <b>事前定義 レイアウト</b> ボタンは、パレットビルダーがユーザーにレイアウト(段)を提案するモードに入ります。&nbsp;
+           最後に、<b>シーケンス</b> ボタンを使用して、レイアウト(段)の製品(箱)を配置する順序を定義できます。&nbsp;
+        </p>
+
+        <p>
+          <b>事前定義 レイアウト</b> ボタンをクリックすると、パレットビルダー が標準のレイアウト(段)タイプを提案するプレビュー画面が表示されます。&nbsp; パレットビルダー には、ドロップダウン メニューを使用して選択できる 4 つの異なるレイアウト(段)タイプがあります。 各レイアウト(段) タイプには、提案されたレイアウト(段)を調整するためのオプションがあります。
+        </p>
+
+        <p style="vertical-align: middle;"><img src="../../images/Block.png" width="150" height="150"/>
+          <i>ブロック積み</i>: すべての製品(箱)が同じ向きになっています。
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Interlock.png" width="150" height="150"/>
+          <i>インターロック積み</i>: 製品(箱)の行または列は、他の製品(箱)とは向きが異なります。</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Pinwheel.png" width="150" height="150"/>
+          <i>ピンホール積み</i>: 製品(箱)の向きが交互になっているセクションを持つ対称的なレイアウト(段)です。</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Diagonal.png" width="150" height="150"/>
+         <i>ダイアゴナル積み</i>: 向きが共通の製品(箱)が斜めに配置されます。</br>
+        </p>
+       
+       
+        <p>
+          レイアウト(段)を受け入れると、提案されたレイアウト(段)が適用されます。&nbsp; キャンセルすると、定義済みのレイアウト(段) モードに入る前にレイアウト(段) デザインが復元されます。&nbsp;
+        </p>
+
+        <p>
+          <b>シーケンス</b> ボタンを使用すると、製品(箱)の配置順序を上書きできます。&nbsp; クリックすると、すべての製品(箱)に番号が表示されなくなります。&nbsp;
+          レイアウト(段)の順序付けには 2 つのオプションがあります。&nbsp; <b>自動</b> モードでは、パレットの角とその角に対する方向を選択する必要があります。&nbsp;
+          パレットビルダー は、選択に基づいてレイアウト(段)のシーケンスを提案します。&nbsp; または、<b>手動モード</b>を使用している場合は、配置したい順序で製品(箱)をクリックできます。&nbsp;
+        </p>
+       
+        <p>
+          キャンバス表示は、画面の右上隅にある 4 つのボタンを使用して操作できます。&nbsp;
+          <ul>
+            <li><img src="../../images/Center.svg" width="20" height="20"/> ボタンを使用すると、画面上の点を中心にビューを中央に配置できます。</li>
+            <li><img src="../../images/FitPage.svg" width="20" height="20"/> ボタンは、すべての製品(箱)とパレットを表示します (画面に合わせて表示します)。 .&nbsp;</li>
+            <li><img src="../../images/ZoomIn2.png" width="20" height="20"/> と <img src="../../images/ZoomOut2.png " width="20" height="20"/> ボタンを使用して、それぞれズームインとズームアウトできます。</li>
+          </ul>
+        </p>
+
+          <p>
+           また、パレットビルダー は、レイアウト(段)に適用できる水平方向、垂直方向の変換も可能です。&nbsp;
+           <ul>
+             <li><img src="../../images/MirrorHoriz2.svg" width="20" height="20"/> と <img src="../../images/MirrorVert2.svg " width="20" height="20"/> ボタンを使用して、重心位置についてレイアウト(段)を水平方向または垂直方向に反映できます。&nbsp;</li>
+             <li><img src="../../images/CenterPallet.svg" width="20" height="20"/> ボタンを使用して、レイアウト(段)をパレットの中央に配置できます。&nbsp; </li>
+           </ul>
+         </p>
+
+         <p>
+           <b>ビルド</b>: これはレイアウト(段)のデフォルトのモードです。&nbsp; 製品(箱)を押すと、選択した製品(箱)に 4 つの円形の「+」ボタンが表示されます。 製品(箱)を離すと選択が解除されます。&nbsp; 「+」ボタンをクリックすると、選択した方向に製品(箱)が追加されます。&nbsp; 上部にある追加のボタンを押すと、製品(箱)をすばやく回転できます。&nbsp;
+         </p>
+         <p style="margin-left: 50;">
+             <img src="../../images/BuildMode.png" width="400" height="130"/>
+         </p>
+        
+         <p>
+           製品(箱)が選択されている間、下部のセクションには、パレットの座標系に対する製品(箱)の位置と方向が表示されます。&nbsp; 矢印ボタンを使用して、選択した製品(箱)の段階的な移動または回転を実行できます。&nbsp; または、X フィールドと Y フィールドを編集して、製品(箱)の位置を設定することもできます。
+         </p>
+
+         <p><b>グループ</b>: グループモードでは、複数の製品(箱)を選択して移動したり、まとめて回転したりできます。&nbsp; 製品(箱)を押して、選択に含めるか除外します。&nbsp; このモードでは、複数の製品(箱)を一度に削除することもできます。&nbsp;
+               <b>すべて選択</b> ボタンを押すと、すべての製品(箱)が選択されたグループ モードが自動的に有効になります。&nbsp; すべての製品(箱)を削除すると、エディタがリセットされます。&nbsp;
+         </p>
+
+         <p style="margin-left: 150;">
+           <img src="../../images/GroupMode.png" width="187" height="178"/>
+         </p>
+
+         <p><b>スナップ</b>: スナップ モードでは、ユーザーは製品(箱)を一緒にすばやく移動できます。
+           製品(箱)をタッチすると、8 つの円形スナップ ポイントが表示されます。&nbsp;
+           ユーザーは、製品(箱)のスナップ ポイントを選択して、スナップ アクションに関連付けることができます。&nbsp;
+           次に、ユーザーは到着先の製品(箱)と対応するスナップ ポイントを選択します。&nbsp;
+           2 つの異なるスナップ ポイントが選択されると、元の製品(箱)が移動先の製品(箱)に変換されます。
+           選択した 2 つのスナップ ポイントが結合されます。&nbsp;
+         </p>
+
+         <p style="margin-left: 10;">
+           <img src="../../images/SnapMode.png" width="500" height="150"/>
+         </p>
+
+         <p><b>メモ</b>:</p>
+         <ul>
+           <li>衝突している箱は赤くなり、パレットの外にある箱は黄色になります。</li>
+           <li>シーケンスを破棄すると、以前のシーケンスが復元されます。</li>
+         </ul>
+
+         </body>
+   </html> 
+
+<!-- 
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Layer Editor</b></strong></h2>
+        <p>The layer editor allows you to define how boxes are arranged on a single layer of your pallet.&nbsp;</p>
+         
+        <p>This interactible canvas shows a rectangular area representing your selected pallet.&nbsp; Your box product is represented by rectangles with your assigned labels and a number inside.&nbsp; 
+           <b>The number on the box indicates its placement order for a layer.&nbsp;</b> When programming your robot to construct your layer, you will be teaching the location of box 1.&nbsp; パレットビルダー will
+           automatically determine the next box position with respect to box 1 of the designed layer and adjust the path accordingly.&nbsp;
+        </p>
+
+        <p>
+           パレットビルダー offers three modes (BUILD, SNAP and GROUP) which can be accessed with there respective buttons.&nbsp;
+           The <b>PREDEFINED LAYER</b> button enters a mode where パレットビルダー will suggest layers to the user.&nbsp;
+           Finally, the <b>SEQUENCE</b> button allows you to define the order in which the boxes of your layer will be placed.&nbsp;
+        </p>
+
+        <p>
+          The <b>PREDEFINED LAYER</b> button will bring up a preview screen where パレットビルダー will suggest standard layer types.&nbsp; パレットビルダー has four distinct layer types that can be selected using the dropdown menu.&nbsp; Each layer type has options to adjust the suggested layers.&nbsp;            
+        </p>
+
+        <p style="vertical-align: middle;"><img src="../../images/Block.png" width="150" height="150"/>
+          <i>Block</i>: All boxes are oriented the same way.
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Interlock.png" width="150" height="150"/>
+          <i>Interlock</i>: A row or column of boxes has a different orientation from the other boxes.</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Pinwheel.png" width="150" height="150"/>
+          <i>Pinwheel</i>: A symmetrical layer with sections of alternating box orientations.</br>
+        </p>
+        <p style="vertical-align: middle;"><img src="../../images/Diagonal.png" width="150" height="150"/>
+         <i>Diagonal</i>: Boxes with a common orientation are aligned diagonally.</br>
+        </p>
+        
+        
+        <p>
+          Accepting the layer will apply the suggested layer.&nbsp; Cancelling will restore your layer design prior to entering the predefined layer mode.&nbsp;
+        </p>
+
+        <p>
+          The <b>SEQUENCE</b> button allows you to overwrite the order in which the boxes are placed.&nbsp; When clicked, all the boxes will no longer have numbers in them.&nbsp;
+          Two options are available to sequence your layer.&nbsp; The <b>Automatic</b> mode requires you to choose a corner of the pallet and a direction with respect to that corner.&nbsp;
+          パレットビルダー will suggest a sequence for your layer based on your choices.&nbsp; Alternatively, when using the <b>manual mode</b>, you can click the boxes in the order you want them placed.&nbsp;
+        </p>
+        
+        <p>
+          The canvas display can be manipulated using the four buttons at the top right corner of the screen.&nbsp;
+          <ul>
+            <li>The <img src="../../images/Center.svg" width="20" height="20"/> button allows you to center your view about a point on the screen.&nbsp;</li>
+            <li>The <img src="../../images/FitPage.svg" width="20" height="20"/> button brings all boxes and the pallet into view (i.e. fit-to-screen).&nbsp;</li>
+            <li>The <img src="../../images/ZoomIn2.png" width="20" height="20"/> and <img src="../../images/ZoomOut2.png" width="20" height="20"/> buttons can be used to zoom in and zoom out respectively.&nbsp;</li>
+          </ul>
+        </p>
+
+        <p>
+          Lastly, パレットビルダー provides global transformations that can be applied to a layer.&nbsp;
+          <ul>
+            <li>The <img src="../../images/MirrorHoriz2.svg" width="20" height="20"/> and <img src="../../images/MirrorVert2.svg" width="20" height="20"/> buttons can be used to reflect a layer about its centroidal position horizontally or vertically respectively.&nbsp;</li>
+            <li>The <img src="../../images/CenterPallet.svg" width="20" height="20"/> button can be used to center the layer to the middle of the pallet.&nbsp;</li>
+          </ul>
+        </p>
+
+        <p>
+          <b>BUILD</b>: This is the default construction mode for a layer.&nbsp; When a box is pressed, four circular "+" buttons will appear on the selected box.&nbsp; Pressing away from the box will deselect it.&nbsp; Clicking on a "+" button will add a box in the selected direction.&nbsp; An additional button at the top can be pressed for quick rotations of boxes.&nbsp;
+        </p>
+        <p style="margin-left: 50;">
+            <img src="../../images/BuildMode.png" width="400" height="130"/>
+        </p>
+        
+        <p>
+          While a box is selected, the bottom section will show the position and orientation of the box with respect to the pallet's coordinate system.&nbsp; The arrow buttons can be used to perform stepwise translations or rotations of the selected box.&nbsp; Alternatively, the position of the box can be set by editing its X and Y fields.&nbsp;
+        </p>
+
+        <p><b>GROUP</b>: The group mode allows you to select multiple boxes to translate them or rotate them together as a unit.&nbsp; Press on a box to include or exclude it from the selection.&nbsp; You can also delete multiple boxes at once with this mode.&nbsp;
+              Pressing on the <b>SELECT ALL</b> button will automatically enable group mode with all boxes selected.&nbsp; Deleting all boxes will reset the layer editor.&nbsp;            
+        </p>
+
+        <p style="margin-left: 150;">
+          <img src="../../images/GroupMode.png" width="187" height="178"/>
+        </p>
+
+        <p><b>SNAP</b>: In the snap mode, users can move boxes together for quick translations. 
+          Touching on a box will display eight circular snap points.&nbsp; 
+          Users can then select a snap point on the source box to be associated with the snapping action.&nbsp; 
+          Next, users must select a destination box and a corresponding snap point.&nbsp; 
+          Once two distinct snap points are selected, the source box will be translated to the destination box so that 
+          the two selected snap points are joined.&nbsp;
+        </p>
+
+        <p style="margin-left: 10;">
+          <img src="../../images/SnapMode.png" width="500" height="150"/>
+        </p>
+
+        <p><b>Notes</b>:</p>
+        <ul> 
+          <li>Boxes in collision will turn red and boxes outside of the pallet will be yellow.&nbsp;</li>
+          <li>Discarding a sequence will restore the previous sequence.&nbsp;</li>
+        </ul>
+
+        </body>
+</html> -->

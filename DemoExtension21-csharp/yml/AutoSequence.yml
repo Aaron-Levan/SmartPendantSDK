@@ -1,0 +1,236 @@
+AutoSequence
+{
+    Column
+    {
+        spacing: 10
+        y: -60
+
+        Row {
+            spacing: 10
+
+            Button {
+                id: automaticTab
+                width: 125 
+                text: tr("automatic_seq")
+                checkable: true 
+                checked: true
+            }
+
+            Button {
+                id: manualTab
+                width: 125
+                text: tr("manual_seq")
+                checkable: true
+            }
+        }
+
+        Rectangle {
+            width: 695
+            height: 255
+            color: "transparent"
+            borderWidth: 3
+            borderColor: "#0066B3"
+            radius: 4
+
+            Stack {
+                id: sequenceOptions
+                width: 695
+                height: 255
+
+                Item {
+                    width: parent.width
+                    height: parent.height
+
+                    Text {
+                        y: 10
+                        width: parent.width
+                        halign: Const.Center
+                        text: tr("auto_sequence_instruction")
+                        fontSize: 20    
+                    }
+                    
+                    ComboBox {
+                        id: directionalCombo
+                        options: ["LEFT", "UP", "RIGHT", "DOWN"]
+                        visible: false
+                        currentIndex: -1
+                    }
+
+                    Item {
+                        x: 245
+                        y: 40
+                        width: 200
+                        height: 200
+
+                        RadioButton {
+                            id: topLeft
+                            x: 5
+                            y: 5
+                        }
+
+                        RadioButton {
+                            id: topRight
+                            x: parent.width-25
+                            y: 5
+                        }
+
+                        RadioButton {
+                            id: bottomLeft
+                            x: 5
+                            y: parent.height-35
+                        }
+
+                        RadioButton {
+                            id: bottomRight
+                            x: parent.width-25
+                            y: parent.height-35
+                        }
+
+                        MouseArea {
+                            id: topZone
+                            x: topLeft.x + 75
+                            y: topLeft.y - 10
+                            width: 50
+                            height: 50
+                            enabled: topLeft.checked || topRight.checked
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex==2 ? "images/RightArrow_Filled.svg" : "images/RightArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: topLeft.checked
+                            }
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex == 0 ? "images/LeftArrow_Filled.svg" : "images/LeftArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: topRight.checked
+                            }
+                        }
+
+                        MouseArea {
+                            id: leftZone
+                            x: topLeft.x - 15
+                            y: topLeft.y + 75
+                            width: 50
+                            height: 50
+                            enabled: topLeft.checked || bottomLeft.checked
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex ==  1 ? "images/UpArrow_Filled.svg" : "images/UpArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: bottomLeft.checked
+                            }
+
+                            Image
+                            {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex == 3 ? "images/DownArrow_Filled.svg" : "images/DownArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: topLeft.checked
+                            }
+                        }
+
+                        MouseArea {
+                            id: bottomZone
+                            x: bottomLeft.x + 70
+                            y: bottomLeft.y - 5
+                            width: 50
+                            height: 50
+                            enabled: bottomLeft.checked || bottomRight.checked
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex == 0 ? "images/LeftArrow_Filled.svg" : "images/LeftArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: bottomRight.checked
+                            }
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex==2 ? "images/RightArrow_Filled.svg" : "images/RightArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: bottomLeft.checked
+                            }
+                        }
+                        
+                        MouseArea {
+                            id: rightZone
+                            x: topRight.x - 15
+                            y: topRight.y + 75
+                            width: 50
+                            height: 50
+                            enabled: topRight.checked || bottomRight.checked
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex ==  1 ? "images/UpArrow_Filled.svg" : "images/UpArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: bottomRight.checked
+                            }
+
+                            Image {
+                                width: 50
+                                height: 50
+                                source: directionalCombo.currentIndex == 3 ? "images/DownArrow_Filled.svg" : "images/DownArrow_Outline.svg"
+                                fillMode: Const.PreserveAspectFit
+                                visible: topRight.checked
+                            }
+                        }
+
+                        Image {
+                            x: topLeft.x + 45
+                            y: topLeft.y + 50
+                            width: 100
+                            height: 100
+                            source: "images/AutoSeqPallet_Blue.svg"
+                            fillMode: Const.PreserveAspectFit
+                        }              
+                    }     
+                }
+                    
+                Column {
+                    width: parent.width
+                    height: parent.height
+                    align: Const.Center
+
+                    Text {
+                        width: parent.width
+                        height: 100
+                        halign: Const.Center
+                        valign: Const.Center
+                        text: tr("sequence_message")
+                        fontSize: 20    
+                    }
+
+                    Row {
+                        spacing: 15
+                        align: Const.Center
+
+                        Button {
+                            id: undoButton
+                            width: 120
+                            text: tr("undo_label")
+                            enabled: false
+                        }
+
+                        Button {
+                            id: undoAllButton
+                            width: 120
+                            text: tr("undo_all")
+                        }
+                    } // Row           
+                }
+            } 
+        }
+    }       
+}

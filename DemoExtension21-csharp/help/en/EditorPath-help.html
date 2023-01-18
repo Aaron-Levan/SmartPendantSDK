@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Path Editor</b></strong></h2>
+    <p>This section allows a user to teach the path used to handle the products of their stations.</p>
+    <p>A path is composed of multiple motions: Approach, Pick/Place, Depart.&nbsp; 
+	  For each motion, the position, motion type, position type and speed can be entered.&nbsp; 
+    This path will then be shifted to handle all other parts in the same manner.&nbsp; 
+    Depending on the number of approach and departure positions specified in the previous screen, 
+    more approach and departure positions may be required.&nbsp; 
+    If the "Inverse Approach" option was selected from the previous screen, users will 
+    only be required to enter the approach positions, and the pick or place position.&nbsp; 
+    With the option enabled, an inversion notice will display on the departure tabs.</p>
+    By default, the application will suggest points based on the selected product and station type.&nbsp; However, they can be overwritten.
+    <p><b>Move Type</b>: Type of motion to a position - Joint Move (joint interpolation) 
+	  or Linear Move (straight line).&nbsp; The "%" option for Linear Move defines
+      linear speed as percentage of maximum speed instead of mm/s.</p>
+    <p><b>Speed</b>: Speed at which the motion will execute.&nbsp; For "Joint Move" and
+      "Linear Move (%)", speed is specified as a percentage of maximum speed and "Linear Move (%)
+	  must at least equal 50%.&nbsp; For "Linear Move", speed is defined in mm/s.&nbsp; </p>
+    <p><b>Position Type</b>: positions can be classified as either "Fixed" or "Relative". 
+    <ul>  
+      <li><b>Fixed:</b> The position is fixed in space, so the robot will always move to the same position 
+      regardless of the part it is handling. 
+      A user may want to specify a position as fixed if their robot must avoid some obstacles 
+      before moving relative to the current part. </li>
+      <li><b>Relative:</b> The position moves with respect to the current part that is being handled, 
+        so that the approach/depart path is the same relative to the part.</li>
+    </ul>
+      <p style="margin-left: 50px;"><img src="../../help/en/Fixed_vs_Relative.png" width="400" height="232"/></p>
+    <p><b>Position</b>: Destination relative to the reference
+      user frame of the station.&nbsp; Positions are defined by
+      coordinates (X, Y, Z) and tool orientation (Rx, Ry, Rz).&nbsp; Values
+      can be set by editing individual fields or using "Teach
+      position" to record the current position of the robot.</p>
+    <p>To teach a Position, select the desired tab: Approach, Pick/Place, Depart.&nbsp; 
+	  Then jog the robot to the desired position relative to the first part of the pattern.&nbsp; 
+    Once in position, press <b>"TEACH"</b> to record the current position.&nbsp; 
+	  Repeat for other motions.</p>
+
+    <p>To verify a position, press <b>"Go To Position"</b> to display the "Target" position in the Jogging panel.&nbsp; Press "Go To Position" of the Jogging panel to move the robot to the Target. </p>
+
+    <p><i>Stack Search Dispensers</i></p>
+    <p>Stack search dispensers usually need an approach point directly above the Pick position, this defined the direction of the search.&nbsp; Then it uses at least two depart points straight up: the first one is a short motion at lower speed used to separate the picked product from the stack; the second depart point is to clear the dispenser side before moving to another station.&nbsp;</p>
+     
+    <p style="margin-left: 50px;"><img src="../../help/en/PositionsStackSearch.png" width="400" height="150"/></p><br>
+
+    <p><i>Build Stations - Boxes</i></p>
+    <p>
+      For build layers involving boxes, the position of Box 1 from the layer should be taught. Moreover, when a box is turned relative to the first box:
+      <ul>
+      <li>The <u>relative</u> approach and depart positions keep the general taught direction.
+        They do not rotate with the box facing.</li>
+        <p style="margin-left: 50px;"><img src="../../images/CustomRelativeRotation.png" width="400" height="146"/></p><br>
+      <li>The <u>fixed</u> approach and depart positions keep the orientation of the part as taught.
+        The part rotation will occur during the transition between a fixed position and the relative position (or vise-versa)</li>
+        <p style="margin-left: 50px;"><img src="../../images/CustomFixedRotation.png" width="400" height="150"/></p><br>
+      
+    </ul>
+    </p>
+
+    <p>
+      <b>Note</b>: When using the default suggested positions for place layers,
+      your gripper's relative position must match that of when it was used to teach the pick position.&nbsp; Otherwise, your product may be placed with the incorrect orientation onto the layer.
+    </p>
+  </body>
+</html>

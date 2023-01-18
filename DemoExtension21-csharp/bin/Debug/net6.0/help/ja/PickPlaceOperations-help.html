@@ -1,0 +1,99 @@
+<html>
+   <head>
+     <!-- <meta http-equiv="content-type" content="text/html; charset=windows-1252"> -->
+     <title>一般</title>
+   </head>
+   <body>
+     <h2><strong><b>取り動作/置き動作</b></strong></h2>
+        
+         <p>この画面では、取り動作/置き動作するジョブを作成できます。&nbsp;</p>
+         
+         <p>
+          最初に、名前、ステーション、製品を割り当てる必要があります。&nbsp; これにより、選択した製品をどのように扱うかを決定するジョブが構築されます。&nbsp;
+          取り動作ジョブの場合、供給ステーションとディスペンサータイプのステーションのみが選択可能です。&nbsp; 置き動作ジョブは、積付ステーションへのアクセスのみを提供します。&nbsp;
+         </p>
+        
+         <p>
+          パレットビルダーでは、[<b>同様のステーションで使用</b>] チェック製品(箱)を選択することで、ジョブを一般的なものにすることができます。&nbsp; これにより、ユーザ座標系に関して同じタイプの別のステーションでジョブを使用できるようになります。&nbsp;
+          この機能では、ユーザ座標系に対する製品の位置が、すべての同様のステーションで同じである必要があります。&nbsp; たとえば、ある取り動作の定義では製品を左側に、別の定義では製品が右側に整列している場合、この機能は使用できません。&nbsp;
+          この条件がなければ、次の図に示すように、各ステーションに固有のジョブが必要になります。
+         </p>
+
+         <p><img src="../../help/ja/Stations.png" width="550" height="200"/>
+         
+         <p>
+           製品については、リストから製品を選択してください。 パレットをロボットで処理する場合、パレットを製品リストに表示するには、[製品管理] 画面でパレットにグリッパーが選択されている必要があります。置き動作ジョブの場合、サイズを正しく設定するには、パレットも選択する必要があります。 また、製品(箱)の場合、積みレイアウト(段) を編集ボタンを使用することで、製品(箱)のレイアウトと配置の順序を定義できます。 配置経路は、レイアウト(段)の最初の製品(箱)に対してのみ教示する必要があります。
+         </p>
+        
+         <p>
+          ジョブ用のロボットの経路の設定に進む前に、経路内のポイント数を決定することをお勧めします。&nbsp;
+          パレットビルダーを使用すると、近接位置、退避位置の数を変更できます。&nbsp; これは、隣接する製品との衝突を避けたり、より複雑な経路が必要な場合に使用できます。&nbsp;
+          単純な経路で良い場合、パレットビルダーには、[<b>退避経路を近接経路の逆アプローチに設定</b>] を使用して、近接経路(アプローチ)と、退避経路に同じ経路を使用する方法も用意されています。&nbsp; 
+          これを有効にすると、近接経路と取り/置き経路のみを定義すれば良いです。退避経路は、近接経路から自動生成されます。&nbsp;
+         </p>
+        
+         <p>
+           選択したステーションと製品に基づいて、基準の経路が生成されます。&nbsp; その経路は、<b>モーションの編集</b> ボタンを押して各ポイントを通過することで確認する必要があります。 <b>経路のリセット</b> ボタンを押すと、経路と経路構成を初期化して基準経路に戻すことができます。
+         </p>
+        
+         <p><b>メモ</b>:</p>
+         <ul>
+           <li>逆アプローチ設定をすると、近接位置と退避位置の数は同一となります。</li>
+           <li>近接位置が教示されている場合、追加の近接位置を追加すると、教示された近接位置のコピーが作成されます。&nbsp; これらの新しいポイントは上書きできます。</li>
+           <li>退避位置が教示されている場合、追加の退避位置を追加すると、教示された退避地点のコピーが作成されます。&nbsp; これらの新しいポイントは上書きできます。</li>
+         </ul>
+         <p>
+          完了したら、<b>セーブしてジョブを生成</b> ボタンを押してジョブを保存するか、<b>キャンセル</b> を押してジョブまたは変更を破棄します。
+</p>
+         </body>
+</html>
+
+<!-- <html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Pick Operation/Place Layers</b></strong></h2>
+        
+        <p>This screen allows you to create jobs to pick up or place products.&nbsp;</p>
+         
+        <p>
+           Initially, you need to assign a name, station and product.&nbsp; This will construct a job that will dictate how the selected product is handled.&nbsp;
+           For pick jobs, only infeed stations and dispenser type stations are selectable.&nbsp; Place jobs will only give access to build stations.&nbsp;
+        </p>
+        
+        <p>
+          パレットビルダー offers the ability to make jobs generic by selecting the <b>Used on similar station</b> checkbox.&nbsp; This will allow the job to be used on another station of the same type with respect to its user frame.&nbsp;
+          This feature requires that the positioning of the product relative to the user frame be the same for all similar stations.&nbsp; For example, if one infeed is aligning product on the left side and the another on the right, this feature cannot be used.&nbsp;
+          Without this condition, each station will require a unique job as seen in the following figure.
+        </p>
+
+        <p style="margin-left: 50px;"><img src="../../help/en/Stations.png" width="200" height="200"/>&nbsp;&nbsp;&nbsp;<img src="../../help/en/StationsUnique.png" width="200" height="200"/></p>
+        
+        <p>
+          For the product, select a product from the list.  If a pallet is to be handled by the robot, the pallet must have a gripper selected in the "Product Manager" screen in order to display it in the product list.   
+          For the Place Layer job, a pallet must also be selected to size the layer correctly.  And for a box product, the Layer Design button will be available to define the boxes layout and sequence of placement.  The place path will need to be programmed only for the first box of the layer.
+        </p>
+        
+        <p>
+          Before proceeding to program a path for the robot for the job, you may wish to configure number of points in the path.&nbsp;
+          パレットビルダー allows you to change the number of Approach or Departure points.&nbsp; This can be used if you need a more complex path to position the product or avoid collisions with neighboring products.&nbsp;
+          For simpler paths, パレットビルダー also provides an option to use the same path for approach and depart motions using the <b>Invert Approach for Depart Path</b> checkbox.&nbsp; With this option enabled, only the approach and pick/place points need to be defined.&nbsp; The departure points will be reflected about the pick/place point to create symmetry in the motion.&nbsp;
+        </p>
+        
+        <p>
+          A default path will be generated based on the selected station and product.&nbsp; That path will need to be verified by pressing the <b>Edit Motion</b> button and going through each point. You may press the <b>Reset Path</b> button to initialize your path and path configuration back to the default path.  
+        </p>
+        
+        <p><b>Notes</b>:</p>
+        <ul> 
+          <li>Invoking the invert option will cause the number of approach and departure points to match.&nbsp;</li>
+          <li>If an approach point was taught, adding extra approach points will produce copies of the taught approach point.&nbsp; These new points can be overwritten.&nbsp;</li>
+          <li>If a departure point was taught, adding extra departure points will produce copies of the taught departure point.&nbsp; These new points can be overwritten.&nbsp;</li>
+        </ul>
+        <p>
+         Once completed, press the <b>Save & Generate Job</b> button to save the job or press <b>Cancel</b> to discard the job or changes. 
+	</p>
+        </body>
+</html> -->

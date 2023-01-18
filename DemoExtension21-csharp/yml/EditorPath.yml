@@ -1,0 +1,441 @@
+EditorPath 
+{
+    width: Const.FullWidth
+
+    CheckBox {  // Dummy control used as property
+        id: pathIsPick
+        visible: false
+    }
+
+    CheckBox {  // Dummy control used as property
+        id: pathIsForBox
+        visible: false
+    }
+    
+
+    Column {
+        spacing: 0
+
+        Item {		// Title
+            width: parent.width
+            height: 50
+
+            Text {
+                text: pathIsPick.checked ? tr("pick_definition") + " > " + tr("edit_motions") : tr("layer_definition") + " > " + tr("edit_motions")
+                width: parent.width
+                height: parent.height
+                fontSize: 30
+                valign: Const.Bottom
+            }  // Text
+        } 
+
+        Item { height: 5; width: 5 }
+
+        Row {       // Tab controls
+            spacing: 1
+            align: Const.Center
+            
+            Button
+            {
+                id: leftButton 
+                text: "❮"
+                width: 50 
+                visible: false
+                bgcolor: "white"
+                color: "black"
+                height: 48
+                fontSize: 18
+            }
+
+            TabBar 
+            {        // Tab selection
+                id: tabPositionSelector
+                TabButton {id: tabMotion0; text: tr("approach_tab1"); visible: false}
+                TabButton {id: tabMotion1; text: tr("approach_tab2"); visible: false}
+                TabButton {id: tabMotion2; text: tr("approach_tab3"); visible: false}
+                TabButton {id: tabMotion3; text: tr("place_tab"); visible: false}
+                TabButton {id: tabMotion4; text: tr("depart_tab1"); visible: false}
+                TabButton {id: tabMotion5; text: tr("depart_tab2"); visible: false}
+                TabButton {id: tabMotion6; text: tr("depart_tab3"); visible: false}
+            }
+
+            Button
+            {
+                id: rightButton 
+                text: "❯"
+                shape: Const.Rectangle
+                width: 50 
+                visible: false
+                bgcolor: "white"
+                color: "black"
+                height: 48
+                fontSize: 18
+            }
+
+        }
+
+        Rectangle {     // Position display
+            width: 770
+            height: 292
+
+            Row {
+                spacing: 40
+                
+                Column {        // Motion Details
+                    y: 7
+                    spacing: 5
+                    
+                    Row {           // Move properties
+                        spacing: 0
+                        height: 50
+                        align: Const.Center 
+
+                        Item { height: 15; width: 15 }
+
+                        ComboBox {
+                            id: moveTypeCombo
+                            width: 175
+                            options: ["JointMove", "LinearMove", "LinearMove(%)"]
+                        }
+
+                        Item { height: 15; width: 15 }
+
+                        Label {
+                            text: tr("speed_label") + "="
+                        }
+
+                        TextField { 
+                            id: speedMovj
+                            width: 110
+                            height: 30
+                            numericInput: true
+                            decimalPlaces: 2
+                            lowerBound: 0.1
+                            upperBound: 100.0
+                            units: "%"
+                            enabled: moveTypeCombo.enabled
+                            visible: moveTypeCombo.currentIndex==0
+                        }
+
+                        TextField { 
+                            id: speedMovl
+                            width: speedMovj.width
+                            height: speedMovj.height
+                            numericInput: true
+                            decimalPlaces: 1
+                            lowerBound: 0.1
+                            upperBound: 1500.0
+                            units: tr("unit_mm_per_sec")
+                            enabled: moveTypeCombo.enabled
+                            visible: moveTypeCombo.currentIndex==1
+                        }
+
+                        TextField { 
+                            id: speedMovlMax
+                            width: speedMovj.width
+                            height: speedMovj.height
+                            numericInput: true
+                            decimalPlaces: 2
+                            lowerBound: 50.0
+                            upperBound: 100.0
+                            units: "%"
+                            enabled: moveTypeCombo.enabled
+                            visible: moveTypeCombo.currentIndex==2
+                        }
+                    }
+
+                    Row {           // Position type
+                        x: 15
+                        spacing: 0
+                        height: 40
+                        align: Const.Center
+                        visible: !pathIsPick.checked && pathIsForBox.checked
+
+                        Label {
+                            text: tr("position_type")
+                        }
+
+                        Item { height: 5; width: 5 }
+
+                        ComboBox {
+                            id: positionTypeCombo
+                            width: 115
+                            options: [tr("relative"), tr("fixed")]
+                        }   
+                    } // Row
+
+                    Row {           // Buttons row
+                        x: 15
+                        spacing: 20
+                        width: parent.width
+                        //height: 50
+                        align: Const.Center
+
+                        //Item { height: 15; width: 15 }
+
+                        Button {
+                            id: setButton
+                            width: (parent.width - parent.spacing - parent.x) / 2
+                            fontSize: 20
+                            text: tr("teach_point")
+                            enabled: moveTypeCombo.enabled
+                        }
+
+                        Text {
+                            id: gotoLink
+                            width: setButton.width
+                            height: 40
+                            halign: Const.Center
+                            valign: Const.Center
+                            wrapMode: Const.Wrap
+                            fontSize: 24
+                            text: "<a href=\"screen:programmingView\">" + tr("goto_position")+ "</a>"
+
+                            MouseArea {
+                                id: gotoLinkArea
+                                width: parent.width
+                                height: parent.height
+                                enabled: moveTypeCombo.enabled  
+                            }
+                        } 
+                    }
+
+                    Row {           // Position
+                        Item { width: 15; height: 15 }
+
+                        Column {    // XYZ
+                            spacing: 5
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "X:"
+                                    width: 20
+                                }
+                                TextField { 
+                                    id: xValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_mm")
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: xValueText.text == ""
+                                    }
+                                }
+                            }
+
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "Y:"
+                                    width: 20
+                                }
+                                TextField { 
+                                    id: yValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_mm")
+                                    enabled: xValueText.enabled
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: yValueText.text == ""
+                                    }
+                                }
+                            }
+
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "Z:"
+                                    width: 20
+                                }
+                                TextField { 
+                                    id: zValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_mm")
+                                    enabled: xValueText.enabled
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: zValueText.text == ""
+                                    }
+                                }
+                            }
+                        }
+
+                        Item { width: 20; height: 20 }
+
+                        Column {  // RxRyRz
+                            spacing: 5
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "Rx:"
+                                }
+                                TextField { 
+                                    id: rxValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_deg")
+                                    enabled: xValueText.enabled
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: rxValueText.text == ""
+                                    }
+                                }
+                            }
+
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "Ry:"
+                                }
+                                TextField { 
+                                    id: ryValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_deg")
+                                    enabled: xValueText.enabled
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: ryValueText.text == ""
+                                    }
+                                }
+                            }
+
+                            Row {
+                                spacing: 0
+                                align: Const.Center
+                                Label {
+                                    text: "Rz:"
+                                }
+                                TextField { 
+                                    id: rzValueText
+                                    width: 120
+                                    height: 38
+                                    numericInput: true
+                                    decimalPlaces: 3
+                                    units: tr("unit_deg")
+                                    enabled: xValueText.enabled
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "Orange"
+                                        borderWidth: 2
+                                        visible: rzValueText.text == ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Column {        // Motion Image
+                    spacing: 0
+
+                    Item { height: 5; width: 5 }
+
+                    Item {
+                        height: 285
+                        width: 350
+                        
+                        Image {
+                            id: positionImage
+                            visible: true
+                            x:2
+                            y:2
+                            width: parent.width - 2 * x
+                            height: parent.height - 2 * y
+                            fillMode: Const.PreserveAspectFit
+                            source: "images/PositionWithBox.png"
+                        }                       
+                    }
+                }
+            }
+
+            Rectangle { // Inverse Approach message
+                id: approachinvmsg
+                width: 380
+                height: parent.height
+                color: "#6F94C6E5"  // transparent blue
+                visible: false
+
+                Text
+                {
+                    text: tr("inverse_approach_message")
+                    width: parent.width
+                    //y: 50
+                    height: parent.height
+                    halign: Const.Center
+                    valign: Const.Center
+                    fontSize: 40
+                    fontWeight: Const.Bold
+                    wrapMode: Const.Wrap
+                    visible: approachinvmsg.visible
+                }
+            }
+        }
+    }
+
+    Column {
+        width: parent.width - 30
+        align: Const.Right
+        y: 407
+        Button { 
+            id: pathReturn
+            width: (parent.width - 70) / 3
+            text: tr("return_to_job");
+        }
+    }
+
+    Button
+    {
+        id: resetPoint
+        width: pathReturn.width
+        x: 0
+        y: 407
+        text: tr("reset_point")
+    }
+
+}

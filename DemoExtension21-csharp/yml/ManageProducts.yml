@@ -1,0 +1,543 @@
+ManageProducts 
+{
+    width: 695
+
+    CheckBox {      // Dummy control used as yml property
+        id: productModifiedFlag
+        visible: false
+    }
+
+    CheckBox {      // Dummy control used as yml property
+        id: productWizardFlag
+        visible: false
+    }
+
+    ComboBox {
+        id: productFilter
+        width: 150
+        x: parent.width - 180
+        y: 15
+        options: ["", tr("box"), tr("pallet"), tr("separator")]
+        enabled: !productModifiedFlag.checked
+        visible: !productWizardFlag.checked
+    }
+
+    Label {
+        x: productFilter.x - width
+        y: productFilter.y
+        height: productFilter.height
+        text: tr("filter") + ": "
+        visible: !productWizardFlag.checked
+    }
+
+    Column {
+        width: parent.width
+		spacing: 10
+
+		Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: productWizardFlag.checked ? tr("build_pattern_creation") : tr('manage_products')
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+        Image {     // Step image
+            x: 75
+            width: 527
+            height: 36
+            source: "images/Step1.png"
+            fillMode: Const.PreserveAspectFit
+            visible: productWizardFlag.checked
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 50
+            visible: productWizardFlag.checked
+            Label {
+                width: 165
+                text: tr("select_product")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("pick_operations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("place_layers")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("build_pattern")
+                halign: Const.Center
+            }
+        } // Row
+
+        Rectangle {     // product table
+            color: "white"
+            width: parent.width
+            height: 310
+            visible: !productWizardFlag.checked
+
+            Table {
+                id: productTable
+                width: parent.width
+                height: parent.height
+
+                rowSpacing: 0
+                colSpacing: 0
+
+                verticalScroll: true
+                //horizontalScroll: true
+                rowSelectable: true
+                fontSize: 18
+                showBorder: true
+                showHeadings: true
+
+                columns: [
+                    {key: 'name', width: 250, label: tr("name"), halign: Const.Left},
+                    {key: 'type', width: 100, label: tr("type"), halign: Const.Left},
+                    {key: 'product_x', width: 80, label: tr("length"), halign: Const.Center},
+                    {key: 'product_y', width: 80, label: tr("width"), halign: Const.Center},
+                    {key: 'product_z', width: 80, label: tr("height"), halign: Const.Center},
+                    {key: 'gripper', width: 200, label: tr("gripper_name"), halign: Const.Left}
+                ]
+
+                rows: [
+                    // { name: 'BoxProduct', type: 'Box', product_x: '300.00', product_y: '200.00', product_z: '150.00', gripper: 'BoxGripper'},
+                    // { name: 'SlipSheet', type: 'Separator', product_x: '1200.00', product_y: '1000.00', product_z: '8.00', gripper: 'SlipsheetGripper'}
+                ]
+            }
+
+            Rectangle {
+                width: parent.width
+                height: parent.height
+                color: "#5fffffff"
+                visible: productModifiedFlag.checked
+            }
+
+            MouseArea {         // productTableMouseArea
+                id: productTableMouseArea
+                width: parent.width
+                height: parent.height
+                enabled: productModifiedFlag.checked
+            }
+        }
+
+        Item {     /// Buttons Row
+            width: parent.width
+            height: 50
+            visible: !productWizardFlag.checked
+
+            Row {           // Buttons
+                id: productTableButtons
+                width: parent.width
+                spacing: 20
+                
+                Button {
+                    id: productAddButton
+                    text: tr("new_product")
+                    width: (parent.width - parent.spacing * 2) / 3
+                    enabled: !productModifiedFlag.checked
+                }
+
+                Button {
+                    id: productDeleteButton
+                    text: tr("delete_product")
+                    width: productAddButton.width
+                    enabled: productTable.selectedRow >= 0 && !productModifiedFlag.checked
+                }
+                
+            }
+
+            MouseArea {         // productButtonsMouseArea
+                id: productButtonsMouseArea
+                width: parent.width
+                height: parent.height
+                enabled: productModifiedFlag.checked
+            }
+        }
+
+        Text {  // Title
+			text: tr("product_definition")
+			height: 50
+			fontSize: 30
+			valign: Const.Center
+			halign: Const.Left
+		}
+
+        Rectangle {     // product Definition Section
+            id: productUnselected
+            width: parent.width
+            height: 550
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+            Text {  // Unselected Notification
+                y: 50
+                width: parent.width
+                fontSize: 20
+                halign: Const.Center
+                text: tr("select_product")
+            }
+        }
+
+        Rectangle {     // product Definition Section
+            id: productDefinitionSection
+            width: parent.width
+            height: 550
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+            visible: !productUnselected.visible
+            
+            Column {
+                x: 15
+                y: 10
+
+                Row {           // product Name
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 130
+                        text: tr("name") + ":"
+                    }
+
+                    TextField {
+                        id: productName
+                        fontSize: 20
+                        allowedChars: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#!@$%&*()'+=:;<>/_[]-."
+                        width: 270
+                        visible: false
+
+                        Rectangle {
+                            width: parent.width
+                            height: 40
+                            y: 12
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: productName.visible && productName.text == ""
+                            
+                        }
+                    }
+
+                    Label {
+                        text: productName.text
+                        fontSize: 20
+                        fontWeight: Const.Medium
+                        visible: !productName.visible
+                    }
+                }
+
+                Row {
+                    spacing: 10
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 130
+                        text: tr("type") + ":" 
+                    }
+
+                    ComboBox {
+                        id: productType
+                        width: 200
+                        options: [tr("box"),tr("pallet"),tr("separator")]
+                        visible: productName.visible && !productWizardFlag.checked
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (productType.currentIndex < 0) && ((productTable.selectedRow >= 0) || (productModifiedFlag.checked))
+                        }
+                    }
+
+                    Label {
+                        text: productType.currentIndex==1 ? tr("pallet") : productType.currentIndex==2 ? tr("separator") : tr("box")
+                        visible: !productType.visible
+                    }
+                } // Row
+
+                Row {
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 140
+                        text: tr("gripper_used") + ":"
+                    }
+
+                    ComboBox {
+                        id: productGripper
+                        width: 200
+                        options: []
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (productGripper.currentIndex < 0) && ((productTable.selectedRow >= 0) || productModifiedFlag.checked) && (productType.currentIndex != 1)
+                        }
+                    }
+
+                    Button {
+                        id: gripperLink
+                        text: ""
+                        iconSource: "images/GearIcon.svg"
+                        iconWidth: 32
+                        iconHeight: 32
+                        bgcolor: "transparent"
+                        visible: !productWizardFlag.checked
+                    }
+
+                    Text {
+                        text: tr("optional_gripper")
+                        visible: productType.currentIndex == 1
+                    }
+                } // Row
+
+                Item { width: 5; height:1 }
+
+                Row {  // Dimension Section
+                    spacing: 0
+
+                    Column {  
+                        id: productDimLabels
+                        width: 120      
+                        spacing: 35
+
+                        Label {
+                            id: productDimLabel 
+                            text: tr("dimension_label") 
+                            fontWeight: Const.Medium
+                        }
+                        
+                        Label {
+                            x: 25
+                            width: 90
+                            text: tr("length") + " (X):"
+                            color: "#D0011B"  // red  "#DB8487" // "Light Red"
+                        }
+                
+                        Label {
+                            x: 25
+                            width: 90
+                            text: tr("width") + " (Y):"
+                            color: "#1B8A3C" // "#3AB54A" // Tab Green // "#90CE98" // "Light Green"
+                        }
+                
+                        Label {
+                            x: 25
+                            width: 90
+                            text: tr("height") + " (Z):"
+                            color: "#0A67B2" // image blue //"#02AAB4" // Tab Blue// "#78A6CC" // "Light Blue"
+                        }                  
+
+                        Label {
+                            width: 90
+                            text: tr("weight") + ":"
+                        }
+                    }
+
+                    Column { 
+                        y: 5         
+                        spacing: 15
+                        width: 120
+
+                        Rectangle { 
+                            height: productDimLabel.height + 5
+                            width: 10
+                            color: "transparent"
+                        }
+                        
+                        TextField { 
+                            id: productX
+                            width: 120
+                            height: 38
+                            numericInput: true
+                            decimalPlaces: 3
+                            lowerBound: 1.000
+                            upperBound: 9999.999
+                            units: tr("unit_mm")
+                            Rectangle {
+                                y: -2
+                                width: parent.width
+                                height: parent.height + 3
+                                color: "transparent"
+                                borderColor: (productX.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked) ? "Orange" : "#DB8487" //"Red"
+                                borderWidth: 2
+                                visible: (productX.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked)
+                            }
+                        }
+                    
+                        TextField { 
+                            id: productY
+                            width: 120
+                            height: 38
+                            numericInput: true
+                            decimalPlaces: 3
+                            lowerBound: 1.000
+                            upperBound: 9999.999
+                            units: tr("unit_mm")
+                            Rectangle {
+                                y: -2
+                                width: parent.width
+                                height: parent.height + 3
+                                color: "transparent"
+                                borderColor: (productY.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked) ? "Orange" : "#90CE98" //"Green"
+                                borderWidth: 2
+                                visible: (productY.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked)
+                            }
+                        } 
+                    
+                        TextField { 
+                            id: productZ
+                            width: 120
+                            height: 38
+                            numericInput: true
+                            decimalPlaces: 3
+                            lowerBound: 0.000
+                            upperBound: 9999.999
+                            units: tr("unit_mm")
+                            Rectangle {
+                                y: -2
+                                width: parent.width
+                                height: parent.height + 3
+                                color: "transparent"
+                                borderColor: (productZ.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked) ? "Orange" : "#78A6CC" //"Blue"
+                                borderWidth: 2
+                                visible: (productZ.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked)
+                            }
+                        }  
+
+                        TextField { 
+                            id: productW
+                            width: 120
+                            height: 38
+                            numericInput: true
+                            decimalPlaces: 3
+                            lowerBound: 0.000
+                            upperBound: 999.999
+                            units: tr("unit_kg")
+                            Rectangle {
+                                y: -2
+                                width: parent.width
+                                height: parent.height + 3
+                                color: "transparent"
+                                borderColor: "Orange"
+                                borderWidth: 2
+                                visible: (productW.text == "") && ((productTable.selectedRow >= 0) || productModifiedFlag.checked)
+                            }
+                        }                 
+                    }
+                   
+                    Item {
+                        width: 400
+                        height: 260
+                        
+                        Image {
+                            id: intervalImage
+                            x:70
+                            width: 355
+                            height: parent.height
+                            fillMode: Const.PreserveAspectFit
+                            source: productType.currentIndex==1 ? "images/ProductPallet.png" : productType.currentIndex==2 ? "images/ProductSeparator.png" : "images/ProductBox.png"
+                        }                     
+                    } 
+                } 
+
+
+                Column {
+                    id: productLabelSection
+                    spacing: 10
+                    visible: productType.currentIndex == 0
+
+                    Row {
+                        // spacing: 0
+                        // align: Const.Center
+                        Label {
+                            width: 150
+                            text: tr("label_position") + ":"
+                        }
+                    } // Row
+
+
+                    Row {
+                        Rectangle {width: 10; height:10; color: "transparent"}
+
+                        CheckBox {
+                            id: productLabel180
+                            text: "A"
+                        }
+
+                        CheckBox {
+                            id: productLabel270
+                            text: "B"
+                        }
+
+                        CheckBox {
+                            id: productLabel0
+                            text: "C"
+                        }
+                        
+                        CheckBox {
+                            id: productLabel90
+                            text: "D"
+                        }
+                    } // Row
+                }
+            }
+        }     
+    }
+
+    Row {     // product Definition and Buttons
+        y: 1065
+        width: parent.width
+        height: 50
+        spacing: 20
+
+        Item {
+            // id: dummyButtonSpace
+            width: (parent.width - 2 * parent.spacing) / 3
+            height: parent.height 
+        }
+
+        Button {
+            id: productDiscard
+            width: (parent.width - 2 * parent.spacing) / 3
+            text: tr("cancel")
+            bgcolor: "#D0011B"  // red
+            visible: productModifiedFlag.checked
+        }
+
+        Button {
+            id: productSave
+            width: productDiscard.width
+            text: tr("save")
+            bgcolor: "#87D040"  // green
+            visible: productModifiedFlag.checked
+        }
+    }
+}

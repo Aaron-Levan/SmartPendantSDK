@@ -1,0 +1,415 @@
+EditorBuild
+{
+    width: 695
+
+    CheckBox {      // Dummy control used as yml property
+        id: buildModifiedFlag
+        visible: false
+    }
+
+    CheckBox {      // Dummy control used as yml property
+        id: buildWizardFlag
+        visible: false
+    }
+
+	Column
+	{
+		width: parent.width
+        spacing: 10
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: buildWizardFlag.checked ? tr("build_pattern_creation") : tr("manage_builds") + " > " + tr("build_definition")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+        Image {     // Step image
+            x: 75
+            width: 527
+            height: 36
+            source: "images/Step4.png"
+            fillMode: Const.PreserveAspectFit
+            visible: buildWizardFlag.checked
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 40
+            visible: buildWizardFlag.checked
+
+            Label {
+                width: 165
+                text: tr("select_product")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("pick_operations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("place_layers")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("build_pattern")
+                halign: Const.Center
+            }
+        } // Row        
+
+        Rectangle {     // build Definition Section
+            id: buildDefinitionSection
+            width: parent.width
+            height: buildWizardFlag.checked ? 895 : 990
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+            
+            Column {
+                x: 15
+                y: 10
+                width: parent.width
+                // spacing: 0
+                // align: Const.Center  
+
+                Row {
+                    width: parent.width
+
+                    Column {
+                        width: 400
+
+                        Row {       // build Name
+                            spacing: 10
+                            align: Const.Center
+                            height: 40
+
+                            Label {
+                                width: 120
+                                text: tr("name") + ":"
+                            }
+
+                            TextField { 
+                                id: buildName
+                                width: 330
+                                height: 38
+                                uppercaseInput: true
+                                allowedChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!&\'()_"
+                                placeholderText: " " + tr("name_placeholder")
+                                
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: buildName.text == ""
+                                }
+                            }
+                        }
+
+                        Row {       // build station
+                            spacing: 10
+                            align: Const.Center
+                            height: 40
+
+                            Label {
+                                width: 120
+                                text: tr("station") + ":" 
+                            }
+
+                            Label {
+                                id: buildStationName
+                                width: 260
+                                text: ""
+                                visible: text != ""
+                            }
+
+                            ComboBox {
+                                id: buildStation
+                                width: 200
+                                options: [tr("Build1"),tr("Infeed1"),tr("Dispenser1")]
+                                visible: !buildStationName.visible
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: (buildStation.currentIndex < 0) //&& (buildTable.selectedRow >= 0)
+                                }
+                            }
+
+                        } // Row
+
+                        Row {       // build product
+                            spacing: 10
+                            align: Const.Center
+                            height: buildWizardFlag.checked ? 30 : 40
+
+                            Label {
+                                width: 120
+                                text: tr("product") + ":" 
+                            }
+
+                            Label {
+                                id: buildProductName
+                                width: 260
+                                text: ""
+                                visible: text != ""
+                            }
+
+                            ComboBox {
+                                id: buildProduct
+                                width: 200
+                                options: [tr("Box123"),tr("Separator"),tr("PalletA")]
+                                visible: !buildProductName.visible
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: (buildProduct.currentIndex < 0) //&& (buildTable.selectedRow >= 0)
+                                }
+                            }
+                        } // Row
+
+                        Row {       // build pallet
+                            spacing: 10
+                            align: Const.Center
+                            height: buildWizardFlag.checked ? 30 : 40
+
+                            Label {
+                                width: 120
+                                text: tr("pallet") + ":" 
+                            }
+
+                            Label {
+                                id: buildPalletName
+                                width: 200
+                                text: ""
+                                visible: text != ""
+                            }
+
+                            ComboBox {
+                                id: buildPallet
+                                width: 200
+                                options: ["Pallet_A"]
+                                visible: !buildPalletName.visible
+
+                                Rectangle {
+                                    width: parent.width
+                                    height: parent.height
+                                    color: "transparent"
+                                    borderColor: "Orange"
+                                    borderWidth: 2
+                                    visible: (buildPallet.currentIndex < 0) //&& (buildTable.selectedRow >= 0)
+                                }
+                            }
+                        } // Row
+                    }
+                } // Row
+
+                Row {    // Layer Selection                
+                    Column {
+                        spacing: 0
+                        width: 370
+
+                        Text {
+                            height: 35
+                            text: tr("select_layer_to_add") + ":"
+                            fontSize: 18
+                        }
+
+                        Item {     // job table
+                            //color: "white"
+                            width: parent.width
+                            height: buildWizardFlag.checked ? 170 : 200
+
+                            Table {
+                                id: buildLayerChoiceTable
+                                width: parent.width
+                                height: parent.height
+
+                                rowSpacing: 0
+                                colSpacing: 0
+
+                                verticalScroll: true
+                                //horizontalScroll: true
+                                rowSelectable: true
+                                fontSize: 18
+                                showBorder: true
+                                showHeadings: false
+
+                                columns: [
+                                    {key: 'name', width: 345, label: tr("name"), halign: Const.Left}
+                                ]
+
+                                rows: [
+                                    //{ name: 'PICK_BOX_123', product: 'Box_123', station: "Infeed1" },
+                                ]
+                            }
+                        }
+                    } // Column
+
+                    CheckBox {      // Dummy control used a property
+                            id: buildSelectPick
+                            visible: false
+                            checked: false
+                    }
+
+                    Column {
+                        spacing: 0
+                        // align: Const.Center
+                        width: buildDefinitionSection.width - 370 - 45;
+                        visible: !buildWizardFlag.checked && buildSelectPick.checked
+
+                        Text {
+                            height: 35
+                            text: buildLayerChoiceTable.selectedRow < 0 ? " " : buildSelectPick.checked ? tr("select_pick_operation") + ":" : tr("associated_pick_operation")
+                            fontSize: 18
+                        }
+
+                        Item {     // job table
+                            //color: "white"
+                            width: parent.width
+                            height: 200
+
+                            Table {
+                                id: buildPickChoiceTable
+                                width: parent.width
+                                height: parent.height
+
+                                rowSpacing: 0
+                                colSpacing: 0
+
+                                verticalScroll: true
+                                horizontalScroll: true
+                                rowSelectable: true
+                                fontSize: 18
+                                showBorder: true
+                                showHeadings: false
+
+                                columns: [
+                                    {key: 'name', width: 350, label: tr("name"), halign: Const.Left}
+                                ]
+
+                                rows: [
+                                    //{ name: 'PICK_BOX_123', product: 'Box_123', station: "Infeed1" },
+                                ]
+                            }
+                        }
+                    } // Column
+
+                } // Row
+
+                Row {
+                    width: parent.width
+                    Button {
+                        id: buildAddLayer
+                        text: tr("add_layer")
+                        width: ( parent.width - 2 * parent.spacing ) / 3
+                        enabled: buildLayerChoiceTable.selectedRow >= 0 && ( !buildSelectPick.checked || (buildSelectPick.checked && buildPickChoiceTable.selectedRow >= 0) )
+                    }
+                } // Row
+                
+                Item {     // Layer table
+                    //color: "white"
+                    width: parent.width - 30
+                    height: buildWizardFlag.checked ? 320 : 365
+
+                    Table {
+                        id: buildLayerTable
+
+                        width: parent.width
+                        height: parent.height
+
+                        rowSpacing: 0
+                        colSpacing: 0
+
+                        verticalScroll: true
+                        horizontalScroll: true
+                        rowSelectable: true
+                        fontSize: 18
+                        showBorder: true
+                        showHeadings: true
+
+                        columns: [
+                            {key: 'layer', width: 35, label: "#"},
+                            {key: 'name', width: 330, label: tr("layer_name")},
+                            {key: 'source', width: 330, label: tr("associated_pick")}
+                        ]
+
+                        rows: [
+                        ]
+                    }
+                }
+
+                Row {
+                    Button {
+                        id: buildDeleteLayer
+                        width: buildAddLayer.width
+                        text: tr("delete_layer")
+                        enabled: buildLayerTable.selectedRow >= 0
+                    }
+                } // Row
+            }
+
+            Image {
+                x: 460
+                y: 30
+                width: 200
+                height: 200
+                source: "images/Build.svg"
+                fillMode: Const.PreserveAspectFit
+            }
+        }        
+    }
+
+    Column {     // build Definition and Buttons
+        y: 1065
+        width: parent.width
+        align: Const.Right
+
+        Row {
+            height: 40
+            spacing: 20
+
+            Button {            // Return to Build List
+                id: buildReturnToList
+                width: (695 - parent.spacing * 2) / 3
+                text: tr("close")
+                visible: !buildModifiedFlag.checked
+            }
+
+            Button {
+                id: buildDiscard
+                width: buildReturnToList.width
+                text: tr("cancel")
+                bgcolor: "#D0011B"  // red
+                visible: buildModifiedFlag.checked
+            }
+
+            Button {
+                id: buildSave
+                width: buildReturnToList.width
+                text: tr("save_generate_job")
+                bgcolor: "#87D040"  // green
+                visible: buildModifiedFlag.checked
+            }
+        }  // Row
+    } // Column
+}

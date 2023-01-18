@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Cell Setup</b></strong></h2>
+    <p>
+        A robotic cell is composed of the robot and its work environment.&nbsp; For proper operation of PalletBuilder, you need to define the stations the robot will interact with and the grippers it will use.&nbsp;
+    </p>
+
+    <p>
+        PalletBuilder offers four different station types: Infeed, Build, Dispenser Search Stack and Dispenser Fixed Pick.&nbsp;
+        <ul>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationInfeed.png" width="50" height="50" align="left"/><b>Infeed</b>: This type of station supplies box products to be loaded on a pallet usually by way of a conveyor.&nbsp;</p>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationBuild.png" width="50" height="50" align="left"/><b>Build</b>: This station is used to define how the pallet, separators and boxes are put together to form a build pattern.&nbsp;</p>
+
+            <p style="margin-left: 20px;"><img src="../../images/StationDispenserSearchStack.png" width="50" height="50" align="left"/><b>Dispenser Search Stack</b>: Given a stack of pallets or separators, this station can be used when a sensor is used to find the top item of the stack and pick it.&nbsp;</p>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationDispenserFixedPick.png" width="50" height="50" align="left"/><b>Dispenser Fixed Pick</b>: This station is used when separators and pallets are fed to a specific location for pick up.&nbsp;</p>
+            
+        </ul> 
+    </p>
+
+    <p>    
+        Stations can be created using the <b>New Station</b> button or stations can be modified or deleted using the
+        <b>Edit Station</b> and <b>Delete Station</b> buttons.&nbsp; 
+    </p>
+
+
+    <p>
+        Once the setup or modification of the palletizing cell is complete, the <b>Generate Supervisor Job</b> can be pressed to create a supervisor job that will govern
+        the palletizing operation.&nbsp; The supervisor flow variable references an I-Variable that controls the palletizing state (i.e. palletize, stop after cycle complete, stopper).&nbsp;
+    </p>
+    <p>
+        If multiple build stations exist, additional options appear to specify how the palletization operation transitions between build stations. &nbsp; The Build Station Tracking I-Var controls which build station is active. The active build station can either change after each cycle or after the current build station is complete.&nbsp;
+    </p>
+
+    <p>
+    	<b>Note</b>: Build stations will be visited in the order they were specified in the "Build Editor" screen.&nbsp;
+    </p>
+
+    <p>
+        The PalletBuilder database (cell setup, pick operation, layer, build...) can be exported to a USB drive using the <b>Save Database to USB</b> button.&nbsp; This allows the same setup to be restored or loaded on a different Smart Pendant (in case the pendant needs to be changed) using <b>Load Database from USB</b>.&nbsp;
+    </p>
+
+    <p>
+        <b>Note</b>: On Smart Pendant versions older than 2.3, a cell setup will be exported to a job.&nbsp; The job will then need to be transferred to a USB drive using the Smart Pendant's File Transfer utility.&nbsp; 
+    </p>
+    
+  </body>
+</html>

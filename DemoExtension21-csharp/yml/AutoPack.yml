@@ -1,0 +1,270 @@
+AutoPack
+{
+    Rectangle {
+        width: 695
+        height: 255
+        color: "transparent" //"LightBlue"
+        borderWidth: 3
+        borderColor: "#0066B3"
+        radius: 4
+
+        ComboBox {
+            id: pinImage1
+            options: ["Type1", "Type2"]
+            currentIndex: 0
+            visible: false
+        }
+        
+        Column {
+            x: 15
+            width: parent.width - 30
+            spacing: 10
+            
+            Item {
+                width: parent.width
+                height: 50
+                
+                Row {
+                    spacing: 10
+
+                    Text {
+                        y: 20
+                        text: tr("layouts") + ":"
+                        fontSize: 20
+                    }
+
+                    ComboBox {
+                        id: layoutOptions
+                        width: 160
+                        y: 15
+                        options: [tr("block"), tr("interlock"), tr("pinwheel"), tr("diagonal")]
+                    }
+                }
+
+                Row {
+                    x: parent.width - width
+                    spacing: 10
+
+                    Label {
+                        y: 25
+                        text: tr("coverage") + ":"
+                        halign: Const.Right
+                        fontSize: 20
+                    }
+
+                    TextField {
+                        id: coverage
+                        numericInput: true
+                        width: 60
+                        text: "%"
+                        decimalPlaces: 0
+                        lowerBound: 0
+                        enabled: false
+                        fontSize: 20
+                    }
+                }
+            } // Item
+
+            Row { //Block Layout
+                id: mainOrient
+                x: 120
+                spacing: 10
+                visible: layoutOptions.currentIndex == 0
+
+                Label {
+                    text: tr("main_orientation") + ":"
+                    width: 210
+                    height: 50
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                RadioButton {
+                    id: zero_orient
+                    y: 10
+                    text: "0 deg"
+                    checked: true
+                }   
+
+                RadioButton {
+                    y: 10
+                    id: ninety_orient
+                    text: "90 deg"
+                    checked: false
+                }
+            } // Row
+
+
+            Row {
+                id: interlockOrient
+                x: 120
+                spacing: 10
+                visible: layoutOptions.currentIndex == 1
+
+                Label {
+                    text: tr("first_box_orientation") + ":"
+                    width: 210
+                    height: 50
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                RadioButton {
+                    id: zero_interlock
+                    y: 10
+                    text: "0 deg"
+                    checked: true
+                }
+
+                RadioButton {
+                    id: ninety_interlock
+                    y: 10
+                    text: "90 deg"
+                }
+            }
+
+            Row //Interlock Layout
+            {
+                id: interlockLocation
+                x: 120
+                spacing: 10
+                visible: layoutOptions.currentIndex == 1
+
+                Label {
+                    text: tr("interlock_direction") + ":"
+                    width: 210
+                    height: 50
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                ComboBox {
+                    id: interlockDirection
+                    y: 5
+                    width: 100
+                    options: [tr("interlock_x"), tr("interlock_y")]
+                }
+            }
+
+            Row {
+                id: interlockSize
+                x: 120
+                spacing: 10
+                visible: layoutOptions.currentIndex == 1
+
+                Label {
+                    text: tr("interlock_size") + ":"
+                    width: 210
+                    height: 50
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                Button {
+                    id: interlockDecrement
+                    text: "-"
+                    width: 55
+                    height: 55
+                    fontSize: 30
+                    enabled: false
+                }
+
+                TextField {
+                    id: interlockCounter
+                    y: 10
+                    text: "1"
+                    numericInput: true
+                    width: 50
+                    height: 30
+                    fontSize: 20
+                    decimalPlaces: 0
+                }
+
+                Button {
+                    id: interlockIncrement
+                    text: "+"
+                    width: 55
+                    height: 55
+                    fontSize: 24
+                }  
+            } // Row
+        
+            Row //PinwheelLayout
+            {
+                id: pinwheel_style
+                x: 120
+                height: 50
+                spacing: 10
+                visible: layoutOptions.currentIndex == 2
+
+                Label {
+                    text: tr("pinwheel_style") + ": "
+                    y: 30
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                RadioButton  {
+                    id: pinwheel1
+                    y: 20
+                    checked: true
+                }
+
+                Image {
+                    y: 10
+                    width: 50
+                    height: 50
+                    source: pinImage1.currentIndex == 0 ? "images/Pinwheel1.svg" : "images/Pinwheel2.svg"
+                    fillMode: Const.PreserveAspectFit
+                }
+
+                Item {width: 20; height: 1}
+                
+                RadioButton {
+                    id: pinwheel2
+                    y: 20
+                }
+
+                Image {
+                    y: 10
+                    width: 50
+                    height: 50
+                    source: pinImage1.currentIndex == 0 ? "images/Pinwheel2.svg" : "images/Pinwheel1.svg"
+                    fillMode: Const.PreserveAspectFit
+                }
+            }
+
+            Row {
+                x: 120
+                height: 50
+                spacing: 10
+                visible: layoutOptions.currentIndex == 3
+
+                Label {
+                    text: tr("first_box_orientation") + ":"
+                    width: 210
+                    height: 50
+                    valign: Const.Center
+                    fontSize: 20
+                }
+
+                RadioButton {
+                    id: zero_diag
+                    y: 10
+                    text: "0 deg"
+                    checked: true
+                }   
+
+                RadioButton {
+                    id: ninety_diag
+                    y: 10
+                    text: "90 deg"
+                    checked: false
+                }
+                
+                } // Row
+
+        } // Column
+
+    }
+}

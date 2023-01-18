@@ -1,0 +1,285 @@
+EditorLayer 
+{
+    Column 
+    {
+        spacing: 10
+        width: 695
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+                id: layerPageText
+				text: tr("layer_definition") + " > " + tr("layer_editor")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+        }
+
+        Item {      // Top buttons row
+            width: parent.width
+            height: 50
+
+            Row {
+                spacing: 10
+                align: Const.Center  
+
+                Button {
+                    id: autoPack
+                    text: tr("predefined_layout")
+                    height: 50
+                    checkable: true
+                    visible: !autoPack.checked
+                }
+
+                Button {
+                    id: sequenceButton
+                    text: tr("sequence_label")
+                    height: 50
+                    visible: autoPack.visible
+                    checkable: true
+                }
+            } // Row
+
+            Row {
+                spacing: 10
+                x: parent.width - width
+
+                Button {
+                    id: centerButton
+                    width: 50
+                    height: 50
+                    iconSource: "images/CenterView.png"
+                    iconWidth: 30
+                    iconHeight: 30    
+                }
+
+                Button {
+                    id: autoFit
+                    width: 50
+                    height: 50
+                    iconSource: "images/Fullscreen.png"
+                    iconWidth: 30
+                    iconHeight: 30
+                }
+
+                Button {
+                    id: zoomOut
+                    width: 50
+                    height: 50
+                    iconSource: "images/ZoomOut.png"
+                    iconWidth: 30
+                    iconHeight: 30
+                }
+
+                Button {
+                    id: zoomIn
+                    width: 50
+                    height: 50
+                    iconSource: "images/ZoomIn.png"
+                    iconWidth: 30
+                    iconHeight: 30
+                }
+            } // Row
+        } 
+
+        Item {      // Canvas
+            width: parent.width
+            height: 600
+
+            Row {   // Scale factor row
+                spacing: 10
+                x: parent.width - width
+
+                Label {
+                    text: tr("zoom_label")
+                    width: 50
+                    height: 30
+                    halign: Const.Center
+                    valign: Const.Center
+                }
+
+                Text {
+                    id: zoomLevel
+                    text: "100%"
+                    fontSize: 20
+                    width: 50
+                    height: 30
+                    halign: Const.Right
+                    valign: Const.Center
+                }
+            }
+
+            Text {
+                id: help_messages
+                text: tr("build_pattern")
+                x: 15
+                y: 40
+                fontSize: 20
+                width: parent.width - 2 * x
+                valign: Const.Center
+                halign: Const.Center
+            }
+
+            Image {
+                id: elementImage
+                width: parent.width
+                height: parent.height
+                fillMode: Const.PreserveAspectFit
+        
+                MouseArea {
+                    id: imageMouse
+                    width: parent.width
+                    height: parent.height
+                    enabled: true
+                }
+            }
+        }
+
+        Item {      // Bottom buttons row
+            width: parent.width
+            height: 50
+
+            Row {
+                spacing: 10
+                align: Const.Center 
+                
+                Button {
+                    id: buildButton
+                    text: tr("build_label")
+                    height: 50
+                    width: 80
+                    checked: true
+                    checkable: true
+                }
+
+                Button {
+                    id: snapButton
+                    text: tr("snap_label")
+                    height: 50
+                    width: 80
+                    checkable: true
+                    visible: buildButton.visible
+                }
+
+                Button {
+                    id: groupButton
+                    text: tr("group_label")
+                    height: 50
+                    width: 80
+                    checkable: true
+                    visible: buildButton.visible
+                }
+
+                Button {
+                    id: selectAll
+                    text: tr("select_all")
+                    height: 50
+                    width: 100
+                    visible: buildButton.visible
+                }    
+            }
+
+            Row {
+                spacing: 10
+                x: parent.width - width
+
+                Button {
+                    id: deleteElement
+                    width: 50
+                    height: 50
+                    iconSource: "images/Delete.svg"
+                    iconWidth: 30
+                    iconHeight: 30
+                    visible: buildButton.visible
+                    enabled: false
+                }
+
+                Button {
+                    id: mirrorHoriz
+                    width: 50
+                    height: 50
+                    iconSource: "images/MirrorHoriz.svg"
+                    iconWidth: 30
+                    iconHeight: 30
+                    visible: buildButton.visible
+                }
+
+                Button {
+                    id: mirrorVert
+                    width: 50
+                    height: 50
+                    iconSource: "images/MirrorVert.svg"
+                    iconWidth: 30
+                    iconHeight: 30
+                    visible: buildButton.visible
+                }
+
+                Button {
+                    id: centerPallet
+                    width: 50
+                    height: 50
+                    iconSource: "images/CenterBox.png"
+                    iconWidth: 30
+                    iconHeight: 30
+                    visible: buildButton.visible
+                }
+            }
+        }
+
+        Item {
+                Stack {
+                id: controlStack
+                currentIndex: 0
+
+                BoxControl {
+                    id: boxcontrol
+                }
+
+                AutoPack {
+                    id: autoLayer
+                }
+
+                AutoSequence {
+                    id: autoSequence
+                }
+            } // Stack   
+        }
+    } // Column
+
+    Row {
+        spacing: 10
+        x: 695 - width
+        y: 1060
+        
+        Button
+        {
+            id: cancelLayer
+            text: tr("cancel")
+            width: 200
+            bgcolor: "#D0011B"
+            visible: (autoPack.checked) || (sequenceButton.checked)
+        }
+
+        Button
+        {
+            id: acceptLayer
+            text: tr("accept")
+            width: 200
+            bgcolor: "#87D040"
+            visible: autoPack.checked
+        }
+
+        Button { 
+            id: layerReturn
+            width: 200
+            text: tr("return_to_job");
+            visible: buildButton.visible
+        }
+        
+    } // Row
+
+}

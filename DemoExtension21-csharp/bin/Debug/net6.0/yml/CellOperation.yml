@@ -1,0 +1,649 @@
+CellOperation {
+	width: 695
+
+	CheckBox {
+		id: isSearchStack
+		visible: false
+	}
+
+
+    Column
+	{
+		width: parent.width
+		spacing: 10
+
+		Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr('cell_operation')
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+		ComboBox {		// Dummy control to track number of stations
+			id: opStationNb
+			options: ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+			visible: false
+		}
+
+		Rectangle {		// Cell Overview
+			width: parent.width
+			height: 410
+			color: "#FFFFFF"
+			borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+			Column {
+				spacing: 0
+				align: Const.Center
+				width: parent.width
+				height: parent.height
+						
+				Row {
+					spacing: 0
+					height: parent.height
+					align: Const.Center
+
+					Column {
+						align: Const.Center
+						visible: opStationNb.currentIndex <= 0
+
+						Text {
+							width: 600
+							text: tr("no_cell_defined")
+							fontSize: 20
+							halign: Const.Center
+							wrapMode: Const.Wrap
+						}
+
+						Button {
+							id: opGotoSetup
+							text: tr("goto_cell_setup")
+						}
+					}
+
+					Column
+					{
+						spacing: 40
+
+						Button {
+							id: opStation1
+							visible: opStationNb.currentIndex >= 1
+							checkable: true
+							width: 150
+							height: 150
+							iconWidth: width - 20
+							iconHeight: height - 20
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation1Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 1"
+							}			
+						}
+
+						Button {
+							id: opStation5
+							visible: opStationNb.currentIndex >= 5
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation5Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 5"
+							}			
+						}
+					}
+
+					Column {
+						spacing: 40
+						visible: opStationNb.currentIndex >= 2
+						
+						Button {
+							id: opStation2
+							visible: opStationNb.currentIndex >= 2
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation2Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 2"
+							}			
+						}
+
+						Button {
+							id: opStation6
+							visible: opStationNb.currentIndex >= 6
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation6Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 6"
+							}			
+						}
+						
+					} // Column
+
+					Column {
+						spacing: 40
+						visible: opStationNb.currentIndex >= 3
+						
+						Button {
+							id: opStation3
+							visible: opStationNb.currentIndex >= 3
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation3Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 3"
+							}			
+						}
+
+						Button {
+							id: opStation7
+							visible: opStationNb.currentIndex >= 7
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation7Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 7"
+							}			
+						}
+					}
+
+					Column {
+						spacing: 40
+						visible: opStationNb.currentIndex >= 4
+						
+						Button {
+							id: opStation4
+							visible: opStationNb.currentIndex >= 4
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation4Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 4"
+							}			
+						}
+
+						Button {
+							id: opStation8
+							visible: opStationNb.currentIndex >= 8
+							checkable: true
+							width: opStation1.width
+							height: opStation1.height
+							iconWidth: opStation1.iconWidth
+							iconHeight: opStation1.iconHeight
+							bgcolor: checked ? "#E6E6E6" /* gray */ : "transparent"
+
+							Text {
+								id: opStation8Text
+								y: parent.height
+								width: parent.width
+								halign: Const.Center
+								fontSize: 20
+								text: "Station 8"
+							}			
+						}
+						
+					} // Column
+					
+				} // Row
+			} // Column
+		}
+
+		Item { 
+			height: 45
+
+			Text {  // Title
+				id: opStationName
+				y: 15
+				text: tr("station_details")
+				fontSize: 30
+			}
+		}
+
+		Rectangle {
+			width: parent.width
+			height: 400
+			color: "#FFFFFF"
+			borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+			Text {  // Title
+				id: opStationUnselected
+				text: tr("select_op_station")
+				width: parent.width
+				height: 50
+				fontSize: 20
+				valign: Const.Center
+				halign: Const.Center
+			}
+
+			Column {
+				y: 15
+				spacing: 10
+				visible: !opStationUnselected.visible
+
+				Row {		// Assignment
+					spacing: 10
+					x: 15 //Margin
+					align: Const.Center
+					
+					Label {
+						text: tr("station_assignment") + ":"
+						//width: 200
+						height: 50
+						fontSize: 24
+						valign: Const.Center
+					}
+
+					ComboBox {
+						id: opStationAssignment
+						width: 370
+						options: []
+
+						Rectangle {
+							width: parent.width
+							height: parent.height
+							color: "transparent"
+							borderWidth: 2
+							borderColor: "Orange"
+							visible: (opStationAssignment.currentIndex == 0)
+						}
+					}
+				} // Row
+
+				Row {		// I/O Signals
+					spacing: 20
+					x: 15
+
+					Column {		// Ready input
+						id: opReadyDisplay
+					 	spacing: 0
+						align: Const.Center
+					
+						Label {
+							text: tr("ready_input")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Rectangle {
+							id: opReadyState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column
+
+					Item { width: 150; height: 50; visible: !opReadyDisplay.visible}
+
+					Column {		// At Station
+						id: opAtStationDisplay
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: tr("at_station")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20	
+						}
+
+						Rectangle {
+							id: opAtStationState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column
+
+					Item { width: 150; height: 50; visible: !opAtStationDisplay.visible}
+				
+					Column {		// Build complete
+						id: opBuildCompleteDisplay
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: isSearchStack.checked ? tr("stack_empty") : tr("build_done")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Rectangle {
+							id: opBuildCompleteState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column
+
+					Item { width: 150; height: 50; visible: !opBuildCompleteDisplay.visible}
+
+					Column {		// Build Reset
+						id: opBuildResetDisplay
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: isSearchStack.checked ? tr("stack_reset") : tr("build_reset")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Rectangle {
+							id: opBuildResetState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column					
+				} // Row
+
+				Row {		// Dispenser Specific
+					spacing: 20
+					x: 15
+					visible: isSearchStack.checked
+
+					Column {		// Search Input
+						id: opSearchDisplay
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: tr("search_sensor")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Rectangle {
+							id: opSearchState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column	
+
+					Rectangle {
+						width: 150
+						height: 10
+						color: "transparent"	
+					}
+
+					Column {		// Search Input
+						id: opLowLevelDisplay
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: tr("low_stack")
+							height: 50
+							width: 150
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Rectangle {
+							id: opLowLevelState
+							width: 60
+							height: width
+							radius: width/2
+							color: "LightGray"
+							borderWidth: 4
+							borderColor: "Gray"
+						}
+					} // Column	
+
+					Column {
+						y: 30
+						spacing: 0
+						align: Const.Center
+						width: 150
+						Button {
+							id: opStackReset
+							text: tr("stack_reset2")
+							width: 100
+							height: 80
+							//requiredMode: Const.Manual
+						}
+					}		
+					
+				} // Row
+
+				Row {		// Build Specific
+					id: opBuildVariableStates
+					visible: false
+					spacing: 20
+					x: 15
+					
+					Column {
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: tr("layer")
+							width: 150
+							height: 40
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Text {
+							id: opLayerState
+							text: ""
+							height: 40
+							valign: Const.Center
+							fontSize: 48
+						}
+					}
+
+					Column {
+						spacing: 0
+						align: Const.Center
+						
+						Label {
+							text: tr("cycle")
+							width: 150
+							height: 40
+							halign: Const.Center
+							fontSize: 20
+						}
+
+						Text {
+							id: opCycleState
+							text: ""
+							height: 40
+							valign: Const.Center
+							fontSize: 48
+						}
+					}
+
+					Column {
+						y: 15
+						spacing: 0
+						align: Const.Center
+						width: 150
+						Button {
+							id: opForceComplete
+							text: tr("force_complete2")
+							width: 100
+							height: 80
+							//requiredMode: Const.Manual
+						}
+					}
+
+					Column {
+						y: 15
+						spacing: 0
+						align: Const.Center
+						width: 150
+						Button {
+							id: opBuildClear
+							text: tr("build_reset2")
+							width: 100
+							height: 80
+							//requiredMode: Const.Manual
+						}
+					}				
+				} // Row
+			} // Column
+		}
+    }
+
+	Row { 
+		y: 1030
+		width: parent.width
+		spacing: 20
+		
+		Button {
+			id: opStop
+			width: (parent.width - parent.spacing) / 3
+			height: 80
+			fontSize: 24
+			text: tr("stop")
+			iconSource: "images/Stop_Icon.png"
+			requiredMode: Const.Auto
+			requiredServo: Const.On
+			visible: false
+		}
+		
+		Button {
+			id: opStopPalletizing
+			width: opStop.width * 2
+			height: 80
+			fontSize: 24
+			text: tr("stop_palletizing")
+			//iconSource: "images/Stop_Icon.png"
+			requiredMode: Const.Auto
+			requiredServo: Const.On
+			checkable: true
+			visible: opStop.visible
+		}		
+
+		Button {
+			id: opStart
+			width: opStop.width
+			height: 80
+			fontSize: 24
+			text: tr("resume")
+			iconSource: "images/Play_IconG.png"
+			requiredMode: Const.Auto
+			requiredServo: Const.On
+			visible: false
+		}
+		
+		Button {
+			id: opStartMaster
+			width: opStopPalletizing.width
+			height: 80
+			fontSize: 24
+			text: tr("start_top_master")
+			iconSource: "images/Play_IconG.png"
+			//requiredMode: Const.Auto
+			requiredServo: Const.On
+			visible: opStart.visible
+		}
+
+	}
+
+	Button
+	{
+		id: opTestMaster
+		x: 120
+		y: 1030
+		width: opStopPalletizing.width
+		height: 80
+		fontSize: 24
+		text: tr("test_master_job")
+		visible: !opStart.visible
+	}		
+}

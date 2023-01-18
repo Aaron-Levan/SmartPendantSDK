@@ -1,0 +1,15 @@
+<svg xmnls="http://www.w3.org/2000/svg" viewBox="50.0 -50.0 700.0 580.0">
+<g transform="rotate(-0.0,400.0,240.0)">
+<rect x="350.0" y="190.0" width="100.0" height="100.0" fill = "white" stroke="#0277BD" stroke-width="3"/>
+<polyline points="450.0,215.0 439.0,215.0 439.0,265.0 450.0,265.0" fill="none" stroke="#0277BD" stroke-width="3"/>
+<polyline points="375.0,190.0 375.0,201.0 425.0,201.0 425.0,190.0" fill="none" stroke="#0277BD" stroke-width="3"/>
+<polyline points="350.0,215.0 361.0,215.0 361.0,265.0 350.0,265.0" fill="none" stroke="#0277BD" stroke-width="3"/>
+<polyline points="375.0,290.0 375.0,279.0 425.0,279.0 425.0,290.0" fill="none" stroke="#0277BD" stroke-width="3"/>
+<polyline points="439.0,229.0 450.0,240.0 439.0,251.0" fill="#0277BD"/>
+</g>
+<text x="400.0" y="240.0" fill = "black" font-size="20" font-weight="bold" dominant-baseline="middle" text-anchor="middle">1</text>
+<text x="480.0" y="250.0" fill = "black" font-size="40" font-weight="bold" dominant-baseline="middle" text-anchor="middle">C</text>
+<text x="400.0" y="160.0" fill = "black" font-size="40" font-weight="bold" dominant-baseline="middle" text-anchor="middle">D</text>
+<text x="310.0" y="250.0" fill = "black" font-size="40" font-weight="bold" dominant-baseline="middle" text-anchor="middle">A</text>
+<text x="400.0" y="340.0" fill = "black" font-size="40" font-weight="bold" dominant-baseline="middle" text-anchor="middle">B</text>
+</svg>

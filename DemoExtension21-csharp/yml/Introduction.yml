@@ -1,0 +1,315 @@
+Introduction
+{
+	Column
+	{
+		spacing: 8
+		width: 700
+
+		Item {		// Introduction message
+			height: 95
+
+			Text {
+				x: 0
+				y: 15
+				text: tr("home")
+				fontSize: 30
+			}  // Text
+
+			Image {
+				x: 460
+				y: 15
+				width: 200
+				height: 40
+				source: "images/YASKAWA-logo-blue.svg"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Image {
+				x: 495
+				y: 70
+				width: 200
+				height: 200
+				source: "images/AppImage.svg"
+				fillMode: Const.PreserveAspectFit
+			}
+
+		}  // Item Introduction message
+
+		Item {		// cell_operation
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("cell_operation")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("cell_operation_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+
+			}
+
+			MouseArea {
+				id: cellOperationArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+
+		Item {  // manage_products
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("manage_products")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("manage_products_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: manageProductsArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+	
+
+		Item {  // Manage Pick Jobs
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("manage_picks")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("manage_picks_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: managePicksArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+
+
+		Item {  // Manage Place Layers
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("manage_layers")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("manage_layers_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: manageLayersArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+
+
+		Item {  // Manage Build Patterns
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("manage_builds")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("manage_builds_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: managePatternsArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+
+
+		Item {  // Cell Setup
+			width: parent.width
+			height: 100
+			
+			Image {
+				x:6
+				y: 13
+				width: 24
+				height: 24
+				source: "images/LeftArrow.png"
+				fillMode: Const.PreserveAspectFit
+			}
+
+			Text {  // Title
+				text: tr("cell_setup")
+				x: 45
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("cell_setup_desc")
+				x: 45
+				y: 50
+				width: parent.width - x - 30
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: cellSetupArea
+				width: parent.width
+				height: parent.height
+			}
+		}
+
+		Item {  // spacer
+			width: parent.width
+			height: 20
+		}
+
+		Rectangle {  // Create New Pattern
+			x: 15
+			width: parent.width - 40
+			height: 110
+			color: "transparent"
+			borderColor: "#0072B8"    // blue background"
+			borderWidth: 2
+			radius: 4
+
+			Button {
+				id: wizardButton
+				x: 530
+				y: 30
+				width: 100
+				bgcolor: "green"
+				text: tr("start")	
+				requiredMode: Const.Manual
+				requiredAccess: Const.Editing
+			}
+
+			Text {  // Title
+				text: tr("create_new_pattern")
+				x: 30
+				y: 10
+				fontSize: 30
+			}
+
+			Text {	// Description
+				text: tr("create_new_pattern_desc")
+				x: 30
+				y: 50
+				width: wizardButton.x - x - 15
+				wrapMode: Const.Wrap
+				fontSize: 18
+				fontWeight: Const.Medium
+			}
+
+			MouseArea {
+				id: wizardArea
+				width: wizardButton.x
+				height: parent.height
+			}
+		}
+		
+	} // Column
+}

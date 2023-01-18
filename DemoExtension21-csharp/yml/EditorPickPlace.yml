@@ -1,0 +1,555 @@
+EditorPickPlace
+{
+    width: 695
+
+    CheckBox {      // Dummy control used as yml property
+        id: jobModifiedFlag
+        visible: false
+    }
+
+    ComboBox {      // Dummy control used as yml property
+        id: editorJobType
+        options: ["pick", "place"]
+        visible: false
+    }
+
+    ComboBox {      // Dummy control used as yml property
+        id: editorProductType
+        options: ["none", "box", "pallet", "separator"]
+        visible: false
+    }
+    
+
+    CheckBox {      // Dummy control used as yml property
+        id: jobWizardFlag
+        visible: false
+    }
+
+    // Label {
+    //     x: editorJobType.x - width
+    //     y: editorJobType.y
+    //     height: editorJobType.height
+    //     text: tr("job_type") + ": "
+    //     visible: false
+    // }
+
+	Column
+	{
+        width: parent.width
+        spacing: 10
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: jobWizardFlag.checked ? tr("build_pattern_creation") : editorJobType.currentIndex==0 ? tr("manage_picks") + " > " + tr("pick_definition") : tr("manage_layers") + " > " + tr("layer_definition") 
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+
+        Image {     // Step image
+            x: 75
+            width: 527
+            height: 36
+            source: editorJobType.currentIndex == 0 ? "images/Step2.png" : "images/Step3.png"
+            fillMode: Const.PreserveAspectFit
+            visible: jobWizardFlag.checked
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 50
+            visible: jobWizardFlag.checked
+
+            Label {
+                width: 165
+                text: tr("select_product")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("pick_operations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("place_layers")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("build_pattern")
+                halign: Const.Center
+            }
+        } // Row        
+
+        Rectangle {     // job Definition Section
+            id: jobDefinitionSection
+            width: parent.width
+            height: editorJobType.currentIndex == 0 ? 720 : editorProductType.currentIndex == 1 ? 835 : 775
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+            
+            Column {
+                x: 15
+                y: 10
+                width: parent.width
+                // spacing: 0
+                // align: Const.Center  
+
+                Row {       // job Name
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 140
+                        text: tr("name") + ":"
+                    }
+
+                    TextField { 
+                        id: jobName
+                        width: 330
+                        height: 38
+                        uppercaseInput: true
+                        allowedChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!&\'()_"
+                        placeholderText: " " + tr("name_placeholder")
+                        
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: jobName.text == ""
+                        }
+                    }
+                }
+
+                Row {       // job station
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 140
+                        text: tr("station") + ":" 
+                    }
+
+                    Label {
+                        id: jobStationName
+                        width: 210
+                        text: ""
+                        visible: text != ""
+                    }
+
+                    ComboBox {
+                        id: jobStation
+                        width: 200
+                        options: [tr("Build1"),tr("Infeed1"),tr("Dispenser1")]
+                        visible: !jobStationName.visible
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (jobStation.currentIndex < 0) //&& (jobTable.selectedRow >= 0)
+                        }
+                    }
+
+                    Item {	width: 30; height: 10}
+
+                    CheckBox { 
+                        id: jobStationAny
+                        visible: true
+                    }
+
+                    Label {
+                        text: tr("job_any_station")
+                        visible: jobStationAny.visible
+
+                        MouseArea {
+                            id: jobStationAnyLabel
+                            width: parent.width
+                            height: parent.height
+                        }
+                    }
+
+                } // Row
+
+                Row {       // job product
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+
+                    Label {
+                        width: 140
+                        text: tr("product") + ":" 
+                    }
+
+                    Label {
+                        id: jobProductName
+                        width: 210
+                        text: ""
+                        visible: text != ""
+                    }
+
+                    ComboBox {
+                        id: jobProduct
+                        width: 200
+                        options: [tr("Box123"),tr("Separator"),tr("PalletA")]
+                        visible: !jobProductName.visible
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (jobProduct.currentIndex < 0) //&& (jobTable.selectedRow >= 0)
+                        }
+                    }
+
+                    Item {	width: 30; height: 10}
+
+                    Label {
+                        //width: 100
+                        text: tr("orientation") + ":" 
+                        visible: editorJobType.currentIndex == 0
+                    }
+
+                    Item {	width: 10; height: 10}
+
+                    ComboBox {
+                        id: jobProductOrient
+                        width: 150
+                        options: [tr("orient_0"),tr("orient_90")]
+                        visible: editorJobType.currentIndex == 0
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (jobProductOrient.currentIndex < 0) //&& (jobTable.selectedRow >= 0)
+                        }
+                    }
+                } // Row
+
+                Row {       // job pallet
+                    spacing: 0
+                    align: Const.Center
+                    height: 40
+                    visible: editorJobType.currentIndex == 1 && editorProductType.currentIndex != 2;
+
+                    Label {
+                        width: 140
+                        text: tr("pallet") + ":" 
+                    }
+
+                    Label {
+                        id: jobPalletName
+                        width: 200
+                        text: ""
+                        visible: text != ""
+                    }
+
+                    ComboBox {
+                        id: jobPallet
+                        width: 200
+                        options: [tr("PalletA")]
+                        visible: !jobPalletName.visible
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: (jobPallet.currentIndex < 0) //&& (jobTable.selectedRow >= 0)
+                        }
+                    }
+                } // Row
+
+                Row {  // Layer Design
+                    spacing: 10
+                    width: parent.width - 30
+                    visible: editorJobType.currentIndex == 1 && editorProductType.currentIndex == 1; 
+
+                    Button {
+                        id: jobLayerEdit
+                        width: parent.width
+                        //height: 40
+                        fontSize: 20
+                        text: tr("edit_layer_design")
+                        enabled: (jobStation.currentIndex >=0 || jobStationName.text != "") && (jobProduct.currentIndex >=0 || jobProductName.text != "") && (jobPallet.currentIndex >= 0 || jobPalletName.text != "") 
+                    
+                        Image {
+                            x: 10
+                            y: 8
+                            width: 32
+                            height: 32
+                            source: "images/Place2_White.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Image {
+                            id: layerWarning
+                            x: parent.width - 36
+                            y: -36
+                            width: 32
+                            height: 32
+                            source: "images/warning_icon.png"
+                            fillMode: Const.PreserveAspectFit
+                            visible: false
+
+                            MouseArea {
+                                id: layerWarnMouse
+                                width: parent.width
+                                height: parent.height
+                                enabled: layerWarning.visible
+                            }
+                        }
+                    }  
+                }
+
+                Rectangle {   // positions Section
+
+                    width: parent.width - 30
+                    height: 525
+                    color: "transparent"
+                    borderWidth: 2
+                    borderColor: "#0066B3"
+                    radius: 4
+
+                    Column {
+                        x: 15
+                        y: 15
+                        width: parent.width - 30
+                        spacing: 10
+                        
+                        Item {
+                            width: parent.width
+                            height: 32
+
+                            Label {
+                                text: tr("position_options")
+                                fontWeight: Const.Medium
+                                fontSize: 18
+                            }
+
+                            Button {
+                                id: resetPath
+                                x: parent.width - width
+                                height: 32
+                                text: tr("reset_path")
+                            }
+                        }
+
+                        Row {
+                            align: Const.Center
+                            spacing: 0
+                            x: 20
+
+                            CheckBox {
+                                id: jobInverseApproach  
+                            }
+
+                            Label {
+                                text: tr("inverse_label")
+                                MouseArea {
+                                    id: jobInverseApproachLabel
+                                    width: parent.width
+                                    height: parent.height
+                                }
+                            }
+
+                            Item { width: 100; height: 1 }   
+                        }
+
+                        Item {
+                            width: parent.width
+                            height: 350
+
+                            // Rectangle {
+                            //     x: 20
+                            //     height:185 // 225
+                            //     width: 570 // 685
+                            //     borderWidth: 1   
+
+                                Label {
+                                    x: 80
+                                    y: 20
+                                    width: 160
+                                    halign: Const.Center
+                                    fontWeight: Const.Bold
+                                    text: jobInverseApproach.checked ? tr("position_counter_label") : tr("approach_counter_label") 
+                                }
+
+                                ComboBox {
+                                    id: approachCounter
+                                    x: 120
+                                    y: 50
+                                    width: 80
+                                    options: ["1", "2", "3"]
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "#F99D1C"
+                                        borderWidth: 1
+                                        radius: 2
+                                    }
+                                }
+
+                                Label {
+                                    x: 360
+                                    y: 20
+                                    width: 160
+                                    halign: Const.Center
+                                    fontWeight: Const.Bold
+                                    text: tr("depart_counter_label")
+                                    visible: !jobInverseApproach.checked
+                                }
+
+                                ComboBox {
+                                    id: departCounter
+                                    x: 400
+                                    y: 50
+                                    width: 80
+                                    options: ["1", "2", "3"]
+                                    visible: !jobInverseApproach.checked
+
+                                    Rectangle {
+                                        width: parent.width
+                                        height: parent.height
+                                        color: "transparent"
+                                        borderColor: "purple"
+                                        borderWidth: 1
+                                        radius: 2
+                                    }
+                                }
+
+                                Image {
+                                    id: pathImage
+                                    x:170
+                                    y: editorProductType.currentIndex <= 1 ? 140 : editorProductType.currentIndex == 2 ? 100 : 100
+                                    width: 300
+                                    height: 200
+                                    fillMode: Const.PreserveAspectFit
+                                    source: "images/Box.svg"
+                                }
+
+                                Image {
+                                    id: arrows
+                                    x: 0
+                                    y: 70
+                                    width: 600
+                                    height: 200
+                                }
+
+                                Label {
+                                    x: 240
+                                    y: 200
+                                    width: 150
+                                    halign: Const.Center
+                                    fontWeight: Const.Bold
+                                    text: editorJobType.currentIndex ? tr("place") : tr("pick")
+                                }
+                            //}
+                        }
+
+                        Row {  // Motion Design
+                            width: parent.width
+                            spacing: 10
+
+                            Button {
+                                id: jobMotionEdit
+                                width: parent.width
+                                fontSize: 20
+                                text: tr("edit_motion")
+                                enabled: (jobStation.currentIndex >=0 || jobStationName.text != "") && (jobProduct.currentIndex >=0 || jobProductName.text != "") && !layerWarning.visible
+
+                                Image {
+                                    x: 10
+                                    y: 8
+                                    width: 32
+                                    height: 32
+                                    source: "images/Pick_White.png"
+                                }
+
+                                Image {
+                                    id: motionWarning
+                                    x: parent.width - 36
+                                    y: -36
+                                    width: 32
+                                    height: 32
+                                    source: "images/warning_icon.png"
+                                    fillMode: Const.PreserveAspectFit
+                                    visible: false
+
+                                    MouseArea {
+                                        id: motionWarnMouse
+                                        width: parent.width
+                                        height: parent.height
+                                        enabled: motionWarning.visible
+                                    }
+                                } 
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+        }  
+    }
+
+
+    Column {
+        y: 1065
+        width: parent.width
+        align: Const.Right
+
+        Row {
+            height: 40
+            spacing: 20
+
+            Button {
+                id: jobReturnToList
+                width: (695 - parent.spacing * 2) / 3
+                text: tr("close") 
+                visible: !jobModifiedFlag.checked
+            }
+
+            Button {
+                id: jobDiscard
+                width: jobReturnToList.width
+                text: tr("cancel") 
+                bgcolor: "#D0011B"  // red
+                visible: jobModifiedFlag.checked
+            }
+
+            Button {
+                id: jobSave
+                width: jobReturnToList.width
+                text: tr("save_generate_job")
+                bgcolor: "#87D040"  // green
+                requiredMode: Const.Manual
+                requiredAccess: Const.Editing
+                visible: jobModifiedFlag.checked
+            }
+        }
+    }
+}

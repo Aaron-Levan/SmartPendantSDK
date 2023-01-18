@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1235"
+   sodipodi:docname="RotateCounterClockWise.svg"
+   inkscape:version="1.1.1 (3bf5ae0, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1239" />
+  <sodipodi:namedview
+     id="namedview1237"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="7.96875"
+     inkscape:cx="65.380392"
+     inkscape:cy="42.603922"
+     inkscape:window-width="1920"
+     inkscape:window-height="933"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Group_1653" />
+  <g
+     id="Group_1657"
+     data-name="Group 1657"
+     transform="translate(-394 -1168)">
+    <g
+       id="Group_1653"
+       data-name="Group 1653"
+       transform="matrix(1.9936834,0,0,1.8159844,-309.54912,-971.04948)"
+       style="fill:#000000;fill-opacity:1">
+      <text
+         id="_90"
+         data-name="90"
+         fill="#ffffff"
+         font-size="13.756px"
+         font-family="Roboto-Bold, Roboto"
+         font-weight="700"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0.982573"
+         x="354.26398"
+         y="1196.2424"
+         transform="scale(1.0027223,0.99728511)"><tspan
+           x="354.26398"
+           y="1196.2424"
+           id="tspan1224"
+           style="fill:#ffffff;fill-opacity:1;stroke-width:0.982573">90</tspan></text>
+      <path
+         id="sync_FILL0_wght400_GRAD0_opsz48"
+         d="m 353.27046,1195.5222 h 2.27396 v 4.8995 l 0.45518,-0.5654 a 12.304757,12.238035 0 0 1 4.20602,-3.5051 11.516559,11.454111 0 0 1 5.07698,-1.0927 11.836763,11.77258 0 0 1 7.21891,2.3519 12.033813,11.968562 0 0 1 4.41489,6.2037 h -2.34982 a 9.6475438,9.595231 0 0 0 -3.66019,-4.5604 9.779567,9.7265383 0 0 0 -5.62773,-1.7335 9.0918642,9.0425645 0 0 0 -4.14986,0.8819 9.7224225,9.6697038 0 0 0 -3.05427,2.3929 l -0.79608,1.1309 h 4.70751 v 2.2645 h -8.7155 z"
+         fill="#ffffff"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0.982573" />
+      <g
+         id="Ellipse_177"
+         data-name="Ellipse 177"
+         transform="matrix(0.98524752,0,0,0.97990512,371.99017,1178.167)"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="1"
+         style="fill:#ffffff;fill-opacity:1">
+        <circle
+           cx="2"
+           cy="2"
+           r="2"
+           stroke="none"
+           id="circle1228"
+           style="fill:#ffffff;fill-opacity:1" />
+        <circle
+           cx="2"
+           cy="2"
+           r="1.5"
+           fill="none"
+           id="circle1230"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

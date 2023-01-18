@@ -1,0 +1,702 @@
+WizardSetup {
+    width: 695
+
+    ComboBox {      // Dummy control used as property
+        id: wizSetupStep
+        options: ["indexes", "stations", "masterjob", "grippers"]
+        currentIndex: 0
+        visible: false
+    }
+
+    Column {
+        width: parent.width
+        spacing: 10
+
+        Item {		// Title
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr("initial_cell_setup")
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		}
+
+        Image {     // Step image
+            //id: wizSetupStepImage
+            x: 75
+            width: 527
+            height: 36
+            source: wizSetupStep.currentIndex==0 ? "images/Step1.png" : wizSetupStep.currentIndex==1 ? "images/Step2.png" : wizSetupStep.currentIndex==2 ? "images/Step3.png" : "images/Step4.png" 
+            fillMode: Const.PreserveAspectFit
+        }
+
+        Row {       // Steps label
+            spacing: 0
+            x: 8
+            height: 50
+            Label {
+                width: 165
+                text: tr("indexes")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("stations")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("masterjob")
+                halign: Const.Center
+            }
+            Label {
+                width: 165
+                text: tr("grippers")
+                halign: Const.Center
+            }
+        } // Row
+
+        Item { // Pages
+            width: parent.width
+            height: 885
+            //color: "transparent"
+            
+            Stack {
+                id: wizSetupStack
+                width: parent.width
+
+                Column {    // Page 1: Indexes Selection
+                    width: parent.width
+                    height: 300
+                    spacing: 30
+
+                    Label {
+                        width: parent.width
+                        text: tr("initial_cell_setup_desc") + "<br><br>" + tr("initial_cell_setup_desc1") + "<br>" + tr("initial_cell_setup_desc2")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+
+                    Label {
+                        width: parent.width - 30
+                        text: tr("indexes_setup")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Text {
+                        x: 15
+                        width: parent.width - 30
+                        text: tr("indexes_setup_desc")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+
+                    Row {
+                        x: 15
+
+                        Column {
+                            width: 500
+                            // spacing: 0
+                            // align: Const.Center
+                            Label {
+                                width: parent.width
+                                text: tr("index_io") + ":"
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                                wrapMode: Const.Wrap
+                            }
+
+                            Text {
+                                width: parent.width
+                                text: tr("index_io_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        Item { width: 10; height:10 }
+
+                        TextField {
+                            id: wizSetupIndexIo
+                            width: 100
+                            label: tr("start_index")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 4096
+                        }
+                    } // Row
+
+                    Row {
+                        x: 15
+
+                        Column {
+                            width: 500
+                            // spacing: 0
+                            // align: Const.Center
+                            Label {
+                                width: parent.width
+                                text: tr("index_var") + ":"
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                                wrapMode: Const.Wrap
+                            }
+
+                            Text {
+                                width: parent.width
+                                text: tr("index_var_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        Item { width: 10; height:10 }
+
+                        TextField {
+                            id: wizSetupIndexVar
+                            width: 100
+                            label: tr("start_index")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 250
+                        }
+                    } // Row
+
+                    Row {
+                        x: 15
+
+                        Column {
+                            width: 500
+                            // spacing: 0
+                            // align: Const.Center
+                            Label {
+                                width: parent.width
+                                text: tr("index_uf") + ":"
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                                wrapMode: Const.Wrap
+                            }
+
+                            Text {
+                                width: parent.width
+                                text: tr("index_uf_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        Item { width: 10; height:10 }
+
+                        TextField {
+                            id: wizSetupIndexUf
+                            width: 100
+                            label: tr("start_index")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 64
+                        }
+                    } // Row
+
+                    Text {
+                        width: parent.width - 15
+                        text: tr("index_note")
+                        fontSize: 15
+                        wrapMode: Const.Wrap
+                    }
+                } // Column
+
+                Column {    // Page 2: Number of Stations
+                    width: parent.width
+                    // spacing: 0
+                    // align: Const.Center
+                    Label {
+                        width: parent.width
+                        height: 50
+                        text: tr("station_selection")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Text {
+                        x: 15
+                        width: parent.width
+                        height: 50
+                        valign: Const.Top
+                        text: tr("station_selection_desc")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+
+                    Row {   // Build
+                        x: 15
+
+                        Item {
+                            width: 150
+                            height: 150
+                            Image {
+                                x: 15
+                                y: -15
+                                width: 120
+                                height: 120
+                                source: "images/Build.png"
+                                fillMode: Const.PreserveAspectFit
+                            }
+                        }
+                        
+                        Column {
+                            width: 350
+                            
+                            Label {
+                                text: tr("build")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Label {
+                                width: parent.width
+                                text: tr("build_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        TextField {
+                            id: wizSetupBuild
+                            width: 100
+                            label: tr("station_count")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 3
+                        }
+                    } // Row
+
+                    Row {   // Infeed
+                        x: 15
+
+                        Item {
+                            width: 150
+                            height: 150
+                            Image {
+                                y: -15
+                                width: 150
+                                height: 120
+                                source: "images/Infeed2.png"
+                                fillMode: Const.PreserveAspectFit
+                            }
+                        }
+
+                        Column {
+                            width: 350
+                            
+                            Label {
+                                text: tr("infeed")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Label {
+                                width: parent.width
+                                text: tr("infeed_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        TextField {
+                            id: wizSetupInfeed
+                            width: 100
+                            label: tr("station_count")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 1
+                            upperBound: 3
+                        }
+                    } // Row
+
+                    Row {   // Dispenser search
+                        x: 15
+
+                        Item {
+                            width: 150
+                            height: 150
+                            Image {
+                                x: 15
+                                y: -15
+                                width: 120
+                                height: 120
+                                source: "images/DispenserSearch2.png"
+                                fillMode: Const.PreserveAspectFit
+                            }
+                        }
+
+                        Column {
+                            width: 350
+                            
+                            Label {
+                                text: tr("dispenserSearch")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Label {
+                                width: parent.width
+                                text: tr("dispenserSearch_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        TextField {
+                            id: wizSetupDispenserSearch
+                            width: 100
+                            label: tr("station_count")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 3
+                        }
+                    } // Row
+
+                    Row {   // Dispenser search
+                        x: 15
+
+                        Image {
+                            y: -15
+                            width: 150
+                            height: 150
+                            source: "images/DispenserFixed.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Column {
+                            width: 350
+                            
+                            Label {
+                                text: tr("dispenserFix")
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                            }
+
+                            Label {
+                                width: parent.width
+                                text: tr("dispenserFix_desc")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        TextField {
+                            id: wizSetupDispenserFix
+                            width: 100
+                            label: tr("station_count")
+                            text: "1"
+                            fontSize: 36
+                            numericInput: true
+                            decimalPlaces: 0
+                            lowerBound: 0
+                            upperBound: 3
+                        }
+                    } // Row
+                } // Column
+
+                Column {    // Page 3: Master Job
+                    width: parent.width
+                    // spacing: 0
+                    // align: Const.Center
+                    Label {
+                        width: parent.width
+                        height: 50
+                        text: tr("master_job")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Label {
+                        x: 15
+                        width: parent.width - 30
+                        text: tr("master_job_desc")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+
+
+                    Row {
+                        x: 15
+
+                        Column {
+                            width: 540
+                            // spacing: 0
+                            // align: Const.Center
+                            Label {
+                                width: parent.width
+                                height: 50
+                                text: tr("master_flow_var") + " #"
+                                fontSize: 24
+                                fontWeight: Const.Medium
+                                wrapMode: Const.Wrap
+                            }
+
+                            Text {
+                                width: parent.width
+                                text: tr("master_job_flow")
+                                fontSize: 14
+                                wrapMode: Const.Wrap
+                            }
+                        } // Column
+
+                        Item {width: 10; height:10}
+
+                        Item {
+                            width: 75
+                            height: 90
+
+                            TextField {
+                                id: wizSetupMasterFlowVar
+                                y: 20
+                                width: parent.width
+                                label: "I-Var #"
+                                text: "0"
+                                fontSize: 36
+                                numericInput: true
+                                decimalPlaces: 0
+                                lowerBound: 0
+                                upperBound: 249
+                            }
+                        }
+                    } // Row
+
+
+                    Item {
+                        id: wizSetupMultiBuildFlag
+                        width: parent.width
+                        height: 170
+
+                        Column {
+                            x: 15
+                            spacing: 0
+                            width: parent.width
+
+                            Text {  // Title
+                                text: tr("multiple_builds_sequencing") + ":"
+                                height: 50
+                                fontSize: 22
+                                fontWeight: Const.Bold
+                                valign: Const.Center
+                                halign: Const.Left
+                            }
+
+                            Item { width: 15; height: 15 }
+
+                            Row {
+                                x: 15
+
+                                Column {
+                                    width: 525
+                                    // spacing: 0
+                                    // align: Const.Center
+                                    Label {
+                                        width: parent.width
+                                        text: tr("station_tracking_var") + " #"
+                                        fontSize: 24
+                                        fontWeight: Const.Medium
+                                        wrapMode: Const.Wrap
+                                    }
+
+                                    Text {
+                                        width: parent.width
+                                        text: tr("master_tracking")
+                                        fontSize: 14
+                                        wrapMode: Const.Wrap
+                                    }
+                                } // Column
+
+                                Item { width: 10; height:10 }
+
+                                TextField {
+                                    id: wizSetupStationTrackingVar
+                                    width: 75
+                                    label: "I-Var #"
+                                    text: "0"
+                                    fontSize: 36
+                                    numericInput: true
+                                    decimalPlaces: 0
+                                    lowerBound: 0
+                                    upperBound: 249
+                                }
+                            } // Row
+
+                            Item { width: 15; height:15 }
+
+                            Row {       // alternate stations selection
+                                x: 15
+                                spacing: 0
+                                // align: Const.Center
+
+                                Column {
+                                    width: 450
+
+                                    Text {
+                                        text: tr("alternate_stations")  
+                                        fontSize: 24
+                                        fontWeight: Const.Medium
+                                        wrapMode: Const.Wrap
+                                    }
+
+                                    Text {
+                                        width: parent.width
+                                        text: tr("master_sequence")
+                                        fontSize: 14
+                                        wrapMode: Const.Wrap
+                                    }
+                                }
+
+                                Item { width: 10; height:10 }
+
+                                Column {
+                                    spacing: 0
+
+                                    RadioButton {
+                                        id: wizSetupAlternateCycle
+                                        x: 15
+                                        text: tr("each_cycle")
+                                    }
+
+                                    RadioButton {
+                                        id: wizSetupAlternateDone
+                                        x: 15
+                                        text: tr("after_completing_build")
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                } // Column
+
+                Column {    // Page 4: Grippers Setup
+                    // spacing: 0
+                    // align: Const.Center
+                    width: parent.width
+
+                    Label {
+                        width: parent.width
+                        height: 50
+                        text: tr("gripper_setup")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Text {
+                        x: 15
+                        width: parent.width - 30
+                        text: tr("incomplete_gripper_setup_desc") + "<br>" + tr("incomplete_gripper_setup_desc2") + "<br>" + tr("incomplete_gripper_setup_question2")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+                } // Column
+
+                Column {    // Page 5: Complete
+                    width: parent.width
+                    // spacing: 0
+                    // align: Const.Center
+                    Label {
+                        width: parent.width
+                        height: 50
+                        text: tr("setup_complete")
+                        fontSize: 24
+                        wrapMode: Const.Wrap
+                    }
+
+                    Text {
+                        x: 15
+                        width: parent.width - 30
+                        text: tr("setup_complete_desc")
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }                    
+
+                    Label {
+                        x: 15
+                        width: parent.width - 30
+                        text: tr("continue_build_pattern") + "<br>"
+                        fontSize: 18
+                        wrapMode: Const.Wrap
+                    }
+
+                    Column {
+                        width: parent.width
+                        align: Const.Center
+
+                        Button {
+                            id: wizSetupPatternWizard
+                            x: 30
+                            text: tr("create_new_pattern")
+                        }   
+                    } // Column
+
+                    
+                } // Column
+            }
+        }
+    }
+
+    Row {     // Bottom buttons
+        y: 1065
+        width: parent.width
+        height: 50
+        spacing: 20
+
+        Item {
+            // id: dummyButtonSpace
+            width: (parent.width - 2 * parent.spacing) / 3
+            height: parent.height 
+        }
+
+        Button {
+            id: wizSetupPrevious
+            width: (parent.width - 2 * parent.spacing) / 3
+            text: tr("previous")
+            visible: wizSetupStack.currentIndex > 0
+        }
+
+        Item {
+            // id: dummyButtonSpace
+            width: wizSetupPrevious.width
+            height: parent.height 
+            visible: !wizSetupPrevious.visible
+        }
+
+        Button {
+            id: wizSetupNext
+            width: wizSetupPrevious.width
+            text: tr("next")
+            visible: wizSetupStack.currentIndex < 4
+        }
+
+        Button {
+            id: wizSetupClose
+            width: wizSetupPrevious.width
+            text: tr("close")
+            visible: wizSetupStack.currentIndex == 4
+        }
+    }
+}

@@ -1,0 +1,314 @@
+PalletizingExt : Utility 
+{
+    id: palletizingExt
+    expandCollapseResize: true
+    expandedSize: [Const.FullWidth,Const.FullHeight]
+    collapsedSize: [300, 300]
+    resolveTransparencies: true
+    margin: 0
+        
+    Row {
+        //x: -15
+        //y: -15
+        width: parent.width
+        spacing: 0
+
+        Rectangle {
+            id: leftTabsArea
+            width: 75
+            height: palletizingExt.height
+            color: "#0072B8"    // blue background
+
+            Image {
+                id: leftTabs
+                width: 75
+                height: 765
+                source: "images/TabHome.png"
+                fillMode: Const.PreserveAspectFit
+
+                Column {
+                    spacing: 0
+
+                    MouseArea {
+                        id: homeClick
+                        width: leftTabs.width
+                        height: leftTabs.height / 7
+                    }
+
+                    MouseArea {
+                        id: cellOperationClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+
+                    MouseArea {
+                        id: manageProductsClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+
+                    MouseArea {
+                        id: managePicksClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+
+                    MouseArea {
+                        id: manageLayersClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+
+                    MouseArea {
+                        id: managePatternsClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+
+                    MouseArea {
+                        id: cellSetupClick
+                        width: homeClick.width
+                        height: homeClick.height
+                    }
+                }
+            }
+        }
+    
+        Column {
+            width: leftTabsArea.visible ? parent.width - leftTabsArea.width : parent.width
+            spacing: 0
+
+            Rectangle {
+                id: topBorder
+                width: parent.width
+                height: 11
+                color: "#F99E1D"    // orange
+            }
+
+            Rectangle {
+                width: parent.width // - leftTabsArea.width
+                height: leftTabsArea.visible ? palletizingExt.height - topBorder.height - 70 : palletizingExt.height - topBorder.height
+                color: "#E6E6E6"    // gray background
+                
+                Stack {
+                    id: interfaceStack
+                    x: 15
+                    y: topBorder.height
+                    
+                    currentIndex: 0
+
+                    Introduction {
+                        id: introScreen
+                    }
+
+                    CellOperation {
+                        id: cellOperation
+                    }
+
+                    ManageProducts {
+                        id: manageProducts
+                    }
+
+                    ManageJobs {
+                        id: manageJobs
+                    }
+
+                    EditorPickPlace {
+                        id: editorPickPlace
+                    }
+
+                    EditorLayer {
+                        id: editorLayer
+                    }
+
+                    EditorPath {
+                        id: editorPath
+                    }
+
+                    ManageBuilds {
+                        id: manageBuilds
+                    }
+
+                    EditorBuild {
+                        id: editorBuild
+                    }
+                
+                    CellSetup {
+                        id: cellSetup
+                    }
+
+                    ManageStations {
+                        id: manageStations
+                    }
+
+                    ManageGrippers{
+                        id: manageGrippers
+                    }
+
+                    Wizard {
+                        id: wizard
+                    }
+
+                    WizardSetup {
+                        id: wizardSetup
+                    }
+                } 
+            }
+
+            Image {
+                width: parent.width
+                height: 70
+                source: "images/PageShadow.png"
+            }
+        }
+    } // Row
+
+//--- Wait screen
+
+    Rectangle {
+        id: waitScreen
+        //x: -15
+        //y: -15
+        width: parent.width
+        height: parent.height
+        color: "#9fffffff"
+        visible: false
+
+        MouseArea {
+            height: parent.height
+            width: parent.width         
+        }
+
+        Text {
+            id: waitMessage
+            height: parent.height
+            width: parent.width
+            fontSize: 40
+            valign: Const.Center
+            halign: Const.Center
+            text: tr("update_message") + "..."
+        }
+    }
+
+//--- Job Selection Dialog Section -------------------- 
+    Rectangle {
+        id: jobSelectionDialog
+        //x: -15
+        //y: -15
+        width: parent.width
+        height: parent.height
+        color: "#6fffffff"
+        visible: false
+
+        MouseArea {
+            height: parent.height
+            width: parent.width            
+        }
+
+        Rectangle {
+            x: 150
+            y: 100
+            width: 500
+            height: 250
+            borderColor: "#09375F"  // titlebar dark blue
+            borderWidth: 2
+
+            Column {
+                align: Const.Center
+                width: parent.width
+                spacing: 0
+
+                Rectangle {
+                    width: parent.width
+                    height: 50
+                    color: "#0277BD"    // pendant blue
+                    Label {
+                        id: jobSelDlgCaption
+                        text: tr("extension_name")
+                        color: "white"
+                        x: 10
+                        height: parent.height
+                        valign: Const.Center
+                    }
+                }
+                    
+                Label {
+                    id: jobSelDlgText
+                    wrapMode: Const.Wrap
+                    x: 20
+                    width: parent.width - 40
+                    height: 70
+                    text: tr("job_load_dlg") + ":"
+                }
+
+                ComboBox {
+                    id: jobListCombo
+                    width: 250
+                    options: ["Job1"]
+                }
+
+                Row {
+                    height: 70
+                    align: Const.Center
+                    Button {
+                        id: jobSelDlgCancelButton
+                        width: 90
+                        text: tr("cancel_option")
+                    }
+                    Button {
+                        id: jobSelDlgActionButton
+                        width: 90
+                        text: tr("load_option")
+                    }
+                }
+            }
+        } 
+    }
+
+    Rectangle {
+        x: - palletizingExt.margin
+        y: - palletizingExt.margin
+        width: parent.width
+        height: parent.height - 46
+        color: "#E1F1FB" // background light blue
+        visible: palletizingExt.width < 350 && palletizingExt.height < 350
+        borderWidth: 2
+        borderColor: "#09375F"  // titlebar dark blue
+
+        Column {
+            // spacing: 0
+            y: 15
+            width: parent.width
+            align: Const.Center
+            Image {
+                width: 200
+                height: 160
+                source: "images/AppImage.svg"
+                fillMode: Const.PreserveAspectCrop
+            }
+
+            Button {
+                id: expandButton
+                text: tr("return_palletizeExt")
+            }
+        } // Column
+
+        // This was added as a workaround to the VisibleChanged event not being supported
+        CheckBox {
+            id: collapsedDisplay
+            text: ""
+            visible: false
+            checked: parent.visible
+        }
+        
+    }
+
+    HelpButton {
+        id: overviewHelpButton
+        x: 752
+        y: 30
+        title: tr("extension_name")
+        htmlSource: "help/en/PalletizingExt-help.html"         
+    }
+
+}

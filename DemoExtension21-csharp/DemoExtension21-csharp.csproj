@@ -2,7 +2,7 @@
 <PropertyGroup>
   <AssemblyName>DemoExtension21_csharp</AssemblyName>
   <OutputType>Exe</OutputType>
-  <TargetFramework>netcoreapp2.2</TargetFramework>
+  <TargetFramework>net6.0</TargetFramework>
   <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   <IntermediateOutputPath>$(MSBuildProjectDirectory)</IntermediateOutputPath>
 </PropertyGroup>
@@ -10,11 +10,208 @@
   <Compile Include="*.cs" />
 </ItemGroup>
 <ItemGroup>
-  <Reference Include="Thrift, Version=0.12.0.1, Culture=neutral, PublicKeyToken=null">
-    <HintPath>..\..\csharp\Thrift.dll</HintPath>
-  </Reference>
-  <Reference Include="YaskawaExtension, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <HintPath>..\..\csharp\YaskawaExtension.dll</HintPath>
+  <None Include="DemoTab.yml">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
+  <None Include="DemoWindow.yml">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
+  <None Include="help\en\CellOperation-help.html" />
+  <None Include="help\en\CellSetup-help.html" />
+  <None Include="help\en\EditorBuild-help.html" />
+  <None Include="help\en\EditorLayer-help.html" />
+  <None Include="help\en\EditorPath-help.html" />
+  <None Include="help\en\Fixed_vs_Relative.png" />
+  <None Include="help\en\GuidedCell-help.html" />
+  <None Include="help\en\ManageBuilds-help.html" />
+  <None Include="help\en\ManageGrippers-help.html" />
+  <None Include="help\en\ManageJobs-help.html" />
+  <None Include="help\en\ManageProducts-help.html" />
+  <None Include="help\en\ManageStations-help.html" />
+  <None Include="help\en\PalletizingExt-help.html" />
+  <None Include="help\en\PickPlaceOperations-help.html" />
+  <None Include="help\en\PositionsStackSearch.png" />
+  <None Include="help\en\Station-UF-Build.html" />
+  <None Include="help\en\Station-UF-DispenserFixed.html" />
+  <None Include="help\en\Station-UF-DispenserSearch.html" />
+  <None Include="help\en\Station-UF-Infeed.html" />
+  <None Include="help\en\Stations.png" />
+  <None Include="help\en\StationsUnique.png" />
+  <None Include="help\en\WizardMode-help.html" />
+  <None Include="help\ja\CellOperation-help.html" />
+  <None Include="help\ja\CellSetup-help.html" />
+  <None Include="help\ja\EditorBuild-help.html" />
+  <None Include="help\ja\EditorLayer-help.html" />
+  <None Include="help\ja\EditorPath-help.html" />
+  <None Include="help\ja\Fixed_vs_Relative.png" />
+  <None Include="help\ja\GuidedCell-help.html" />
+  <None Include="help\ja\ManageBuilds-help.html" />
+  <None Include="help\ja\ManageGrippers-help.html" />
+  <None Include="help\ja\ManageJobs-help.html" />
+  <None Include="help\ja\ManageProducts-help.html" />
+  <None Include="help\ja\ManageStations-help.html" />
+  <None Include="help\ja\PalletizingExt-help.html" />
+  <None Include="help\ja\PickPlaceOperations-help.html" />
+  <None Include="help\ja\PositionsStackSearch.png" />
+  <None Include="help\ja\Station-UF-Build.html" />
+  <None Include="help\ja\Station-UF-DispenserFixed.html" />
+  <None Include="help\ja\Station-UF-DispenserSearch.html" />
+  <None Include="help\ja\Station-UF-Infeed.html" />
+  <None Include="help\ja\Stations.png" />
+  <None Include="help\ja\WizardMode-help.html" />
+  <None Include="images\AppImage.svg" />
+  <None Include="images\AutoSeqPallet.svg" />
+  <None Include="images\AutoSeqPallet_Blue.svg" />
+  <None Include="images\back_arrow@2x.png" />
+  <None Include="images\Block.png" />
+  <None Include="images\Box.svg" />
+  <None Include="images\Build.png" />
+  <None Include="images\Build.svg" />
+  <None Include="images\BuildMode.png" />
+  <None Include="images\Center.svg" />
+  <None Include="images\CenterBox.png" />
+  <None Include="images\CenterPallet.svg" />
+  <None Include="images\CenterView.png" />
+  <None Include="images\CustomFixedRotation.png" />
+  <None Include="images\CustomPatternSnap.png" />
+  <None Include="images\CustomRelativeRotation.png" />
+  <None Include="images\Delete.svg" />
+  <None Include="images\Diagonal.png" />
+  <None Include="images\DispenserFixed.png" />
+  <None Include="images\DispenserSearch2.png" />
+  <None Include="images\DownArrowButton.svg" />
+  <None Include="images\DownArrow_Filled.svg" />
+  <None Include="images\DownArrow_Outline.svg" />
+  <None Include="images\FitPage.svg" />
+  <None Include="images\Fullscreen.png" />
+  <None Include="images\GearIcon.svg" />
+  <None Include="images\GradientButton.svg" />
+  <None Include="images\GroupMode.png" />
+  <None Include="images\Infeed.png" />
+  <None Include="images\Infeed2.png" />
+  <None Include="images\InfeedAlignCenter.png" />
+  <None Include="images\InfeedAlignLeft.png" />
+  <None Include="images\InfeedAlignRight.png" />
+  <None Include="images\Interlock.png" />
+  <None Include="images\Labels.svg" />
+  <None Include="images\LeftArrow.png" />
+  <None Include="images\LeftArrowButton.svg" />
+  <None Include="images\LeftArrow_Filled.svg" />
+  <None Include="images\LeftArrow_Outline.svg" />
+  <None Include="images\MirrorHoriz.svg" />
+  <None Include="images\MirrorHoriz2.svg" />
+  <None Include="images\MirrorVert.svg" />
+  <None Include="images\MirrorVert2.svg" />
+  <None Include="images\PageShadow.png" />
+  <None Include="images\Pallet.svg" />
+  <None Include="images\PathBuildApproachBox.png" />
+  <None Include="images\PathBuildApproachPallet.png" />
+  <None Include="images\PathBuildApproachSeparator.png" />
+  <None Include="images\PathBuildDepartBox.png" />
+  <None Include="images\PathBuildDepartPallet.png" />
+  <None Include="images\PathBuildDepartSeparator.png" />
+  <None Include="images\PathBuildPlaceBox.png" />
+  <None Include="images\PathBuildPlacePallet.png" />
+  <None Include="images\PathBuildPlaceSeparator.png" />
+  <None Include="images\PathDispenserFixApproach.png" />
+  <None Include="images\PathDispenserFixApproachPallet.png" />
+  <None Include="images\PathDispenserFixDepart.png" />
+  <None Include="images\PathDispenserFixDepartPallet.png" />
+  <None Include="images\PathDispenserFixPick.png" />
+  <None Include="images\PathDispenserFixPickPallet.png" />
+  <None Include="images\PathDispenserStackApproach.png" />
+  <None Include="images\PathDispenserStackApproachPallet.png" />
+  <None Include="images\PathDispenserStackDepart.png" />
+  <None Include="images\PathDispenserStackDepart1.png" />
+  <None Include="images\PathDispenserStackDepart1Pallet.png" />
+  <None Include="images\PathDispenserStackDepartPallet.png" />
+  <None Include="images\PathDispenserStackPick.png" />
+  <None Include="images\PathDispenserStackPickPallet.png" />
+  <None Include="images\PathInfeedApproach.png" />
+  <None Include="images\PathInfeedDepart.png" />
+  <None Include="images\PathInfeedPick.png" />
+  <None Include="images\Pause_Icon.png" />
+  <None Include="images\Pick_White.png" />
+  <None Include="images\Pinwheel.png" />
+  <None Include="images\Pinwheel1.svg" />
+  <None Include="images\Pinwheel2.svg" />
+  <None Include="images\Place2_White.png" />
+  <None Include="images\Play_IconG-0.png" />
+  <None Include="images\Play_IconG-20.png" />
+  <None Include="images\Play_IconG-40.png" />
+  <None Include="images\Play_IconG-60.png" />
+  <None Include="images\Play_IconG-80.png" />
+  <None Include="images\Play_IconG.png" />
+  <None Include="images\ProductBox.png" />
+  <None Include="images\ProductPallet.png" />
+  <None Include="images\ProductSeparator.png" />
+  <None Include="images\RightArrowButton.svg" />
+  <None Include="images\RightArrow_Filled.svg" />
+  <None Include="images\RightArrow_Outline.svg" />
+  <None Include="images\RotateClockwise.svg" />
+  <None Include="images\RotateCounterClockWise.svg" />
+  <None Include="images\Separator.png" />
+  <None Include="images\Separator.svg" />
+  <None Include="images\SnapMode.png" />
+  <None Include="images\Station-UF-Build.svg" />
+  <None Include="images\Station-UF-DispenserFixed.svg" />
+  <None Include="images\Station-UF-DispenserSearch.svg" />
+  <None Include="images\Station-UF-Infeed.svg" />
+  <None Include="images\StationBuild.png" />
+  <None Include="images\StationDispenserFixedPick.png" />
+  <None Include="images\StationDispenserSearchStack.png" />
+  <None Include="images\StationInfeed.png" />
+  <None Include="images\Step1.png" />
+  <None Include="images\Step2.png" />
+  <None Include="images\Step3.png" />
+  <None Include="images\Step4.png" />
+  <None Include="images\StepMarker.svg" />
+  <None Include="images\Stop_Icon.png" />
+  <None Include="images\TabBuild.png" />
+  <None Include="images\TabCellOperation.png" />
+  <None Include="images\TabCellSetup.png" />
+  <None Include="images\TabHome.png" />
+  <None Include="images\TabPick.png" />
+  <None Include="images\TabPlace.png" />
+  <None Include="images\TabProduct.png" />
+  <None Include="images\UpArrowButton.svg" />
+  <None Include="images\UpArrow_Filled.svg" />
+  <None Include="images\UpArrow_Outline.svg" />
+  <None Include="images\warning_icon.png" />
+  <None Include="images\YASKAWA-logo-blue.svg" />
+  <None Include="images\Yaskawa-Y-logo.png" />
+  <None Include="images\ZoomIn.png" />
+  <None Include="images\ZoomIn2.png" />
+  <None Include="images\ZoomOut.png" />
+  <None Include="images\ZoomOut2.png" />
+  <None Include="languages\PalletizingExt_en.properties" />
+  <None Include="languages\PalletizingExt_ja.properties" />
+  <None Include="yml\AutoPack.yml" />
+  <None Include="yml\AutoSequence.yml" />
+  <None Include="yml\BoxControl.yml" />
+  <None Include="yml\CellOperation.yml" />
+  <None Include="yml\CellSetup.yml" />
+  <None Include="yml\EditorBuild.yml" />
+  <None Include="yml\EditorLayer.yml" />
+  <None Include="yml\EditorPath.yml" />
+  <None Include="yml\EditorPickPlace.yml" />
+  <None Include="yml\Introduction.yml" />
+  <None Include="yml\ManageBuilds.yml" />
+  <None Include="yml\ManageGrippers.yml" />
+  <None Include="yml\ManageJobs.yml" />
+  <None Include="yml\ManageProducts.yml" />
+  <None Include="yml\ManageStations.yml" />
+  <None Include="yml\NewStationSelect.yml" />
+  <None Include="yml\PalletizingExt.yml" />
+  <None Include="yml\Wizard.yml" />
+  <None Include="yml\WizardSetup.yml" />
+</ItemGroup>
+<ItemGroup>
+  <PackageReference Include="ApacheThrift" Version="0.17.0" />
+</ItemGroup>
+<ItemGroup>
+  <Reference Include="YaskawaExtension">
+    <HintPath>..\csharp\net6.0\YaskawaExtension.dll</HintPath>
   </Reference>
 </ItemGroup>
 

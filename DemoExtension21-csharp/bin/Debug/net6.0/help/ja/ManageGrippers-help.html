@@ -1,0 +1,49 @@
+<html>
+   <head>
+     <!-- <meta http-equiv="content-type" content="text/html; charset=windows-1252"> -->
+     <title>一般</title>
+   </head>
+   <body>
+     <h2><strong><b>グリッパー</b></strong></h2>
+     <p>
+         このページを使用して、パレタイズセルで使用されるグリッパーを定義できます。&nbsp; 各グリッパーには、グリッパーのパラメーターを定義するワーク無しツールとワーク有りツールが必要です。&nbsp;
+     </p>
+
+<p>ツールは、ツールセンターポイント (TCP) の位置とそのプロパティ (重量、重心など) を定義します。 ワーク無しツールとワーク有りツールの TCP 定義が同じであることが重要で、重量、重心位置、慣性モーメントのみが異なります。&nbsp; 製品(箱)の重量がツール自体とロボットのペイロードに比べて比較的小さい場合、ワーク無しツールとワーク有りツールに同じツール番号を参照することができます。&nbsp; 協働ロボット (HCシリーズ) は重量の変化に敏感で、通常は別のツール番号を使用する必要があることに注意してください。&nbsp;
+</p>
+
+<p>
+ツールは、「ワーク無しツール」または「ワーク有りツール」の横にある歯車アイコンを押すことでアクセスできるスマートペンダントツールメニューを使用して設定できます。&nbsp; ツールは、TCP がピッキングされる製品(箱)の上面の中心にくるように定義する必要があります。&nbsp; ツールの Z 軸は、製品に向かって下を向いている必要があります。&nbsp;
+</p>
+
+<p>
+グリッパーの動作方法を定義するには、簡単制御と複雑制御の 2 つのオプションを使用できます。&nbsp; 簡単制御は、グリッパーをアクティブにする Output信号と、製品をON/OFFするためのタイマーが必要です。&nbsp; 複雑制御は、外部ジョブを使用することで複数の信号やアクティブ化信号を必要とするグリッパーを操作できます。&nbsp;
+</p>
+    
+   </body>
+</html>
+
+<!-- <html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Grippers</b></strong></h2>
+    <p>
+        This page can be used to define the grippers that are used in the palletization cell.&nbsp; Each gripper will require an empty tool and loaded tool which define gripper parameters when holding a product or not.&nbsp;
+    </p>   
+
+<p>Tools define the location of the control point (TCP) and its properties (weight, center of gravity...).&nbsp; It is important that the empty tool and the loaded tool have the same TCP definition, only the weight, center of gravity and inertia should be different.&nbsp; It is possible to reference the same tool number for empty and loaded tools when the weight of the part is relatively small in regard to the tool itself and the robot payload.&nbsp; Note that collaborative robots (HC-robot) are more sensible to weight variations and normally require use of different tools.&nbsp;
+</p> 
+
+<p>
+Tools are taught using the Smart Pendant tools menu which is accessible by pressing the gear icon next to the 'Empty Tool' or 'Loaded Tool'? selection box.&nbsp; Tool should be defined so that the TCP is in the center of the top surface of a product being picked.&nbsp; The Z-axis of the tool should be pointing down toward the product.&nbsp;
+</p> 
+
+<p>
+Two options are available to define how a gripper operates: Simple and Complex.&nbsp; Simple grippers require an Output# that activates the gripper and timers to allow a gripper to take or release the product.&nbsp; Complex control allows one to operate grippers using external jobs for more complex grippers that would require multiple signals or to wait for an activation confirmation signal.&nbsp; 
+</p>
+    
+  </body>
+</html> -->

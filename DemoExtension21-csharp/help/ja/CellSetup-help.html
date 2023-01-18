@@ -1,0 +1,110 @@
+<html>
+   <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252" charset="UTF-8">
+     <title>一般</title>
+   </head>
+   <body>
+     <h2><strong><b>セルのセットアップ</b></strong></h2>
+     <p>
+         ロボットセルは、ロボットとその作業環境で構成されます。&nbsp; パレットビルダーを適切に操作するには、ロボットがやり取りするステーションと使用するグリッパーを定義する必要があります。&nbsp;
+     </p>
+
+     <p>
+         パレットビルダーには、供給、積付、ディスペンサー(センサ使用)、ディスペンサー(固定)の 4 つの異なるステーションタイプがあります。&nbsp;
+         <ul>
+            
+             <p style="margin-left: 20px;"><img src="../../images/StationInfeed.png" width="50" height="50" align="left"/><b> 供給</b>: このタイプのステーションは、通常はコンベヤーを介してパレットに積み込まれる製品(箱)を供給します.&nbsp;</p>
+            
+             <p style="margin-left: 20px;"><img src="../../images/StationBuild.png" width="50" height="50" align="left"/><b> 積付</b>: このステーションは、パレット、セパレーター、および製品(箱)を組み合わせて積付パターンを形成する方法を定義するために使用されます。&nbsp;</p>
+
+             <p style="margin-left: 20px;"><img src="../../images/StationDispenserSearchStack.png" width="50" height="50" align="left"/><b> ディスペンサー(センサ使用)</b>: パレットまたはセパレーターのスタックが与えられた場合、センサーを使用してスタックの一番上のアイテムを見つけてピッキングするときに、このステーションを使用できます。&nbsp;</p>
+            
+             <p style="margin-left: 20px;"><img src="../../images/StationDispenserFixedPick.png" width="50" height="50" align="left"/><b> ディスペンサー(固定)</b>: このステーションは、セパレーターとパレットがピックアップのために特定の場所に供給されるときに使用されます.&nbsp;</p>
+            
+         </ul>
+     </p>
+
+     <p>
+         <b>新しいステーション</b> ボタンを使用してステーションを作成するか、
+         <b>ステーションを編集</b>および<b>ステーションを削除</b>ボタンを使用してステーションを変更または削除できます。&nbsp;
+     </p>
+
+
+     <p>
+         パレタイジング セルの設定または変更が完了したら、<b>マスタージョブの生成</b>を押して、パレタイジング作業を管理するマスタージョブを作成できます。&nbsp; 
+         マスタージョブフロー変数は、パレタイズ状態を制御する I 変数を参照します (例：パレタイズ、サイクル完了後の停止、ストッパー)。
+     </p>
+     <p>
+         複数の積付ステーションが存在する場合、追加のオプションが表示され、積付ステーション間でパレタイズ操作がどのように移行するかを指定します。&nbsp; 積付ステーショントラッキングI変数 は、アクティブな積付ステーションを制御します。 アクティブな積付ステーションは各サイクルの後、または現在の積付ステーションが完了した後に変更できます。&nbsp;
+     </p>
+
+     <p>
+     <b>注</b>: 積付ステーションは、[積付エディター] 画面で指定された順序で表示されます。&nbsp;
+     </p>
+
+     <p>
+         パレットビルダーデータベース (セルのセットアップ、取り動作、レイアウト(段)、積付...) は、[<b>データベースを USB に保存</b>] ボタンを使用して USB ドライブにエクスポートできます。&nbsp; これにより、<b>USBからデータベースをロード</b> を使用して、同じセットアップを別のスマートペンダントに復元またはロードすることができます (ペンダントを変更する必要がある場合)。&nbsp;
+     </p>
+
+     <p>
+         <b>注</b>: バージョン 2.3 より古いスマート ペンダントでは、セル設定がジョブにエクスポートされます。&nbsp; その後、スマートペンダントのファイル転送ユーティリティを使用して、ジョブを USBドライブに転送する必要があります。&nbsp;
+     </p>
+    
+   </body>
+</html>
+
+<!-- 
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Cell Setup</b></strong></h2>
+    <p>
+        A robotic cell is composed of the robot and its work environment.&nbsp; For proper operation of パレットビルダー, you need to define the stations the robot will interact with and the grippers it will use.&nbsp;
+    </p>
+
+    <p>
+        パレットビルダー offers four different station types: Infeed, Build, Dispenser Search Stack and Dispenser Fixed Pick.&nbsp;
+        <ul>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationInfeed.png" width="50" height="50" align="left"/><b>Infeed</b>: This type of station supplies box products to be loaded on a pallet usually by way of a conveyor.&nbsp;</p>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationBuild.png" width="50" height="50" align="left"/><b>Build</b>: This station is used to define how the pallet, separators and boxes are put together to form a build pattern.&nbsp;</p>
+
+            <p style="margin-left: 20px;"><img src="../../images/StationDispenserSearchStack.png" width="50" height="50" align="left"/><b>Dispenser Search Stack</b>: Given a stack of pallets or separators, this station can be used when a sensor is used to find the top item of the stack and pick it.&nbsp;</p>
+            
+            <p style="margin-left: 20px;"><img src="../../images/StationDispenserFixedPick.png" width="50" height="50" align="left"/><b>Dispenser Fixed Pick</b>: This station is used when separators and pallets are fed to a specific location for pick up.&nbsp;</p>
+            
+        </ul> 
+    </p>
+
+    <p>    
+        Stations can be created using the <b>New Station</b> button or stations can be modified or deleted using the
+        <b>Edit Station</b> and <b>Delete Station</b> buttons.&nbsp; 
+    </p>
+
+
+    <p>
+        Once the setup or modification of the palletizing cell is complete, the <b>Generate Master Job</b> can be pressed to create a master job that will govern
+        the palletizing operation.&nbsp; The master flow variable references an I-Variable that controls the palletizing state (i.e. palletize, stop after cycle complete, stopper).&nbsp;
+    </p>
+    <p>
+        If multiple build stations exist, additional options appear to specify how the palletization operation transitions between build stations. &nbsp; The 積付ステーショントラッキングI変数 controls which build station is active. The active build station can either change after each cycle or after the current build station is complete.&nbsp;
+    </p>
+
+    <p>
+    	<b>Note</b>: Build stations will be visited in the order they were specified in the "Build Editor" screen.&nbsp;　！！！どこ！！！
+    </p>
+
+    <p>
+        The パレットビルダー database (cell setup, pick operation, layer, build...) can be exported to a USB drive using the <b>Save Database to USB</b> button.&nbsp; This allows the same setup to be restored or loaded on a different Smart Pendant (in case the pendant needs to be changed) using <b>Load Database to USB</b>.&nbsp;
+    </p>
+
+    <p>
+        <b>Note</b>: On Smart Pendant versions older than 2.3, a cell setup will be exported to a job.&nbsp; The job will then need to be transferred to a USB drive using the Smart Pendant's File Transfer utility.&nbsp; 
+    </p>
+    
+  </body>
+</html>  -->

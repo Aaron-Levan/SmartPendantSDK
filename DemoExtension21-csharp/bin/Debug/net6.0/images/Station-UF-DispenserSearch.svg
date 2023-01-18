@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="300"
+   height="220"
+   viewBox="0 0 300.00001 220.00001"
+   version="1.1"
+   id="svg25125"
+   sodipodi:docname="Station-UF-DispenserSearch.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs25129" />
+  <sodipodi:namedview
+     id="namedview25127"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.9165592"
+     inkscape:cx="128.68438"
+     inkscape:cy="105.4497"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Group_1721" />
+  <path
+     id="Path_4665"
+     data-name="Path 4665"
+     d="M 116.06098,6.3766621 67.876979,30.542663 V 132.56066 l 48.184001,-24.166 z"
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="1" />
+  <g
+     id="Group_1503"
+     data-name="Group 1503"
+     transform="translate(40.499022,91.219743)">
+    <g
+       id="Group_1501"
+       data-name="Group 1501"
+       transform="translate(0,53.962)">
+      <path
+         id="Path_4194"
+         data-name="Path 4194"
+         d="m 4211.934,1502.619 -104.373,-34.6 v 1.746 l 104.373,34.605 z"
+         transform="translate(-4107.562,-1468.014)"
+         fill="#ffffff" />
+    </g>
+    <g
+       id="Group_1502"
+       data-name="Group 1502"
+       transform="translate(105.373,35.555)">
+      <path
+         id="Path_4195"
+         data-name="Path 4195"
+         d="m 4181.914,1507.913 v 1.747 l 107.636,-53.011 v -1.749 z"
+         transform="translate(-4181.914,-1454.901)"
+         fill="#ffffff" />
+    </g>
+    <path
+       id="Path_4196"
+       data-name="Path 4196"
+       d="m 4320.571,1465.228 -104.911,-34.988 -108.1,53.593 105.007,34.9 z"
+       transform="translate(-4107.562,-1430.24)"
+       fill="#ffffff" />
+  </g>
+  <path
+     id="Path_4197"
+     data-name="Path 4197"
+     d="m 253.45902,128.03774 -108,53.5 -104.907998,-36.78943 v -0.0306 L 148.55102,91.217713 253.46202,127.8236 Z"
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="1"
+     sodipodi:nodetypes="ccccccc" />
+  <path
+     id="Path_4664"
+     data-name="Path 4664"
+     d="m 224.40398,40.445663 -48.183,24.166 V 166.62866 l 48.183,-24.166 z"
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="1" />
+  <g
+     id="Group_1721"
+     data-name="Group 1721"
+     transform="translate(69.339557,135.94762)">
+    <path
+       id="Path_4204"
+       data-name="Path 4204"
+       d="m 115.64824,26.270029 -25.312904,4.949446 1.955231,3.783746 -17.465207,8.37966 a 2.3012629,2.2176957 0 0 0 1.02719,4.204162 2.2804415,2.1976304 0 0 0 1.022232,-0.232184 l 17.467191,-8.381571 1.954239,3.781835 z"
+       fill="#c4091e"
+       style="stroke-width:0.999997" />
+    <path
+       id="Path_4205"
+       data-name="Path 4205"
+       d="m 75.972422,42.869124 -18.94,-6.585137 1.4,-4.383135 -26,-1.625934 21.739,14.97884 1.4,-4.383134 18.938,6.588268 a 2.321,2.4222035 0 0 0 1.471,-4.591855 z"
+       fill="#45a735"
+       style="stroke-width:1" />
+    <path
+       id="Path_4206"
+       data-name="Path 4206"
+       d="m 81.981422,23.631043 -6.743,-25.1629999 -6.744,25.1629999 h 4.422 v 21.635 a 2.3215,2.3215 0 0 0 4.643,0 v -21.635 z"
+       fill="#00234c" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="fill:#003d7b;fill-opacity:1"
+     x="154.96794"
+     y="205.78139"
+     id="text376"><tspan
+       id="tspan374"
+       x="154.96794"
+       y="205.78139"
+       sodipodi:role="line">ORIGIN</tspan></text>
+  <ellipse
+     style="fill:#000000"
+     id="ellipse531-2-3"
+     cx="144.91844"
+     cy="181.40341"
+     rx="2.0209908"
+     ry="1.9021091" />
+  <path
+     style="fill:none;stroke:#003d7b;stroke-width:0.746783;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="m 155.33464,196.04471 -9.40905,-13.09028"
+     id="path2598" />
+  <ellipse
+     style="fill:#000000"
+     id="ellipse659"
+     cx="52.060917"
+     cy="148.6857"
+     rx="2.0209908"
+     ry="1.9021091" />
+  <text
+     xml:space="preserve"
+     style="fill:#003d7b;fill-opacity:1"
+     x="63.156727"
+     y="174.40747"
+     id="text3702-7"><tspan
+       id="tspan3700-2"
+       x="63.156727"
+       y="174.40747"
+       sodipodi:role="line">XY</tspan></text>
+  <path
+     style="fill:none;stroke:#003d7b;stroke-width:0.679785;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 62.497461,164.47234 52.792226,150.40041"
+     id="path3704-1"
+     sodipodi:nodetypes="cc" />
+  <ellipse
+     style="fill:#000000"
+     id="ellipse659-3"
+     cx="234.22867"
+     cy="137.85313"
+     rx="2.0209908"
+     ry="1.9021091" />
+  <text
+     xml:space="preserve"
+     style="fill:#003d7b;fill-opacity:1"
+     x="245.32446"
+     y="163.57491"
+     id="text3702-7-8"><tspan
+       id="tspan3700-2-6"
+       x="245.32446"
+       y="163.57491"
+       sodipodi:role="line">XX</tspan></text>
+  <path
+     style="fill:none;stroke:#003d7b;stroke-width:0.679785;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="m 244.6652,153.63978 -9.70523,-14.07193"
+     id="path3704-1-5"
+     sodipodi:nodetypes="cc" />
+</svg>

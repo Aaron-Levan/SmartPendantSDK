@@ -1,0 +1,239 @@
+NewStationSelect {
+    
+    Rectangle {
+        x: -15
+        y: -15
+        width: parent.width - 2 * x
+        height: parent.height - 2 * x
+        color: "#7fffffff"
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+        }
+    }
+    
+    Row {
+        // spacing: 0
+        align: Const.Center
+        width: parent.width
+        height: parent.height
+    
+        Column {
+            // spacing: 0
+            align: Const.Center
+            width: parent.width
+
+            Rectangle {
+                width: 660
+                height: 700
+                color: "#E6E6E6"    // gray background 
+                borderColor: "#0277BD"    // pendant blue
+                borderWidth: 2
+
+                Column {
+                    width: parent.width
+
+                    Rectangle {
+                        width: parent.width
+                        height: 50
+                        color: "#0277BD"    // pendant blue
+                        Label {
+                            id: jobSelDlgCaption
+                            x: 10
+                            height: parent.height
+                            valign: Const.Center
+                            text: tr("select_station_type")
+                            fontSize: 20
+                            color: "white"
+                        }
+                    }
+
+                    Rectangle {  // Infeed
+                        width: parent.width
+                        height: 120
+                        color: "transparent"
+                        //borderWidth: 1
+                        
+                        Image {
+                            x: 20
+                            y: 10
+                            width: 100
+                            height: 100
+                            source: "images/StationInfeed.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Text {  // Title
+                            text: tr("infeed")
+                            x: 140
+                            y: 20
+                            fontSize: 30
+                        }
+
+                        Text {	// Description
+                            text: tr("infeed_desc")
+                            x: 140
+                            y: 60
+                            width: 500
+                            wrapMode: Const.Wrap
+                            fontSize: 18
+                            fontWeight: Const.Medium
+                        }
+
+                        MouseArea {
+                            id: newStationInfeed
+                            width: parent.width
+                            height: parent.height
+                        }
+                    }
+
+                    Rectangle {  // Build
+                        width: parent.width
+                        height: 120
+                        color: "transparent"
+                        //borderWidth: 1
+                        
+                        Image {
+                            x: 20
+                            y: 10
+                            width: 100
+                            height: 100
+                            source: "images/StationBuild.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Text {  // Title
+                            text: tr("build")
+                            x: 140
+                            y: 20
+                            fontSize: 30
+                        }
+
+                        Text {	// Description
+                            text: tr("build_desc")
+                            x: 140
+                            y: 60
+                            width: 500
+                            wrapMode: Const.Wrap
+                            fontSize: 18
+                            fontWeight: Const.Medium
+                        }
+
+                        MouseArea {
+                            id: newStationBuild
+                            width: parent.width
+                            height: parent.height
+                        }
+                    }
+
+
+                    Rectangle {  // Dispenser search
+                        width: parent.width
+                        height: 120
+                        color: "transparent"
+                        //borderWidth: 1
+                        
+                        Image {
+                            x: 20
+                            y: 10
+                            width: 100
+                            height: 100
+                            source: "images/StationDispenserSearchStack.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Text {  // Title
+                            text: tr("dispenserSearch")
+                            x: 140
+                            y: 20
+                            fontSize: 30
+                        }
+
+                        Text {	// Description
+                            text: tr("dispenserSearch_desc")
+                            x: 140
+                            y: 60
+                            width: 500
+                            wrapMode: Const.Wrap
+                            fontSize: 18
+                            fontWeight: Const.Medium
+                        }
+
+                        MouseArea {
+                            id: newStationDispenserSearch
+                            width: parent.width
+                            height: parent.height
+                        }
+                    }
+
+
+                    Rectangle {  // Dispenser fixed
+                        width: parent.width
+                        height: 120
+                        color: "transparent"
+                        //borderWidth: 1
+                        
+                        Image {
+                            x: 20
+                            y: 10
+                            width: 100
+                            height: 100
+                            source: "images/StationDispenserFixedPick.png"
+                            fillMode: Const.PreserveAspectFit
+                        }
+
+                        Text {  // Title
+                            text: tr("dispenserFix")
+                            x: 140
+                            y: 20
+                            fontSize: 30
+                        }
+
+                        Text {	// Description
+                            text: tr("dispenserFix_desc")
+                            x: 140
+                            y: 60
+                            width: 500
+                            wrapMode: Const.Wrap
+                            fontSize: 18
+                            fontWeight: Const.Medium
+                        }
+
+                        MouseArea {
+                            id: newStationDispenserFix
+                            width: parent.width
+                            height: parent.height
+                        }
+                    }
+
+                    Rectangle { width: 10; height: 10; color: "transparent" }
+
+                    Column {
+                        // spacing: 0
+                        align: Const.Right
+                        width: parent.width - 15
+    
+                        Row {
+                            // spacing: 0
+                            // align: Const.Center
+                            Button {
+                                id: newStationCancel
+                                text: tr("cancel")
+                                bgcolor: "#D0011B"  // red
+                            }
+
+                            // Button {
+                            //     id: newStationAdd
+                            //     text: tr("add_station")
+                            //     bgcolor: "#87D040"  // green
+                            // }
+                        } // Row
+                    } // Column
+                } // Column
+            }
+            
+        } // Column
+
+    } // Row
+}

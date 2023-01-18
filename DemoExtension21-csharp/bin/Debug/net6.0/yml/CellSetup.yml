@@ -1,0 +1,349 @@
+CellSetup
+{
+    width: 695
+    height: 1120
+
+	CheckBox {
+        id: setupModifiedFlag
+        visible: false
+    }
+
+    CheckBox {
+        id: setupMultiBuildFlag
+        visible: false
+    }
+
+	Column
+	{
+		spacing: 10
+        width: 695
+
+		Item {		// Introduction message
+			width: parent.width
+			height: 50
+
+			Text {
+				text: tr('cell_setup')
+				width: parent.width
+				height: parent.height
+				fontSize: 30
+				valign: Const.Bottom
+			}  // Text
+		} 
+	
+		Text {  // Title
+			text: tr("station_management")
+			height: 50
+			fontSize: 30
+			//fontWeight: Const.Bold
+			//color: "#ffffff"
+			valign: Const.Center
+			halign: Const.Left
+		}
+
+        Rectangle {     // station table
+            color: "white"
+            width: parent.width
+            height: 290
+
+            Table {
+                id: stationTable
+                width: parent.width
+                height: parent.height
+
+                rowSpacing: 0
+                colSpacing: 0
+
+                verticalScroll: true
+                //horizontalScroll: true
+                rowSelectable: true
+                fontSize: 18
+                showBorder: true
+                showHeadings: true
+
+                columns: [
+                    {key: 'name', width: 230, label: tr("name"), halign: Const.Left},
+                    {key: 'type', width: 230, label: tr("type"), halign: Const.Left},
+                    {key: 'frame', width: 210, label: tr("frame"), halign: Const.Left}
+                ]
+
+                rows: [
+                ]
+            }
+        }
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            
+            Button {
+                id: stationAddButton
+                text: tr("new_station")
+                width: (parent.width - parent.spacing * 2) / 3
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+            }
+
+			Button {
+                id: stationEditButton
+                text: tr("edit_station")
+                width: stationAddButton.width
+                enabled: stationTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+            }
+
+            Button {
+                id: stationDeleteButton
+                text: tr("delete_station")
+                width: stationAddButton.width
+                enabled: stationTable.selectedRow >= 0
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+            }
+        }
+
+        Item {	width: 10; height: 1; visible: setupMultiBuildFlag.checked }
+
+        Text {  // Title
+            text: tr("master_management")
+            height: 40
+            fontSize: 30
+            valign: Const.Center
+            halign: Const.Left
+        }
+
+        Rectangle {
+            width: parent.width
+            height: setupMultiBuildFlag.checked ? 220 : 50
+            color: "white"
+            borderColor: "#AAB9C7"
+            borderWidth: 2
+            radius: 4
+
+            Column {
+                x: 15
+                y: 5
+                spacing: 0
+
+                Row {       // Master Flow
+                    align: Const.Center
+                    spacing: 0 
+
+                    Label {
+                        text: tr("master_flow_var") + " #"
+                    }
+
+                    TextField {
+                        id: setupMasterFlowVar
+                        width: 50
+                        height: 38
+                        text: ""
+                        numericInput: true
+                        decimalPlaces: 0
+                        lowerBound: 0
+                        upperBound: 249
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: parent.text == ""
+                        }
+                    }
+                }
+
+                Text {  // Title
+                    text: tr("multiple_builds_sequencing") + ":"
+                    height: 50
+                    fontSize: 18
+                    fontWeight: Const.Bold
+                    valign: Const.Center
+                    halign: Const.Left
+                    visible: setupMultiBuildFlag.checked
+                }
+
+                Row {       // alternate stations selection
+                    x: 15
+                    spacing: 0
+                    visible: setupMultiBuildFlag.checked
+
+                    Label {
+                        text: tr("alternate_stations")  
+                    }
+
+                    Column {
+                        spacing: 0
+                        RadioButton {
+                            id: setupAlternateCycle
+                            x: 15
+                            text: tr("each_cycle")
+                        }
+                        RadioButton {
+                            id: setupAlternateDone
+                            x: 15
+                            text: tr("after_completing_build")
+                        }
+                    }
+                } 
+
+                Row {       // Build sequencing
+                    id: setupStationTracking
+                    x: 15
+                    align: Const.Center
+                    spacing: 0
+                    visible: setupMultiBuildFlag.checked
+
+                    Label {
+                        text: tr("station_tracking_var") + " #"
+                    }
+
+                    TextField {
+                        id: setupStationTrackingVar
+                        width: 50
+                        height: 38
+                        text: ""
+                        numericInput: true
+                        decimalPlaces: 0
+                        lowerBound: 0
+                        upperBound: 249
+
+                        Rectangle {
+                            width: parent.width
+                            height: parent.height
+                            color: "transparent"
+                            borderColor: "Orange"
+                            borderWidth: 2
+                            visible: parent.text == ""
+                        }
+                    }
+                }
+            }
+
+        }
+
+        Row {
+            width: parent.width
+            height: 40
+            spacing: 20
+            align: Const.Center
+
+            Button {
+                id: setupMasterJob
+                width: (parent.width - parent.spacing * 2) / 3
+                text: tr("generate_master")             
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+                visible: setupModifiedFlag.checked == false
+            }
+
+            Row {   // Master Job status
+                spacing: 5
+                align: Const.Center
+                width: setupMasterJob.width
+                visible: setupModifiedFlag.checked == false
+
+                Text {
+                    id: setupMasterStatus
+                    text: ""
+                    visible: false
+                }
+
+                Image {
+                    width: 32
+                    height: 32
+                    source: "images/warning_icon.png"
+                    fillMode: Const.PreserveAspectFit
+                    visible: setupMasterStatus.text != tr("job_status_ok")
+                }
+
+                Label { 
+                    text: setupMasterStatus.text 
+                    visible: setupMasterStatus.text != tr("job_status_ok")   
+                }
+            } // Row
+            
+            Item {
+                width: setupMasterJob.width
+                height: 10
+                visible: setupModifiedFlag.checked == true
+            }
+
+            Button {
+                id: setupCancel
+                width: setupMasterJob.width
+                text: tr("cancel") 
+                bgcolor: "#D0011B"  // red
+                visible: setupModifiedFlag.checked == true
+            }
+
+            Button {
+                id: setupSave
+                width: setupMasterJob.width
+                text: tr("save_generate_master")
+                bgcolor: "#87D040"  // green
+                requiredMode: Const.Manual
+                requiredAccess: Const.Managing
+                visible: setupModifiedFlag.checked == true
+            }
+        }
+
+        Item { width: 10; height: 10 }
+
+		Text {  // Title
+			text: tr("gripper_management")
+			height: 50
+			fontSize: 30
+			//fontWeight: Const.Bold
+			//color: "#ffffff"
+			valign: Const.Center
+			halign: Const.Left
+		}
+
+        Button {
+            id: setupGripper
+            width: setupMasterJob.width
+            text: tr("gripper_setup")
+        }
+
+
+        Item { width: 10; height: 10 }
+
+		Text {  // Title
+			text: tr("database_management")
+			height: 50
+			fontSize: 30
+			//fontWeight: Const.Bold
+			//color: "#ffffff"
+			valign: Const.Center
+			halign: Const.Left
+		}
+
+        Row {           // Buttons
+            width: parent.width
+            spacing: 20
+            align: Const.Center
+            
+            Button {
+                id: dbSaveButton
+                text: tr("save_to_usb")
+                width: (parent.width - parent.spacing * 2) / 3
+            }
+
+			Button {
+                id: dbLoadButton
+                text: tr("load_from_usb")
+                width: dbSaveButton.width
+            }
+        }
+    }
+
+    NewStationSelect {
+        id: newStationSelect
+        width: parent.width
+        height: parent.height
+        visible: false
+    }
+}

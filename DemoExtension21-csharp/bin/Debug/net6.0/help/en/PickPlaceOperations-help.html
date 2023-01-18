@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>General</title>
+  </head>
+  <body>
+    <h2><strong><b>Pick Operation/Place Layers</b></strong></h2>
+        
+        <p>This screen allows you to create jobs to pick up or place products.&nbsp;</p>
+         
+        <p>
+           Initially, you need to assign a name, station and product.&nbsp; This will construct a job that will dictate how the selected product is handled.&nbsp;
+           For pick jobs, only infeed stations and dispenser type stations are selectable.&nbsp; Place jobs will only give access to build stations.&nbsp;
+        </p>
+        
+        <p>
+          PalletBuilder offers the ability to make jobs generic by selecting the <b>Used on similar station</b> checkbox.&nbsp; This will allow the job to be used on another station of the same type with respect to its user frame.&nbsp;
+          This feature requires that the positioning of the product relative to the user frame be the same for all similar stations.&nbsp; For example, if one infeed is aligning product on the left side and the another on the right, this feature cannot be used.&nbsp;
+          Without this condition, each station will require a unique job as seen in the following figure.
+        </p>
+
+        <p style="margin-left: 50px;"><img src="../../help/en/Stations.png" width="200" height="200"/>&nbsp;&nbsp;&nbsp;<img src="../../help/en/StationsUnique.png" width="200" height="200"/></p>
+        
+        <p>
+          For the product, select a product from the list.  If a pallet is to be handled by the robot, the pallet must have a gripper selected in the "Product Manager" screen in order to display it in the product list.   
+          For the Place Layer job, a pallet must also be selected to size the layer correctly.  And for a box product, the Layer Design button will be available to define the boxes layout and sequence of placement.  The place path will need to be programmed only for the first box of the layer.
+        </p>
+        
+        <p>
+          Before proceeding to program a path for the robot for the job, you may wish to configure number of points in the path.&nbsp;
+          PalletBuilder allows you to change the number of Approach or Departure points.&nbsp; This can be used if you need a more complex path to position the product or avoid collisions with neighboring products.&nbsp;
+          For simpler paths, PalletBuilder also provides an option to use the same path for approach and depart motions using the <b>Invert Approach for Depart Path</b> checkbox.&nbsp; With this option enabled, only the approach and pick/place points need to be defined.&nbsp; The departure points will be reflected about the pick/place point to create symmetry in the motion.&nbsp;
+        </p>
+        
+        <p>
+          A default path will be generated based on the selected station and product.&nbsp; That path will need to be verified by pressing the <b>Edit Motion</b> button and going through each point. You may press the <b>Reset Path</b> button to initialize your path and path configuration back to the default path.  
+        </p>
+        
+        <p><b>Notes</b>:</p>
+        <ul> 
+          <li>Invoking the invert option will cause the number of approach and departure points to match.&nbsp;</li>
+          <li>If an approach point was taught, adding extra approach points will produce copies of the taught approach point.&nbsp; These new points can be overwritten.&nbsp;</li>
+          <li>If a departure point was taught, adding extra departure points will produce copies of the taught departure point.&nbsp; These new points can be overwritten.&nbsp;</li>
+        </ul>
+        <p>
+         Once completed, press the <b>Save & Generate Job</b> button to save the job or press <b>Cancel</b> to discard the job or changes. 
+	</p>
+        </body>
+</html>
